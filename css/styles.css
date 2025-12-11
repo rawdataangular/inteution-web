@@ -2052,3 +2052,365 @@ body {
     }
 }
 
+/* ============================================
+   Value Proposition Page Styles
+   ============================================ */
+
+/* Value Hero Section */
+.value-hero {
+    background: linear-gradient(135deg, var(--brand-blue-dark) 0%, var(--brand-blue) 50%, var(--brand-blue-light) 100%);
+    padding: 6rem 0 4rem;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+
+.value-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+    opacity: 0.3;
+}
+
+.value-hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.value-hero-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.value-hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.value-hero-subtitle {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--brand-blue-lighter);
+    opacity: 0.95;
+}
+
+.value-hero-description {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    opacity: 0.95;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.value-hero-description strong {
+    color: var(--white);
+    font-weight: 700;
+}
+
+.value-hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+}
+
+.value-stat {
+    text-align: center;
+}
+
+.value-stat-number {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    color: var(--white);
+}
+
+.value-stat-label {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Value Proposition Section */
+.value-proposition {
+    padding: 5rem 0;
+    background: linear-gradient(to bottom, var(--white) 0%, var(--brand-blue-lighter) 5%, var(--white) 100%);
+}
+
+.value-category {
+    margin-bottom: 5rem;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.value-category:last-child {
+    margin-bottom: 0;
+}
+
+.value-category-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    padding: 2.5rem;
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    border-left: 5px solid var(--brand-blue);
+}
+
+.value-category-icon {
+    font-size: 4rem;
+    flex-shrink: 0;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.value-category-content {
+    flex: 1;
+}
+
+.value-category-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--brand-blue-dark);
+    margin-bottom: 0.5rem;
+}
+
+.value-category-subtitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--brand-blue);
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.value-category-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-gray);
+    max-width: 800px;
+}
+
+/* Value Pillars Grid */
+.value-pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.value-pillar-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.value-pillar-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--brand-blue);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+.value-pillar-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--brand-blue-light);
+}
+
+.value-pillar-card:hover::before {
+    transform: scaleY(1);
+}
+
+.value-pillar-card-featured {
+    background: linear-gradient(135deg, var(--brand-blue-lighter) 0%, var(--white) 100%);
+    border-color: var(--brand-blue-light);
+}
+
+.value-pillar-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: var(--brand-blue);
+    color: var(--white);
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+}
+
+.value-pillar-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--brand-blue-dark);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.value-pillar-description {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-gray);
+    margin-bottom: 1.5rem;
+}
+
+.value-pillar-tag {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background: var(--brand-blue-lighter);
+    color: var(--brand-blue-dark);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Value CTA Section */
+.value-cta {
+    background: linear-gradient(135deg, var(--brand-blue-dark) 0%, var(--brand-blue) 100%);
+    padding: 5rem 0;
+    text-align: center;
+    color: var(--white);
+}
+
+.value-cta-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.value-cta-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.value-cta-description {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    opacity: 0.95;
+}
+
+/* Responsive Design for Value Page */
+@media (max-width: 768px) {
+    .value-hero {
+        padding: 4rem 0 3rem;
+    }
+
+    .value-hero-title {
+        font-size: 2.5rem;
+    }
+
+    .value-hero-subtitle {
+        font-size: 1.5rem;
+    }
+
+    .value-hero-description {
+        font-size: 1.1rem;
+    }
+
+    .value-hero-stats {
+        gap: 2rem;
+    }
+
+    .value-stat-number {
+        font-size: 2.5rem;
+    }
+
+    .value-category-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .value-category-icon {
+        font-size: 3rem;
+    }
+
+    .value-category-title {
+        font-size: 1.75rem;
+    }
+
+    .value-category-subtitle {
+        font-size: 1.25rem;
+    }
+
+    .value-pillars-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .value-pillar-card {
+        padding: 1.5rem;
+    }
+
+    .value-cta-title {
+        font-size: 2rem;
+    }
+
+    .value-cta-description {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .value-hero-title {
+        font-size: 2rem;
+    }
+
+    .value-hero-subtitle {
+        font-size: 1.25rem;
+    }
+
+    .value-hero-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .value-category-title {
+        font-size: 1.5rem;
+    }
+
+    .value-pillar-title {
+        font-size: 1.25rem;
+    }
+}
+
