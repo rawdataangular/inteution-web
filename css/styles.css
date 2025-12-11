@@ -480,6 +480,34 @@ body {
     font-weight: bold;
 }
 
+.product-feature {
+    color: var(--text-gray);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.btn-know-more {
+    background-color: transparent;
+    color: var(--brand-blue);
+    border: 2px solid var(--brand-blue);
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: var(--transition);
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+.btn-know-more:hover {
+    background-color: var(--brand-blue);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
 .analytics-content {
     margin-top: 1.5rem;
 }
@@ -496,11 +524,26 @@ body {
     padding-bottom: 0;
 }
 
+.analytics-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
 .analytics-subtitle {
     font-size: 1.2rem;
     font-weight: 600;
     color: var(--brand-blue-dark);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0;
+    flex: 1;
+}
+
+.btn-know-more-inline {
+    margin-top: 0;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.9rem;
+    white-space: nowrap;
 }
 
 .analytics-tagline {
