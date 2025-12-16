@@ -1029,13 +1029,45 @@ body {
 
 .ceo-info {
     margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.ceo-image-container {
+    flex-shrink: 0;
+}
+
+.ceo-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--brand-blue-lighter);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+}
+
+.ceo-image:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--brand-blue);
+}
+
+.ceo-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
 }
 
 .ceo-name {
     font-size: 1.3rem;
     font-weight: 600;
     color: var(--brand-blue-dark);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0;
 }
 
 .ceo-linkedin {
@@ -1125,7 +1157,25 @@ body {
 .achievement-icon {
     font-size: 4rem;
     margin-bottom: 1.5rem;
-    animation: pulse 2s ease-in-out infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+}
+
+.achievement-logo {
+    max-width: 180px;
+    max-height: 100px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(0%);
+    transition: var(--transition);
+}
+
+.achievement-card:hover .achievement-logo {
+    transform: scale(1.1);
+    filter: grayscale(0%);
 }
 
 .achievement-title {
@@ -2044,6 +2094,16 @@ body {
 
     .ceo-paragraph {
         font-size: 1rem;
+    }
+
+    .ceo-info {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .ceo-image {
+        width: 120px;
+        height: 120px;
     }
 
     .achievements-grid {
