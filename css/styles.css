@@ -199,6 +199,11 @@ body {
     z-index: 1;
 }
 
+.hero-home .hero-overlay {
+    background: linear-gradient(135deg, rgba(0, 51, 102, 0.75) 0%, rgba(0, 102, 204, 0.65) 50%, rgba(0, 51, 102, 0.75) 100%);
+    backdrop-filter: blur(2px);
+}
+
 .wave-animation {
     position: absolute;
     bottom: 0;
@@ -232,8 +237,9 @@ body {
     right: 0;
     display: flex;
     justify-content: space-around;
-    opacity: 0.1;
+    opacity: 0.05;
     z-index: 0;
+    pointer-events: none;
 }
 
 .floating-container {
@@ -288,6 +294,16 @@ body {
     animation: fadeInUp 1s ease-out;
 }
 
+.hero-home .hero-content {
+    max-width: 1000px;
+    padding: 3rem 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -308,6 +324,16 @@ body {
     animation: fadeInUp 1s ease-out 0.2s both;
 }
 
+.hero-home .hero-headline {
+    font-size: 4rem;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    text-shadow: 2px 4px 12px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+    letter-spacing: -0.02em;
+}
+
 .hero-subheadline-1 {
     font-size: 1.5rem;
     font-weight: 600;
@@ -316,12 +342,30 @@ body {
     animation: fadeInUp 1s ease-out 0.4s both;
 }
 
+.hero-home .hero-subheadline-1 {
+    font-size: 1.75rem;
+    color: var(--white);
+    margin-bottom: 1.25rem;
+    text-shadow: 1px 2px 8px rgba(0, 0, 0, 0.3);
+    opacity: 0.95;
+}
+
 .hero-subheadline-2 {
     font-size: 1.1rem;
     color: var(--text-gray);
     margin-bottom: 2rem;
     line-height: 1.8;
     animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+.hero-home .hero-subheadline-2 {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 2.5rem;
+    text-shadow: 1px 2px 6px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .hero-cta {
@@ -350,6 +394,23 @@ body {
     background-color: var(--brand-blue-dark);
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
+}
+
+.hero-home .btn-primary {
+    background-color: var(--white);
+    color: var(--brand-blue);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), 0 8px 32px rgba(0, 102, 204, 0.3);
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 1.25rem 2.5rem;
+    border: 2px solid transparent;
+}
+
+.hero-home .btn-primary:hover {
+    background-color: var(--brand-blue-lighter);
+    color: var(--brand-blue-dark);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3), 0 12px 40px rgba(0, 102, 204, 0.4);
 }
 
 /* ============================================
@@ -417,6 +478,25 @@ body {
     font-size: 3rem;
     margin-bottom: 1rem;
     animation: pulse 2s ease-in-out infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60px;
+}
+
+.product-icon:has(img) {
+    animation: none;
+}
+
+.product-icon-img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    transition: var(--transition);
+}
+
+.product-card:hover .product-icon-img {
+    transform: scale(1.1);
 }
 
 @keyframes pulse {
@@ -2017,7 +2097,16 @@ body {
         padding: 1rem 0;
     }
 
+    .hero-home .hero-content {
+        padding: 2rem 1.5rem;
+        margin: 0 1rem;
+    }
+
     .hero-headline {
+        font-size: 2.5rem;
+    }
+
+    .hero-home .hero-headline {
         font-size: 2.5rem;
     }
 
@@ -2025,8 +2114,17 @@ body {
         font-size: 1.2rem;
     }
 
+    .hero-home .hero-subheadline-1 {
+        font-size: 1.3rem;
+    }
+
     .hero-subheadline-2 {
         font-size: 1rem;
+    }
+
+    .hero-home .btn-primary {
+        font-size: 1.1rem;
+        padding: 1rem 2rem;
     }
 
     .section-title {
@@ -2196,12 +2294,24 @@ body {
         max-width: 120px;
     }
 
+    .hero-home .hero-content {
+        padding: 1.5rem 1rem;
+    }
+
     .hero-headline {
+        font-size: 2rem;
+    }
+
+    .hero-home .hero-headline {
         font-size: 2rem;
     }
 
     .hero-subheadline-1 {
         font-size: 1.1rem;
+    }
+
+    .hero-subheadline-2 {
+        font-size: 0.95rem;
     }
 
     .section-title {
