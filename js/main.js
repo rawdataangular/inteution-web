@@ -1,5 +1,26 @@
-// Mobile Menu Toggle
+// Theme preference auto-initializer (prevents flash of white background)
+(function() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+    }
+})();
+
+// Mobile Menu Toggle and Theme Toggle Integration
 document.addEventListener('DOMContentLoaded', function() {
+    // Setup theme switch buttons
+    const themeToggles = document.querySelectorAll('.theme-toggle');
+    themeToggles.forEach(toggle => {
+        toggle.addEventListener('click', function() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    });
+
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
 

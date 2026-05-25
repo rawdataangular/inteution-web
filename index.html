@@ -7,6 +7,17 @@
     <title>inTEUtion - Stop Guessing. Start Profiting.</title>
     <link rel="icon" type="image/png" href="assets/logo-square.png">
     <link rel="stylesheet" href="css/styles.css">
+    <script>
+        // Inline theme selector to prevent white screen flash
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
     <script src="js/main.js" defer></script>
 </head>
 <body>
@@ -27,6 +38,14 @@
                     <li><a href="blog.html" class="nav-link">Blog</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <span class="sun-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                    </span>
+                    <span class="moon-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                    </span>
+                </button>
                 <div class="hamburger">
                     <span></span>
                     <span></span>
@@ -39,9 +58,7 @@
     <!-- Hero Section -->
     <section class="hero hero-home">
         <div class="hero-background">
-            <video class="hero-video" autoplay muted loop playsinline aria-label="Background video showing shipping and container operations">
-                <source src="https://pricing.inteution.com/assets/background.mp4" type="video/mp4">
-            </video>
+            <img class="hero-backdrop" src="assets/hero_background.png" alt="inTEUtion twilight shipping harbor backdrop image">
             <div class="hero-overlay"></div>
         </div>
         <div class="container">

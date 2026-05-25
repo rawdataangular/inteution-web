@@ -1,11 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-228718713"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-228718713');
+</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - inTEUtion</title>
     <link rel="icon" type="image/png" href="assets/logo-square.png">
     <link rel="stylesheet" href="css/styles.css">
+    <script>
+        // Inline theme selector to prevent white screen flash
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
     <script src="js/main.js" defer></script>
 </head>
 <body>
@@ -25,6 +45,14 @@
                     <li><a href="blog.html" class="nav-link">Blog</a></li>
                     <li><a href="index.html#contact" class="nav-link">Contact</a></li>
                 </ul>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <span class="sun-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                    </span>
+                    <span class="moon-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                    </span>
+                </button>
                 <div class="hamburger">
                     <span></span>
                     <span></span>
