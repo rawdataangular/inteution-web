@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <script>
         // Inline theme selector to prevent white screen flash
-        (function() {
+        (function () {
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.documentElement.setAttribute('data-theme', 'dark');
@@ -20,6 +21,7 @@
     </script>
     <script src="js/main.js" defer></script>
 </head>
+
 <body>
     <!-- Header Navigation -->
     <header class="header">
@@ -34,16 +36,22 @@
                     <li><a href="index.html" class="nav-link active">Home</a></li>
                     <li><a href="about.html" class="nav-link">About Us</a></li>
                     <li><a href="value.html" class="nav-link">Value Proposition</a></li>
-                    <li><a href="careers.html" class="nav-link">Careers</a></li>
-                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <!-- <li><a href="careers.html" class="nav-link">Careers</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li> -->
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                     <span class="sun-icon">
-                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="4" />
+                            <path
+                                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                        </svg>
                     </span>
                     <span class="moon-icon">
-                        <svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+                        </svg>
                     </span>
                 </button>
                 <div class="hamburger">
@@ -58,14 +66,16 @@
     <!-- Hero Section -->
     <section class="hero hero-home">
         <div class="hero-background">
-            <img class="hero-backdrop" src="assets/hero_background.png" alt="inTEUtion twilight shipping harbor backdrop image">
+            <img class="hero-backdrop" src="assets/hero_background.png"
+                alt="inTEUtion twilight shipping harbor backdrop image">
             <div class="hero-overlay"></div>
         </div>
-        <div class="container">
+        <div class="container" style="padding-top: 5%;">
             <div class="hero-content">
                 <h1 class="hero-headline">Stop Guessing. Start Profiting.</h1>
                 <h2 class="hero-subheadline-1">The Executive Software Platform for Streamlined Container Operations</h2>
-                <p class="hero-subheadline-2">Designed by deep domain experts, our platform delivers Real-Time Financial Clarity and Guaranteed Yield for every business decision—on time, every time.</p>
+                <p class="hero-subheadline-2">Designed by deep domain experts, our platform delivers Real-Time Financial
+                    Clarity and Guaranteed Yield for every business decision—on time, every time.</p>
                 <div class="hero-cta">
                     <a href="https://wa.me/918714335326" class="btn btn-primary" target="_blank">Get a Demo</a>
                 </div>
@@ -136,18 +146,22 @@
                         <div class="analytics-section">
                             <h4 class="analytics-subtitle">Marketing Intelligence Dashboard</h4>
                             <p class="analytics-tagline">Where Data Becomes Decision.</p>
-                            <p class="analytics-description">Navigate market changes with confidence. Gain instant visibility into competitor activity, pricing strategies, and emerging demand patterns through one powerful dashboard.</p>
+                            <p class="analytics-description">Navigate market changes with confidence. Gain instant
+                                visibility into competitor activity, pricing strategies, and emerging demand patterns
+                                through one powerful dashboard.</p>
                         </div>
                         <div class="analytics-section">
                             <div class="analytics-section-header">
                                 <h4 class="analytics-subtitle">Operations Analysis Dashboards</h4>
-                                <a href="#product-analytics-operations" class="btn btn-know-more btn-know-more-inline">Know More</a>
+                                <a href="#product-analytics-operations"
+                                    class="btn btn-know-more btn-know-more-inline">Know More</a>
                             </div>
                         </div>
                         <div class="analytics-section">
                             <div class="analytics-section-header">
                                 <h4 class="analytics-subtitle">Market Analysis Dashboards</h4>
-                                <a href="#product-analytics-market" class="btn btn-know-more btn-know-more-inline">Know More</a>
+                                <a href="#product-analytics-market" class="btn btn-know-more btn-know-more-inline">Know
+                                    More</a>
                             </div>
                         </div>
                     </div>
@@ -161,7 +175,8 @@
                     <h3 class="product-title">
                         <a href="#product-custom" class="product-link">Custom Solutions</a>
                     </h3>
-                    <p class="product-description">Have something in mind? Our domain experts will build it for you. A-Z</p>
+                    <p class="product-description">Have something in mind? Our domain experts will build it for you. A-Z
+                    </p>
                     <a href="#product-custom" class="btn btn-know-more">Know More</a>
                 </div>
             </div>
@@ -179,11 +194,14 @@
                 <!-- Testimonial 1 -->
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        <p class="testimonial-text">"inTEUtion transformed our financial oversight. Before, getting a P&L took days; now, it's a one-click process that gives me the clarity needed for immediate strategic decisions. We literally stopped guessing and started profiting."</p>
+                        <p class="testimonial-text">"inTEUtion transformed our financial oversight. Before, getting a
+                            P&L took days; now, it's a one-click process that gives me the clarity needed for immediate
+                            strategic decisions. We literally stopped guessing and started profiting."</p>
                     </div>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">
-                            <img src="https://ui-avatars.com/api/?name=Kevin+Mathew+Johnson&background=0066CC&color=fff&size=80" alt="Kevin Mathew Johnson" class="avatar-img">
+                            <img src="https://ui-avatars.com/api/?name=Kevin+Mathew+Johnson&background=0066CC&color=fff&size=80"
+                                alt="Kevin Mathew Johnson" class="avatar-img">
                         </div>
                         <div class="testimonial-info">
                             <h4 class="testimonial-name">Kevin Mathew Johnson</h4>
@@ -195,11 +213,15 @@
                 <!-- Testimonial 2 -->
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        <p class="testimonial-text">"The automated cost tracking and quotation features save my team hours every day. I trust the data completely, which means less time reconciling and more time focusing on smooth vessel and container operations. It makes the entire workflow highly reliable."</p>
+                        <p class="testimonial-text">"The automated cost tracking and quotation features save my team
+                            hours every day. I trust the data completely, which means less time reconciling and more
+                            time focusing on smooth vessel and container operations. It makes the entire workflow highly
+                            reliable."</p>
                     </div>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">
-                            <img src="https://ui-avatars.com/api/?name=Radhika+A&background=0066CC&color=fff&size=80" alt="Radhika A" class="avatar-img">
+                            <img src="https://ui-avatars.com/api/?name=Radhika+A&background=0066CC&color=fff&size=80"
+                                alt="Radhika A" class="avatar-img">
                         </div>
                         <div class="testimonial-info">
                             <h4 class="testimonial-name">Radhika A</h4>
@@ -211,11 +233,15 @@
                 <!-- Testimonial 3 -->
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        <p class="testimonial-text">"Our partnership with inTEUtion has been seamless. Their expertise allowed us to quickly develop complex, custom EDI solutions connecting disparate systems. Their flexible architecture and domain knowledge made integration quick and highly effective."</p>
+                        <p class="testimonial-text">"Our partnership with inTEUtion has been seamless. Their expertise
+                            allowed us to quickly develop complex, custom EDI solutions connecting disparate systems.
+                            Their flexible architecture and domain knowledge made integration quick and highly
+                            effective."</p>
                     </div>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">
-                            <img src="https://ui-avatars.com/api/?name=Geesche+Laksola&background=0066CC&color=fff&size=80" alt="Geesche Laksola" class="avatar-img">
+                            <img src="https://ui-avatars.com/api/?name=Geesche+Laksola&background=0066CC&color=fff&size=80"
+                                alt="Geesche Laksola" class="avatar-img">
                         </div>
                         <div class="testimonial-info">
                             <h4 class="testimonial-name">Geesche Laksola</h4>
@@ -244,9 +270,9 @@
                 <div class="customer-logo">
                     <img src="assets/nexus.png" alt="Nexus" class="customer-logo-img">
                 </div>
-                <div class="customer-logo">
+                <!-- <div class="customer-logo">
                     <img src="assets/dbworld.svg" alt="DP World" class="customer-logo-img">
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -256,7 +282,8 @@
         <div class="container">
             <div class="cta-content">
                 <h2 class="cta-title">Ready to Transform Your Operations?</h2>
-                <p class="cta-description">Get a personalized demo and see how inTEUtion can streamline your container operations</p>
+                <p class="cta-description">Get a personalized demo and see how inTEUtion can streamline your container
+                    operations</p>
                 <a href="https://wa.me/918714335326" class="btn btn-cta" target="_blank">
                     <span class="whatsapp-icon">💬</span>
                     Get a Demo
@@ -271,7 +298,8 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3 class="footer-title">inTEUtion</h3>
-                    <p class="footer-description">The Executive Software Platform for Streamlined Container Operations</p>
+                    <p class="footer-description">The Executive Software Platform for Streamlined Container Operations
+                    </p>
                 </div>
                 <div class="footer-section">
                     <h4 class="footer-heading">Quick Links</h4>
@@ -299,7 +327,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="https://in.linkedin.com/company/inteution" target="_blank" class="contact-link" rel="noopener noreferrer">
+                            <a href="https://in.linkedin.com/company/inteution" target="_blank" class="contact-link"
+                                rel="noopener noreferrer">
                                 <span class="contact-icon">💼</span>
                                 Follow us on LinkedIn
                             </a>
@@ -317,7 +346,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p class="copyright">&copy; 2024 inTEUtion. All rights reserved.</p>
+                <p class="copyright">&copy; 2026 inTEUtion. All rights reserved.</p>
                 <div class="footer-legal">
                     <a href="#privacy">Privacy Policy</a>
                     <span class="separator">|</span>
@@ -327,4 +356,5 @@
         </div>
     </footer>
 </body>
+
 </html>

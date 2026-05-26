@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <script>
         // Inline theme selector to prevent white screen flash
-        (function() {
+        (function () {
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.documentElement.setAttribute('data-theme', 'dark');
@@ -19,6 +20,7 @@
     </script>
     <script src="js/main.js" defer></script>
 </head>
+
 <body>
     <header class="header">
         <nav class="navbar">
@@ -38,10 +40,16 @@
                 </ul>
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                     <span class="sun-icon">
-                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="4" />
+                            <path
+                                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                        </svg>
                     </span>
                     <span class="moon-icon">
-                        <svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+                        </svg>
                     </span>
                 </button>
                 <div class="hamburger">
@@ -92,7 +100,8 @@
         <div class="video-modal-container">
             <button class="video-modal-close" aria-label="Close video">×</button>
             <div class="video-modal-content">
-                <video class="video-player" id="videoPlayer" controls aria-label="InTEUtion Pricing Engine demonstration video">
+                <video class="video-player" id="videoPlayer" controls
+                    aria-label="InTEUtion Pricing Engine demonstration video">
                     <source src="" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -106,7 +115,8 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3 class="footer-title">inTEUtion</h3>
-                    <p class="footer-description">The Executive Software Platform for Streamlined Container Operations</p>
+                    <p class="footer-description">The Executive Software Platform for Streamlined Container Operations
+                    </p>
                 </div>
                 <div class="footer-section">
                     <h4 class="footer-heading">Quick Links</h4>
@@ -134,7 +144,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="https://in.linkedin.com/company/inteution" target="_blank" class="contact-link" rel="noopener noreferrer">
+                            <a href="https://in.linkedin.com/company/inteution" target="_blank" class="contact-link"
+                                rel="noopener noreferrer">
                                 <span class="contact-icon">💼</span>
                                 Follow us on LinkedIn
                             </a>
@@ -152,7 +163,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p class="copyright">&copy; 2024 inTEUtion. All rights reserved.</p>
+                <p class="copyright">&copy; 2026 inTEUtion. All rights reserved.</p>
                 <div class="footer-legal">
                     <a href="#privacy">Privacy Policy</a>
                     <span class="separator">|</span>
@@ -189,21 +200,21 @@
                 blogGrid.innerHTML = '<div class="blog-error"><p>Error: Blog configuration not available.</p></div>';
                 return;
             }
-            
+
             blogGrid.innerHTML = '';
-            
+
             // Sort blogs by ID (newest first if you add date sorting)
             const sortedBlogs = Object.values(blogConfig).sort((a, b) => b.id - a.id);
-            
+
             sortedBlogs.forEach(blog => {
                 const blogCard = document.createElement('article');
                 blogCard.className = 'blog-card';
                 blogCard.setAttribute('data-blog-id', blog.id);
-                
-                const highlightsHTML = blog.highlights.map(h => 
+
+                const highlightsHTML = blog.highlights.map(h =>
                     `<span class="blog-highlight">${h}</span>`
                 ).join('');
-                
+
                 blogCard.innerHTML = `
                     <div class="blog-card-image">
                         <div class="blog-icon">${blog.icon}</div>
@@ -224,14 +235,14 @@
                         </div>
                     </div>
                 `;
-                
+
                 // Add click handler for card
-                blogCard.addEventListener('click', function(e) {
+                blogCard.addEventListener('click', function (e) {
                     if (!e.target.closest('.blog-card-actions')) {
                         openBlogModal(blog.id);
                     }
                 });
-                
+
                 blogGrid.appendChild(blogCard);
             });
         }
@@ -254,7 +265,7 @@
                     },
                     cache: 'no-cache'
                 });
-                
+
                 if (response.ok) {
                     const content = await response.text();
                     if (content && content.trim().length > 0) {
@@ -284,7 +295,7 @@
             blogModalContent.innerHTML = '<div class="blog-loading">Loading...</div>';
             blogModal.classList.add('active');
             document.body.style.overflow = 'hidden';
-            
+
             const content = await loadBlogContent(blogId);
             if (content) {
                 blogModalContent.innerHTML = content;
@@ -322,7 +333,7 @@
         videoModalOverlay.addEventListener('click', closeVideoModal);
 
         // Close on Escape key
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
                 if (blogModal.classList.contains('active')) {
                     closeBlogModal();
@@ -334,9 +345,10 @@
         });
 
         // Initialize blog cards on page load
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             loadBlogCards();
         });
     </script>
 </body>
+
 </html>
