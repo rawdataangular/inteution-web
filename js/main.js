@@ -541,6 +541,266 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 250);
         });
     }
+
+    // ============================================
+    // Schedule A Demo Modal & Web3Forms Submission
+    // ============================================
+
+    // 1. Gather all "Schedule A Demo" buttons/links
+    const demoButtons = [];
+    document.querySelectorAll('a, button').forEach(el => {
+        const text = el.textContent.trim().toLowerCase();
+        if (text.includes('schedule a demo')) {
+            demoButtons.push(el);
+        }
+    });
+
+    if (demoButtons.length > 0) {
+        demoButtons.forEach(btn => {
+            // Remove target="_blank" and replace WhatsApp url behaviors with the form trigger
+            btn.removeAttribute('target');
+            if (btn.hasAttribute('href')) {
+                btn.setAttribute('data-original-href', btn.getAttribute('href'));
+                btn.setAttribute('href', 'javascript:void(0)');
+            }
+            if (btn.hasAttribute('#href')) {
+                btn.removeAttribute('#href');
+                btn.setAttribute('href', 'javascript:void(0)');
+            }
+
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                openDemoModal();
+            });
+        });
+    }
+
+    function openDemoModal() {
+        // Create modal if it doesn't exist
+        let demoModal = document.getElementById('demoModal');
+        if (!demoModal) {
+            demoModal = document.createElement('div');
+            demoModal.id = 'demoModal';
+            demoModal.className = 'demo-modal';
+            demoModal.innerHTML = `
+                <div class="demo-modal-card">
+                    <div class="demo-modal-header">
+                        <h2 class="demo-modal-title">Schedule A Demo</h2>
+                        <button class="demo-modal-close" aria-label="Close modal" id="closeDemoBtn">&times;</button>
+                    </div>
+                    <div class="demo-modal-body" id="demoModalBody">
+                        <form id="demoForm" class="demo-form" novalidate>
+                            <!-- Web3Forms Hidden Settings -->
+                            <input type="hidden" name="access_key" value="50a6b5a6-8cfb-4cfb-b18d-d840b9d9f434">
+                            <input type="hidden" name="subject" value="New Demo Request from inTEUtion Website">
+                            <input type="hidden" name="from_name" value="inTEUtion Demo Form">
+                            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+                            <!-- First Row: Name and Email -->
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="demoName" class="form-label">Name<span>*</span></label>
+                                    <input type="text" id="demoName" name="name" class="form-input" placeholder="e.g. John Doe" required autocomplete="name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="demoEmail" class="form-label">Work Email<span>*</span></label>
+                                    <input type="email" id="demoEmail" name="email" class="form-input" placeholder="name@company.com" required autocomplete="email">
+                                </div>
+                            </div>
+
+                            <!-- Second Row: Phone and Company -->
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="demoPhone" class="form-label">Phone Number</label>
+                                    <input type="tel" id="demoPhone" name="phone" class="form-input" placeholder="+1 (555) 000-0000" autocomplete="tel">
+                                </div>
+                                <div class="form-group">
+                                    <label for="demoCompany" class="form-label">Company Name<span>*</span></label>
+                                    <input type="text" id="demoCompany" name="company" class="form-input" placeholder="e.g. Global Logistics Inc." required>
+                                </div>
+                            </div>
+
+                            <!-- Message / Requirements -->
+                            <div class="form-group">
+                                <label for="demoMessage" class="form-label">Additional Operational Requirements / Message</label>
+                                <textarea id="demoMessage" name="message" class="form-textarea" placeholder="Tell us a bit about your liner/NVOCC operations and current pain points..."></textarea>
+                            </div>
+
+                            <!-- Submission Status Message -->
+                            <div id="formStatus" class="form-status"></div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" id="submitDemoBtn" class="btn-submit">
+                                <span>Submit Demo Request</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(demoModal);
+
+            // Wire up internal close handlers
+            const closeBtn = demoModal.querySelector('#closeDemoBtn');
+            closeBtn.addEventListener('click', closeDemoModal);
+            demoModal.addEventListener('click', function (evt) {
+                if (evt.target === demoModal) {
+                    closeDemoModal();
+                }
+            });
+
+            // Wire up submit handler
+            const form = demoModal.querySelector('#demoForm');
+            form.addEventListener('submit', handleDemoSubmit);
+        }
+
+        // Show Modal
+        demoModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Auto-focus first input
+        const firstInput = demoModal.querySelector('#demoName');
+        if (firstInput) {
+            setTimeout(() => firstInput.focus(), 100);
+        }
+    }
+
+    function closeDemoModal() {
+        const demoModal = document.getElementById('demoModal');
+        if (demoModal) {
+            demoModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+
+    // Add ESC key listener to close demo modal as well
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            closeDemoModal();
+        }
+    });
+
+    async function handleDemoSubmit(e) {
+        e.preventDefault();
+        const form = e.target;
+        const statusDiv = document.getElementById('formStatus');
+        const submitBtn = document.getElementById('submitDemoBtn');
+
+        // Reset previous status
+        statusDiv.style.display = 'none';
+        statusDiv.className = 'form-status';
+        statusDiv.textContent = '';
+
+        // Validation checks
+        const nameInput = form.querySelector('#demoName');
+        const emailInput = form.querySelector('#demoEmail');
+        const companyInput = form.querySelector('#demoCompany');
+
+        if (!nameInput.value.trim()) {
+            showError("Name is required.");
+            nameInput.focus();
+            return;
+        }
+
+        if (!emailInput.value.trim() || !validateEmail(emailInput.value.trim())) {
+            showError("A valid Work Email is required.");
+            emailInput.focus();
+            return;
+        }
+
+        if (!companyInput.value.trim()) {
+            showError("Company Name is required.");
+            companyInput.focus();
+            return;
+        }
+
+        // Disable elements & show loading spinner
+        toggleFormState(form, true);
+        submitBtn.innerHTML = `<span class="spinner"></span> <span>Sending Request...</span>`;
+
+        // Prepare data (extracting only defined fields to prevent browser autofill/extension injections from adding unnamed inputs)
+        const object = {
+            access_key: form.querySelector('[name="access_key"]').value,
+            subject: form.querySelector('[name="subject"]').value,
+            from_name: form.querySelector('[name="from_name"]').value,
+            name: form.querySelector('#demoName').value.trim(),
+            email: form.querySelector('#demoEmail').value.trim(),
+            phone: form.querySelector('#demoPhone').value.trim(),
+            company: form.querySelector('#demoCompany').value.trim(),
+            message: form.querySelector('#demoMessage').value.trim()
+        };
+
+        const botcheck = form.querySelector('[name="botcheck"]');
+        if (botcheck && botcheck.checked) {
+            object.botcheck = "on";
+        }
+
+        const json = JSON.stringify(object);
+
+        try {
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            });
+
+            const result = await response.json();
+
+            if (response.status === 200) {
+                // Success: Show beautiful success view
+                showSuccessState();
+            } else {
+                showError(result.message || "Unable to send request. Please try again.");
+                toggleFormState(form, false);
+                submitBtn.innerHTML = `<span>Submit Demo Request</span>`;
+            }
+        } catch (error) {
+            console.error('Web3Forms Error:', error);
+            showError("Connection error. Please check your internet and try again.");
+            toggleFormState(form, false);
+            submitBtn.innerHTML = `<span>Submit Demo Request</span>`;
+        }
+    }
+
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+
+    function showError(msg) {
+        const statusDiv = document.getElementById('formStatus');
+        statusDiv.textContent = msg;
+        statusDiv.classList.add('error');
+        statusDiv.style.display = 'block';
+    }
+
+    function toggleFormState(form, isDisabled) {
+        const inputs = form.querySelectorAll('.form-input, .form-textarea, .btn-submit');
+        inputs.forEach(input => {
+            if (isDisabled) {
+                input.setAttribute('disabled', 'true');
+            } else {
+                input.removeAttribute('disabled');
+            }
+        });
+    }
+
+    function showSuccessState() {
+        const bodyContainer = document.getElementById('demoModalBody');
+        bodyContainer.innerHTML = `
+            <div class="demo-success-view">
+                <div class="success-icon-wrapper">✓</div>
+                <h3 class="success-title">Demo Request Received!</h3>
+                <p class="success-message">Thank you for your interest in inTEUtion. Our maritime solutions consulting team has been notified and will reach out to schedule your personalized product walkthrough shortly.</p>
+                <button class="btn-success-close" id="successCloseBtn">Close</button>
+            </div>
+        `;
+
+        const successCloseBtn = bodyContainer.querySelector('#successCloseBtn');
+        successCloseBtn.addEventListener('click', closeDemoModal);
+    }
 });
 
 
