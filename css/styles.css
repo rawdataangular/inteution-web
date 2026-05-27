@@ -3333,7 +3333,7 @@ body::before {
 }
 
 /* ============================================
-   Value Proposition Page Styles
+   What You Get Page Styles
    ============================================ */
 
 /* Value Hero Section */
@@ -3434,7 +3434,7 @@ body::before {
     letter-spacing: 1px;
 }
 
-/* Value Proposition Section */
+/* What You Get Section */
 .value-proposition {
     padding: 5rem 0;
     background: linear-gradient(to bottom, var(--white) 0%, var(--brand-blue-lighter) 5%, var(--white) 100%);
