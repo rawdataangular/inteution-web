@@ -1,0 +1,2584 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>inTEUtion — Event Based Accounting ERP for NVOCCs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>
+      // Inline theme selector to prevent white screen flash
+      (function () {
+          const savedTheme = localStorage.getItem('theme');
+          if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+              document.documentElement.setAttribute('data-theme', 'dark');
+          } else {
+              document.documentElement.setAttribute('data-theme', 'light');
+          }
+      })();
+  </script>
+  <script src="js/main.js" defer></script>
+
+  <style>
+    :root {
+      --navy: #1322a8;
+      --navy-deep: #0a125c;
+      --navy-soft: #2438d4;
+      --cobalt: #3b54f0;
+      --ice: #eef1ff;
+      --ice-2: #f4f6ff;
+      --ink: #0b1020;
+      --slate: #4e5668;
+      --line: #e2e8f0;
+      --white: #ffffff;
+      --green: #10b981;
+      --amber: #f59e0b;
+      --rose: #ef4444;
+      --shadow: 0 20px 40px -15px rgba(19, 34, 168, 0.15);
+      --shadow-lg: 0 35px 70px -25px rgba(19, 34, 168, 0.25);
+      --shadow-sm: 0 8px 20px -8px rgba(19, 34, 168, 0.1);
+    }
+
+    [data-theme="dark"] {
+      --white: #0F1524;
+      --line: rgba(255, 255, 255, 0.08);
+      --ink: #FFFFFF;
+      --slate: #94A3B8;
+      --ice-2: #090D16;
+      --ice: #172033;
+      --navy-deep: #93C5FD;
+      --bg-primary: #080B11;
+      --shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 35px 70px -25px rgba(0, 0, 0, 0.7);
+      --shadow-sm: 0 8px 20px -8px rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Manrope', system-ui, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-dark);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    .erp-main-wrapper {
+      display: flex;
+     
+      margin-top: 50px;
+      width: 100%;
+    }
+
+    /* Left Sidebar Navigation */
+    .sidebar {
+      width: 280px;
+      background: var(--white);
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      flex-shrink: 0;
+      z-index: 50;
+    }
+
+    .brand {
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand img {
+      max-height: 40px;
+      max-width: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .nav-links {
+      padding: 20px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex-grow: 1;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      color: var(--slate);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+
+    .nav-item svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--slate);
+      transition: stroke 0.2s ease;
+    }
+
+    .nav-item:hover {
+      background: var(--ice-2);
+      color: var(--navy);
+    }
+
+    .nav-item:hover svg {
+      stroke: var(--navy);
+    }
+
+    .nav-item.active {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .nav-item.active svg {
+      stroke: var(--white);
+    }
+
+    .sidebar-footer {
+      padding: 20px;
+      border-top: 1px solid var(--line);
+      font-size: 11px;
+      color: var(--slate);
+      background: var(--ice-2);
+    }
+
+    /* Main Workspace */
+    .workspace {
+      flex-grow: 1;
+      height: 100%;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Tab Contents */
+    .tab-view {
+      display: none;
+      padding: 40px;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    .tab-view.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Vision Dashboard Custom Layout */
+    .vision-layout {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+      min-height: calc(100vh - 120px);
+    }
+
+    .hero-content h1 {
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: 46px;
+      line-height: 1.15;
+      color: var(--navy-deep);
+      margin-bottom: 12px;
+    }
+
+    .hero-content h2 {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--cobalt);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .hero-content p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--slate);
+      margin-bottom: 30px;
+      max-width: 600px;
+    }
+
+    /* Interactive Features Badge Grid */
+    .badge-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 34px;
+    }
+
+    .badge-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .badge-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--ice);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--navy);
+      font-weight: bold;
+    }
+
+    .badge-info h4 {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .badge-info span {
+      font-size: 12px;
+      color: var(--slate);
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--navy), var(--cobalt));
+      color: var(--white);
+      padding: 16px 32px;
+      border-radius: 12px;
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 12px 24px -10px rgba(19, 34, 168, 0.4);
+      transition: all 0.2s ease;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 32px -8px rgba(19, 34, 168, 0.5);
+    }
+
+    /* Premium Graphic Box */
+    .hero-art-box {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      border-radius: 32px;
+      background: linear-gradient(135deg, var(--navy-deep) 0%, var(--cobalt) 100%);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .hero-art-box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 40px);
+    }
+
+    .diamond-shape {
+      position: absolute;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transform: rotate(45deg);
+    }
+
+    .diamond-1 {
+      width: 180px;
+      height: 180px;
+      top: -30px;
+      right: -30px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.02) 100%);
+    }
+
+    .diamond-2 {
+      width: 240px;
+      height: 240px;
+      bottom: -60px;
+      left: -60px;
+      background: rgba(19, 34, 168, 0.4);
+    }
+
+    .diamond-3 {
+      width: 120px;
+      height: 120px;
+      top: 40%;
+      right: 15%;
+      border-color: rgba(255, 255, 255, 0.4);
+      background: rgba(59, 84, 240, 0.3);
+    }
+
+    .graphic-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      text-align: center;
+      z-index: 10;
+    }
+
+    .ship-silhouette {
+      width: 100px;
+      height: 100px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      border: 2px dashed rgba(255, 255, 255, 0.4);
+      animation: spinDashed 20s linear infinite;
+    }
+
+    @keyframes spinDashed {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .ship-silhouette svg {
+      width: 50px;
+      height: 50px;
+      animation: counterSpin 20s linear infinite;
+    }
+
+    @keyframes counterSpin {
+      100% {
+        transform: rotate(-360deg);
+      }
+    }
+
+    /* Modules Section styling */
+    .module-header {
+      margin-bottom: 30px;
+    }
+
+    .module-header h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--navy-deep);
+    }
+
+    .module-header p {
+      font-size: 15px;
+      color: var(--slate);
+      margin-top: 6px;
+    }
+
+    .modules-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .module-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 140px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .module-card::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--cobalt);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.25s ease;
+    }
+
+    .module-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--cobalt);
+      box-shadow: var(--shadow);
+    }
+
+    .module-card:hover::after {
+      transform: scaleY(1);
+    }
+
+    .module-card.active-card {
+      background: linear-gradient(135deg, var(--navy), var(--navy-soft));
+      color: var(--white);
+      border-color: transparent;
+    }
+
+    .module-card.active-card .module-code {
+      background: rgba(255, 255, 255, 0.2);
+      color: var(--white);
+    }
+
+    .module-card.active-card .module-title {
+      color: var(--white);
+    }
+
+    .module-card.active-card::after {
+      display: none;
+    }
+
+    .module-code {
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      background: var(--ice);
+      color: var(--navy);
+      padding: 4px 10px;
+      border-radius: 6px;
+      width: max-content;
+      margin-bottom: 12px;
+    }
+
+    .module-title {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--navy-deep);
+    }
+
+    .module-subtitle {
+      font-size: 12px;
+      color: #000208;
+      margin-top: 2px;
+    }
+
+    
+
+    /* Interactive Feature Panel in Modules tab */
+    .module-feature-panel {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 540px;
+    }
+
+    .feature-header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+
+    .feature-header h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--navy-deep);
+    }
+
+    .feature-header span {
+      font-size: 13px;
+      color: var(--cobalt);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .feature-body {
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--slate);
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Live Interactive CMNR Tool in Module View */
+    .cmnr-calc-box {
+      background: var(--ice-2);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 18px;
+      border: 1px solid var(--line);
+    }
+
+    .cmnr-selects {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .cmnr-selects select {
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid var(--line);
+      font-size: 12.5px;
+      background: var(--white);
+    }
+
+    .cmnr-result {
+      margin-top: 14px;
+      background: var(--white);
+      padding: 12px;
+      border-radius: 8px;
+      border-left: 4px solid var(--amber);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cmnr-price {
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--navy);
+    }
+
+    /* Live Interactive Settlement Tool in Module View */
+    .settlement-box {
+      background: var(--ice-2);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 18px;
+      border: 1px solid var(--line);
+    }
+
+    .settlement-slider {
+      width: 100%;
+      margin: 10px 0;
+    }
+
+    /* Move Engine Styling */
+    .engine-header {
+      margin-bottom: 30px;
+    }
+
+    .engine-header h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--navy-deep);
+    }
+
+    .engine-params {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .param-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .param-group label {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--slate);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .param-group select,
+    .param-group input {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      font-size: 13.5px;
+      background: var(--ice-2);
+      font-weight: 600;
+    }
+
+    /* The Journey timeline block */
+    .timeline-container {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+
+    .timeline-track {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .timeline-track::before {
+      content: "";
+      position: absolute;
+      top: 40px;
+      left: 5%;
+      right: 5%;
+      height: 4px;
+      background: var(--line);
+      z-index: 1;
+    }
+
+    .timeline-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 5;
+      width: 14%;
+      cursor: pointer;
+    }
+
+    .node-icon-wrapper {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      background: var(--white);
+      border: 2px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s ease;
+      color: var(--slate);
+    }
+
+    .node-icon-wrapper svg {
+      width: 44px;
+      height: 44px;
+    }
+
+    .timeline-node:hover .node-icon-wrapper {
+      transform: translateY(-6px);
+      border-color: var(--cobalt);
+      color: var(--cobalt);
+    }
+
+    .timeline-node.active .node-icon-wrapper {
+      background: linear-gradient(135deg, var(--navy), var(--cobalt));
+      border-color: transparent;
+      color: var(--white);
+      box-shadow: 0 12px 24px -10px rgba(19, 34, 168, 0.4);
+      transform: translateY(-6px) scale(1.05);
+    }
+
+    .node-code {
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      margin-top: 12px;
+      color: var(--navy-deep);
+    }
+
+    .node-desc {
+      font-size: 11.5px;
+      color: var(--slate);
+      text-align: center;
+      margin-top: 2px;
+      font-weight: 500;
+    }
+
+    /* Accrual Ledger & Generated Tariffs Sticky View */
+    .engine-sandbox {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 30px;
+    }
+
+    .sticky-stage {
+      background: var(--ice-2);
+      border: 2px dashed var(--line);
+      border-radius: 20px;
+      padding: 30px;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .sticky-note-grid {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    /* Yellow Sticky Note Graphic representation */
+    .sticky-note {
+      width: 195px;
+      min-height: 200px;
+      padding: 18px;
+      background: #fef08a;
+      /* Soft bright yellow sticky */
+      border-radius: 2px;
+      box-shadow: 0 10px 20px -8px rgba(120, 90, 0, 0.35);
+      transform: rotate(var(--rot, -2deg));
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      animation: dropIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    .sticky-note::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 30%;
+      width: 70px;
+      height: 18px;
+      background: rgba(255, 255, 255, 0.45);
+      transform: rotate(-1deg);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .sticky-note.cost {
+      background: #fde047;
+      /* Slightly darker gold yellow for cost */
+    }
+
+    @keyframes dropIn {
+      from {
+        transform: translateY(-50px) rotate(15deg);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0) rotate(var(--rot, -2deg));
+        opacity: 1;
+      }
+    }
+
+    .sticky-type {
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #854d0e;
+      border-bottom: 1.5px solid rgba(133, 77, 14, 0.15);
+      padding-bottom: 6px;
+      margin-bottom: 10px;
+    }
+
+    .sticky-elem-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #713f12;
+      line-height: 1.3;
+    }
+
+    .sticky-elem-code {
+      font-size: 11px;
+      background: rgba(113, 63, 18, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: bold;
+      width: max-content;
+      margin-top: 6px;
+    }
+
+    .sticky-amount {
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      color: #451a03;
+      text-align: right;
+      margin-top: auto;
+    }
+
+    .accrual-ledger {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .accrual-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
+    }
+
+    .accrual-header h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: 18px;
+      color: var(--navy-deep);
+    }
+
+    .gp-badge {
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: 13.5px;
+      background: var(--ice);
+      color: var(--navy);
+      padding: 6px 12px;
+      border-radius: 30px;
+    }
+
+    .ledger-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .ledger-table th {
+      text-align: left;
+      padding: 10px;
+      background: var(--ice-2);
+      color: var(--slate);
+      font-weight: 700;
+    }
+
+    .ledger-table td {
+      padding: 12px 10px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .ledger-amount.revenue {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .ledger-amount.cost {
+      color: var(--rose);
+      font-weight: 700;
+    }
+
+    /* Workflow Screen Grid Structure */
+    .flow-screen-container {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 30px;
+    }
+
+    .flow-selector-tabs {
+      grid-column: 1 / -1;
+      display: flex;
+      background: var(--ice-2);
+      padding: 6px;
+      border-radius: 12px;
+      width: max-content;
+      margin-bottom: 20px;
+    }
+
+    .flow-tab-btn {
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--slate);
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .flow-tab-btn.active {
+      background: var(--white);
+      color: var(--navy);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .workflow-scroller {
+      max-height: 580px;
+      overflow-y: auto;
+      padding-right: 12px;
+    }
+
+    .workflow-card-step {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 16px;
+      border-radius: 14px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      margin-bottom: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .workflow-card-step:hover {
+      border-color: var(--cobalt);
+      background: var(--ice-2);
+    }
+
+    .workflow-card-step.active {
+      background: var(--ice);
+      border-color: var(--cobalt);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .workflow-card-step.completed::after {
+      content: "✓";
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--green);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .step-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--ice-2);
+      color: var(--slate);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .workflow-card-step.active .step-circle {
+      background: var(--navy);
+      color: white;
+    }
+
+    .step-text h4 {
+      font-family: 'Sora', sans-serif;
+      font-size: 15px;
+      color: var(--navy-deep);
+    }
+
+    .step-text span {
+      font-size: 12px;
+      color: var(--slate);
+    }
+
+    /* High fidelity live simulation document viewer */
+    .doc-viewer-panel {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 580px;
+    }
+
+    .doc-header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+    }
+
+    .doc-badge {
+      font-size: 11px;
+      background: var(--ice);
+      color: var(--navy);
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    .doc-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--navy-deep);
+    }
+
+    .doc-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--slate);
+      margin-bottom: 20px;
+    }
+
+    /* Realistic Simulated Screens inside doc viewer */
+    .simulated-screen {
+      background: var(--ice-2);
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      padding: 20px;
+      font-family: monospace;
+      font-size: 12px;
+      color: var(--ink);
+      flex-grow: 1;
+      margin-bottom: 20px;
+      overflow-y: auto;
+    }
+
+    .sim-line {
+      margin-bottom: 8px;
+    }
+
+    .sim-label {
+      color: var(--navy-soft);
+      font-weight: bold;
+    }
+
+    .sim-val {
+      color: #0369a1;
+    }
+
+    .sim-title-inner {
+      font-weight: bold;
+      border-bottom: 1px dashed var(--line);
+      padding-bottom: 6px;
+      margin-bottom: 10px;
+      color: var(--navy-deep);
+      font-family: 'Sora', sans-serif;
+    }
+
+    /* Import Flow Lanes */
+    .import-lanes-container {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .lane-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .lane-title {
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: 13.5px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--slate);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lane-flow {
+      display: flex;
+      gap: 12px;
+    }
+
+    .lane-node {
+      flex: 1;
+      background: var(--ice-2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .lane-node:hover {
+      background: var(--ice);
+      border-color: var(--cobalt);
+    }
+
+    .lane-node.active {
+      background: linear-gradient(135deg, var(--navy-soft), var(--cobalt));
+      color: white;
+      border-color: transparent;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .lane-node h5 {
+      font-family: 'Sora', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .lane-node span {
+      font-size: 11px;
+      opacity: 0.8;
+    }
+
+    /* Interactive Status Indicators */
+    .live-accent {
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 6px;
+      animation: pulseGreen 1.5s infinite;
+    }
+
+    @keyframes pulseGreen {
+      0% {
+        transform: scale(0.9);
+        opacity: 0.7;
+      }
+
+      50% {
+        transform: scale(1.1);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(0.9);
+        opacity: 0.7;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header Navigation -->
+  <header class="header">
+      <nav class="navbar">
+          <div class="container">
+              <div class="nav-brand">
+                  <a href="index.html" class="logo">
+                      <img src="assets/logo-big.png" alt="inTEUtion" class="logo-img">
+                  </a>
+              </div>
+              <ul class="nav-menu">
+                  <li><a href="index.html" class="nav-link">Home</a></li>
+                  <li><a href="about.html" class="nav-link">About Us</a></li>
+                  <li><a href="value.html" class="nav-link">What You Get</a></li>
+                  <!-- <li><a href="careers.html" class="nav-link">Careers</a></li>
+                  <li><a href="blog.html" class="nav-link">Blog</a></li> -->
+                  <li><a href="contact.html" class="nav-link">Contact</a></li>
+              </ul>
+              <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                  <span class="sun-icon">
+                      <svg viewBox="0 0 24 24">
+                          <circle cx="12" cy="12" r="4" />
+                          <path
+                              d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                      </svg>
+                  </span>
+                  <span class="moon-icon">
+                      <svg viewBox="0 0 24 24">
+                          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+                      </svg>
+                  </span>
+              </button>
+              <div class="hamburger">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+              </div>
+          </div>
+      </nav>
+  </header>
+
+  <!-- ERP Main Container -->
+  <div class="erp-main-wrapper">
+   
+
+    <!-- Workspace area -->
+    <main class="workspace">
+
+    
+
+    <!-- TAB 2: MODULES -->
+    <section id="modules" class="tab-view active">
+
+      <div class="vision-layout">
+        <div class="hero-content">
+          <h2>Event Based Accounting ERP for NVOCCs</h2>
+          <h1>in<span style="color:#1322a8;">TEU</span>tion</h1>
+          <p>
+            Next-gen ERP built For NVOCC operations — sleek, smart, and built for the new age of logistics..
+            Instead of manual invoicing and fragile tracking, <strong>every container movement</strong> (such as
+            Dispatch to Shipper, Port Gate-In, or On-Board) triggers mapped cost and revenue elements, resolving tariffs
+            automatically.
+          </p>
+
+          <div class="badge-grid">
+            <div class="badge-card">
+              <div class="badge-icon">100%</div>
+              <div class="badge-info">
+                <h4>No Revenue Leakage</h4>
+                <span>Real-time automatic provisions</span>
+              </div>
+            </div>
+            <div class="badge-card">
+              <div class="badge-icon">MC</div>
+              <div class="badge-info">
+                <h4>Move-Based Tariffs</h4>
+                <span>Dispatch, Gate-In, On-Board events</span>
+              </div>
+            </div>
+            <div class="badge-card">
+              <div class="badge-icon">9</div>
+              <div class="badge-info">
+                <h4>Integrated Modules</h4>
+                <span>From CMNR to Slot Capacity</span>
+              </div>
+            </div>
+            <div class="badge-card">
+              <div class="badge-icon">DA</div>
+              <div class="badge-info">
+                <h4>Agency Settlement</h4>
+                <span>1-Click Settlement Windows</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="hero-art-box">
+          <div class="diamond-shape diamond-1"></div>
+          <div class="diamond-shape diamond-2"></div>
+          <div class="diamond-shape diamond-3"></div>
+          <div class="graphic-center">
+            <div class="ship-silhouette">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M2 17h20l-2.5 4h-15L2 17zM5 17V9a3 3 0 013-3h8a3 3 0 013 3v8" />
+                <path d="M9 6V3h6v3" />
+              </svg>
+            </div>
+            <h3 style="font-family:'Sora'; font-weight:800; font-size:24px; margin-bottom:6px;">Event × Element</h3>
+            <p style="opacity:0.8; font-size:14px; max-width:280px; margin: 0 auto;">One physical movement automatically
+              triggers all relevant accounting lines.</p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="module-header">
+        <h2>System Architecture</h2>
+        <p>Click any of the 9 fully integrated modules to simulate its live programmatic capability.</p>
+      </div>
+
+      <div class="modules-layout">
+        <div class="modules-grid" id="modulesGrid">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Dynamic Module Details Panel -->
+        <div class="module-feature-panel" id="modulePanel">
+          <!-- Populated dynamically by JS -->
+        </div>
+      </div>
+    </section>
+
+  
+
+
+
+     <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Transform Your Operations?</h2>
+                <p class="cta-description">Get a personalized demo and see how inTEUtion can streamline your container
+                    operations</p>
+                <a href="#" class="btn btn-cta">
+                    <span class="demo-icon">📅</span>
+                   Schedule A Demo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact" style="">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">inTEUtion</h3>
+                    <p class="footer-description">The Executive Software Platform for Streamlined Container Operations
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="value.html">What You Get</a></li>
+                        <!-- <li><a href="careers.html">Careers</a></li>
+                        <li><a href="blog.html">Blog</a></li> -->
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <a #href="https://wa.me/918714335326" target="_blank" class="contact-link">
+                                <span class="contact-icon">💬</span>
+                                WhatsApp: +91 87 14 335 326
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:info@inteution.com" class="contact-link">
+                                <span class="contact-icon">✉️</span>
+                                info@inteution.com
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://in.linkedin.com/company/inteution" target="_blank" class="contact-link"
+                                rel="noopener noreferrer">
+                                <span class="contact-icon">💼</span>
+                                Follow us on LinkedIn
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Address</h4>
+                    <p class="footer-address">
+                        2nd Floor, Transasia Corporate Park<br>
+                        XIV/396-C, Seaport - Airport Rd<br>
+                        Chittethukara, Kakkanad<br>
+                        Kerala 682037, India
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2026 inTEUtion. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#privacy">Privacy Policy</a>
+                    <span class="separator">|</span>
+                    <a href="#terms">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+  </main>
+  
+
+  <script>
+    // Premium Toast Overlay Guardrail (Replacing native Alerts to comply with Frame Guidelines)
+    function showToast(title, message, type = 'success') {
+      var container = document.getElementById('toast-container');
+      if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        container.style.position = 'fixed';
+        container.style.bottom = '30px';
+        container.style.right = '30px';
+        container.style.zIndex = '9999';
+        container.style.display = 'flex';
+        container.style.flexDirection = 'column';
+        container.style.gap = '10px';
+        document.body.appendChild(container);
+      }
+
+      var toast = document.createElement('div');
+      toast.style.background = type === 'success' ? 'var(--green)' : 'var(--navy)';
+      toast.style.color = 'white';
+      toast.style.padding = '14px 20px';
+      toast.style.borderRadius = '10px';
+      toast.style.boxShadow = 'var(--shadow-lg)';
+      toast.style.fontFamily = "'Manrope', sans-serif";
+      toast.style.fontSize = '13.5px';
+      toast.style.fontWeight = '600';
+      toast.style.minWidth = '320px';
+      toast.style.maxWidth = '400px';
+      toast.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(30px)';
+
+      toast.innerHTML = `
+        <div style="font-family:'Sora', sans-serif; font-weight:800; font-size:12px; margin-bottom:4px; text-transform:uppercase; letter-spacing:0.5px; display:flex; align-items:center; gap:6px;">
+          <span style="width:6px; height:6px; border-radius:50%; background:white; display:inline-block; animation: pulseGreen 1.5s infinite;"></span>
+          ${title}
+        </div>
+        <div>${message}</div>
+      `;
+
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateY(0)';
+      }, 50);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(-20px)';
+        setTimeout(() => {
+          toast.remove();
+        }, 300);
+      }, 5000);
+    }
+
+    // System Constants & Mock DB Values (Declared with var to prevent redeclaration ReferenceErrors in hot-reload iframe containers)
+    var MODULES_DATA = [
+      {
+        code: 'CORE',
+        name: 'Core Master Data',
+        subtitle: 'The Enterprise Blueprint',
+        desc: 'Core holds systemic master data including trade routes, partner records, containers, and tariff cards. Elements and their associated parameters are declared here centrally to dynamically calculate and provision costs upstream upon move code updates.',
+        interactiveType: 'tariffs'
+      },
+      {
+        code: 'EMS',
+        name: 'Equipment Management',
+        subtitle: 'Fleet & Mobilisation',
+        desc: 'Enables purchase, lease, sales and lifecycle tracking of your containers. Ensures global fleet mobilization, empty stock rebalancing and physical tracking across marine and inland terminals.',
+        interactiveType: 'fleet'
+      },
+      {
+        code: 'CAP',
+        name: 'Slot Capacity',
+        subtitle: 'Slot Buying Contracts',
+        desc: 'Provides control over purchased slots. Manages corporate ocean carriage allocations, tracks route performance, and calculates provisional slot cost accruals dynamically to limit margin variance.',
+        interactiveType: 'slots'
+      },
+      {
+        code: 'EXIM',
+        name: 'EXIM Operations',
+        subtitle: 'Booking to Documentation',
+        desc: 'Powerhouse for Export and Import workflows. Runs operations seamlessly from quotation to booking confirmation, container allocation, seal recording, BL drafting, and shipping instructions.',
+        interactiveType: 'exim'
+      },
+      {
+        code: 'CMNR',
+        name: 'Container M&R',
+        subtitle: 'Prevent Revenue Leakage',
+        desc: 'Monitors the repair cycle. Allows depots to log inspections by structural parameters (Face, Component, Location, Damage, Repair). Resolves regional tariffs instantly to bill back consignees or underwriters.',
+        interactiveType: 'cmnr'
+      },
+      {
+        code: 'ACC',
+        name: 'Event-driven Accounts',
+        subtitle: 'Accruals to Actuals',
+        desc: 'Replaces traditional batch post-accounting. Accrues expected revenues and carriage expenses in real-time on movement updates, actualizing into final accounts without leakage.',
+        interactiveType: 'accounting'
+      },
+      {
+        code: 'AGY',
+        name: 'Agency Management',
+        subtitle: 'Settlements & Transparency',
+        desc: 'Ensures structured trust between container lines and regional agent offices. Tracks all agent collections/payments, mapping commissions precisely (either element-wise or load/discharge container-wise) for hands-free verified settlements.',
+        interactiveType: 'agency'
+      },
+      {
+        code: 'USR',
+        name: 'User Security',
+        subtitle: 'Granular Access Governance',
+        desc: 'Manages user authorization with deep operational specificity. Defines precise permissions for depot partners, agents, corporate users, and documentation checkers.',
+        interactiveType: 'security'
+      },
+      {
+        code: 'UTL',
+        name: 'Utility Insights',
+        subtitle: 'Predictive Analytics',
+        desc: 'Extracts real-time metrics and on-demand analysis across operations. Pinpoints route profitability, slot utilization waste, and structural repair trends worldwide.',
+        interactiveType: 'insights'
+      }
+    ];
+
+    var MOVES_DATA = [
+      {
+        code: 'DSO',
+        name: 'Dispatch to Shipper',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" /><circle cx="7" cy="18" r="2" /><path d="M9 18h6" /><circle cx="17" cy="18" r="2" /><path d="M19 18h2a1 1 0 0 0 1-1v-5l-3-4h-4v9" /></svg>`,
+        desc: 'Empty container dispatched to shipper. Bill Of Lading Fees (BLFE) are provisioned. Advancement Fee (ADFE) begins accumulating.',
+        elements: [
+          { code: 'BLFE', name: 'Bill of Lading Fees', type: 'revenue', formula: 'Fixed Document Fee', base40: 90, base20: 60 }
+        ]
+      },
+      {
+        code: 'OFO',
+        name: 'Port Gate-In',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M9 3v18M15 3v18M3 9h18M3 15h18" /></svg>`,
+        desc: 'Laden container gated in past origin port gates. Resolves terminal handling, Toll fees, and finalized accrued Advancement Fee (ADFE) based on Shipper custody days.',
+        elements: [
+          { code: 'THC-R', name: 'Terminal Handling Revenue', type: 'revenue', formula: 'Port THC Tariff', base40: 320, base20: 220 },
+          { code: 'THC-C', name: 'Terminal Handling Cost', type: 'cost', formula: 'Terminal Operator Rate', base40: 240, base20: 170 },
+          { code: 'TOLL', name: 'Port Toll Charge Accrual', type: 'cost', formula: 'Infrastructure Levies', base40: 60, base20: 45 },
+          { code: 'ADFE', name: 'Advancement Fee', type: 'revenue', isTemporal: true, sourceDaysId: 'daysADFE', rate40: 25, rate20: 15, formula: 'DSO ➔ OFO Daily Surcharge' }
+        ]
+      },
+      {
+        code: 'BFF',
+        name: 'On-Board (Vessel Loaded)',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17h20M12 2v15M12 2l-4 4M12 2l4 4M5 17l1 4h12l1-4" /></svg>`,
+        desc: 'Box loaded on vessel. Triggers Basic Ocean Freight (BOF), Gantry Crane charges (GANTRYL), and accrued Export Port Storage (POSE) based on terminal hold days.',
+        elements: [
+          { code: 'BOF', name: 'Basic Ocean Freight (BOF)', type: 'revenue', formula: 'Ocean Freight Tariff', base40: 1400, base20: 950 },
+          { code: 'GANTRYL', name: 'Gantry Crane charges', type: 'cost', formula: 'Crane Operations Tariff', base40: 190, base20: 130 },
+          { code: 'POSE', name: 'Port Storage at Export', type: 'cost', isTemporal: true, sourceDaysId: 'daysPOSE', rate40: 30, rate20: 20, formula: 'OFO ➔ BFF Daily Storage Cost' }
+        ]
+      },
+      {
+        code: 'IFD',
+        name: 'Discharged at POD',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17h20M5 17V9a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v8M12 6v11" /></svg>`,
+        desc: 'Vessel docked. Container discharged at POD terminal. Triggers local destination handling and import seal verification elements.',
+        elements: [
+          { code: 'THD', name: 'Terminal handling at discharge side', type: 'revenue', formula: 'POD Handling Tariff', base40: 310, base20: 210 },
+          { code: 'SEALI', name: 'Seal Charges at Import', type: 'revenue', formula: 'Discharge Seal Verif.', base40: 25, base20: 15 },
+          { code: 'THC', name: 'Terminal handling charge', type: 'cost', formula: 'Destination Operator Bill', base40: 240, base20: 160 }
+        ]
+      },
+      {
+        code: 'DCO',
+        name: 'Dispatched to Consignee',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>`,
+        desc: 'Laden container released and dispatched on truck. Triggers Delivery Order Fee (DOFE) and accrued Import Port Storage (POSI).',
+        elements: [
+          { code: 'DOFE', name: 'Delivery Order Fee', type: 'revenue', formula: 'DO Release Document Fee', base40: 110, base20: 70 },
+          { code: 'POSI', name: 'Port Storage at Import', type: 'cost', isTemporal: true, sourceDaysId: 'daysPOSI', rate40: 35, rate20: 22, formula: 'IFD ➔ DCO Daily Storage Cost' }
+        ]
+      },
+      {
+        code: 'DMM',
+        name: 'Yard Gate-In (Empty Return)',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM9 9h6v6H9z" /></svg>`,
+        desc: 'Container returned empty back to yard. Triggers Yard lift off charges (YLOF) and finalized accrued Detention (DET) revenue.',
+        elements: [
+          { code: 'YLOF', name: 'Yard lift off charges', type: 'cost', formula: 'Depot Gate Lift Tariff', base40: 70, base20: 45 },
+          { code: 'DET', name: 'Detention (DET)', type: 'revenue', isTemporal: true, sourceDaysId: 'daysDET', rate40: 50, rate20: 30, formula: 'IFD ➔ DMM Daily Detention Surcharge' }
+        ]
+      }
+    ];
+
+    var EXPORT_STEPS = [
+      { num: 1, event: 'QTE', stage: 'Quotation Preparation', desc: 'Commercial rate request captured for trade lane parameters. Evaluates client volume commitments vs slot pricing.' },
+      { num: 2, event: 'PRC', stage: 'Tariff Allocation', desc: 'Core module resolves base ocean tariffs and local origin/destination elements based on standard agreements.' },
+      { num: 3, event: 'APR', stage: 'Pricing Approvals', desc: 'Ensures minimum contribution margin bounds are cleared before committing to carrier allocation.' },
+      { num: 4, event: 'BKG', stage: 'Booking Creation', desc: 'Shipment recorded inside the EXIM system. Provisioned placeholders established for all trade-lane elements.' },
+      { num: 5, event: 'CRO', stage: 'Container Release Order', desc: 'EMS system reviews equipment stocks. Releases container release authorization to regional shipper depots.' },
+      { num: 6, event: 'DSO', stage: 'Equipment Mobilisation (Move Code)', desc: 'Shipper picks empty container. Bill Of Lading Fees (BLFE) and Advancement Fee (ADFE) are provisioned.' },
+      { num: 7, event: 'SEAL', stage: 'Cargo Stuffing & Seal', desc: 'Laden box is locked with security seal. Seal reference captured and uploaded on-field via user portal.' },
+      { num: 8, event: 'OFO', stage: 'Port Gate-In Origin (Move Code)', desc: 'Laden box gated in at origin port. Terminal Handling Revenue (THC-R), Terminal Handling Cost (THC-C) and Port Toll charges provisioned along with accrued Advancement Fee (ADFE).' },
+      { num: 9, event: 'BLUI', stage: 'BL Draft in UI', desc: 'NVOCC operator completes draft Bill of Lading with shipper descriptions and routing rules.' },
+      { num: 10, event: 'BLEM', stage: 'BL Check Email Link', desc: 'System automatically dispatches secure editing link to the client for instant self-service draft verification.' },
+      { num: 11, event: 'BLP', stage: 'BL Release Hold & Filings', desc: 'Customs compliance checks, supporting dynamic Export General Manifest (EGM) filing uploads.' },
+      { num: 12, event: 'BFF', stage: 'Onboard Validation (Move Code)', desc: 'Container loaded on board the vessel. Triggers Basic Ocean Freight (BOF), Gantry crane charges (GANTRYL), and export Port Storage (POSE).' },
+      { num: 13, event: 'INV', stage: 'Invoice Generation', desc: 'Accounts module actualizes provisional revenues. Formulates customer commercial invoice instantly.' },
+      { num: 14, event: 'FCL', stage: 'Freight Collection Check', desc: 'Ensures credit limits are honored or pre-payments settled before releasing negotiable documentation.' },
+      { num: 15, event: 'BLI', stage: 'Negotiable BL Issue', desc: 'Original physical Bill of Lading or Telex release issued. Operational documentation complete.' },
+      { num: 16, event: 'CLS', stage: 'Operations Closure', desc: 'All provisioned tariffs verified against actual vendor bills. Financial margin closed and preserved.' }
+    ];
+
+    var IMPORT_FLOW_MOCKS = {
+      'discharge': {
+        title: 'Discharge (IFD) — Vessel POD Arrival',
+        badge: 'Operational Import',
+        desc: 'The container vessel docks at Cochin Port, and the container is discharged from the vessel deck to the yard container stacking lanes.',
+        sim: `[Vessel EDI Interface]\nEVENT_ID     : EV-IFD-9031\nVESSEL       : MESSINA CHAL V-2401E\nCONTAINER_ID : INTU4093821 (40HC)\nDISCH_TIME   : 2026-05-25 09:30\nSTATUS       : Accruals Triggered\n---------------------------------\nAccruing Local Dest THD... Resolved (+$310.00)\nAccruing Local Dest SEALI. Resolved (+$25.00)\nAccruing Dest THC Cost... Resolved (-$240.00)`
+      },
+      'do-eol': {
+        title: 'DO/EOL - Delivery Release',
+        badge: 'Operational Import',
+        desc: 'Delivery Order is generated upon presentation of negotiable BL. Equipment lease status evaluated to assess potential demurrages.',
+        sim: `[Delivery Order & Lease System]\nRELEASE_CODE : DO-881932\nCONSIGNEE    : KERALA SPICES LTD\nDO_FEE_DOFE  : Cleared (+$110.00)\nFREE_DAYS    : 5 Days\nLEASE_CHECK  : Off-Lease eligible (EMS)`
+      },
+      'port-out': {
+        title: 'Port Out (DCO) — Gate Out to Consignee',
+        badge: 'Operational Import',
+        desc: 'Laden container gates out of Cochin port to delivery address. Accrues dynamic Port Storage at Import (POSI) cost.',
+        sim: `[Terminal Gate Interface]\nGATE_OUT_ID  : GO-4019283\nTRUCK_PLATE  : KL-07-CD-8812\nPOSI_ACCRUED : 3 Days x $35.00 = -$105.00\nOUT_TIME     : 2026-05-25 14:15`
+      },
+      'yard-in': {
+        title: 'Return Empty (DMM) — Gated in at Yard',
+        badge: 'Operational Import',
+        desc: 'The container is returned empty by the shipper to Cochin regional yard. Triggers Yard lift off charges (YLOF) and finalizes Detention (DET) revenue.',
+        sim: `[Depot Gate Interface]\nYARD_CODE    : INCOK_YARD1\nCONTAINER    : INTU4093821 (40HC)\nYLOF_COST    : -$70.00 Lift-Off Applied\nDET_REVENUE  : 6 Days x $50.00 = +$300.00 Accrued\nSTATUS       : EMPTY RETURNED`
+      },
+      'port-bill': {
+        title: 'Port Billing Accruals',
+        badge: 'Accounting Lane',
+        desc: 'Origin terminal billing accruals processed in accounts module based on movement timestamps.',
+        sim: `[Accrual Ledger Integration]\nTRANS_REF    : TR-998312\nACCR_REVENUE : $0.00\nACCR_EXPENSE : $240.00 (THC-C)\nGL_MAPPING   : 4100-Origin Port Costs\nSTATUS       : Accrued Provision`
+      },
+      'payment': {
+        title: 'Cochin Terminal Settlement',
+        badge: 'Accounting Lane',
+        desc: 'Actual payment executed against Cochin Terminal handling invoice, resolving estimated provisions.',
+        sim: `[Actualisation Interface]\nINVOICE_REF  : CCH-100234\nEST_PROVISION: $240.00\nACTUAL_BILL  : $238.50\nRECONCILED   : YES (+$1.50 Variance logged)`
+      },
+      'da': {
+        title: 'JEA Agency Disbursement',
+        badge: 'Accounting Lane',
+        desc: 'Disbursement account calculations made for AEJEA port agency commission handling.',
+        sim: `[Disbursement System]\nAGENCY_CODE  : JEA_AGENCY\nCOMM_REVENUE : $45.00 per slot\nACC_RECON    : Settle cycle June 1st\nSTATUS       : Provisioned`
+      },
+      'gate-in': {
+        title: 'CMNR Empty Gate-In Inspection',
+        badge: 'CMNR Lane',
+        desc: 'Inspectors perform 360 survey, logging any container damages directly into yard user terminal.',
+        sim: `[Yard Terminal Log]\nINSPECT_ID   : IN-3019\nYARD_USER    : ronaldo_depot\nDAMAGE_FOUND : Top panel indentation\nCOMP_MAPPED  : Roof panel`
+      },
+      'estimate': {
+        title: 'CMNR Repair Estimation',
+        badge: 'CMNR Lane',
+        desc: 'System utilizes systemic master tariffs to calculate cost automatically according to components, materials and faces.',
+        sim: `[Systemic Estimate Engine]\nDAMAGE_CODE  : DN (Dent)\nREPAIR_CODE  : ST (Straighten)\nLABOR_TARIFF : $45.00/hr (Cochin depot)\nEST_TOTAL    : $135.00 (Tariff Guard Active)`
+      },
+      'approvals': {
+        title: 'Equipment Owner Approval',
+        badge: 'CMNR Lane',
+        desc: 'If damage exceeds free limits, approval workflow dispatches request to NVOCC equipment manager or client.',
+        sim: `[Authorization Flow]\nAUTH_STATUS  : Pending Owner Approval\nLIMIT_CEILING: $100.00\nAPPROVER     : eq_manager@inteution.com\nDISPATCHED   : Auto-email sent`
+      },
+      'repair': {
+        title: 'Structural Repair Executed',
+        badge: 'CMNR Lane',
+        desc: 'Yard technicians carry out repair tasks. Completion status logged to return box to cargo-worthy pool.',
+        sim: `[Depot Worklog]\nWORK_REF     : WR-8831\nTECHNICIAN   : kumar_welds\nTIME_SPENT   : 2.5 Hrs\nREPAIR_STATUS: COMPLETED (CARGO WORTHY)`
+      },
+      'invoice-da': {
+        title: 'CMNR Billing Actualisation',
+        badge: 'CMNR Lane',
+        desc: 'Automatically rolls repair bill into agency DA or directly bills consignee to protect margins.',
+        sim: `[CMNR Ledger Posting]\nBILL_TO      : CONSIGNEE (KERALA SPICES)\nINVOICE_ID   : INV-MR-4412\nTOTAL_COLLECT: $135.00\nREVENUE_LEAK : Prevented`
+      }
+    };
+
+    // Application State variables
+    var activeTabId = 'vision';
+    var selectedModuleCode = 'CORE';
+    var currentWorkflowMode = 'export';
+    var activeTimelineNodeIdx = 0;
+    var provisionedAccruals = [];
+
+    // Custom Live CMNR State
+    var selectFace = 'Roof';
+    var selectComp = 'Panel';
+    var selectDamage = 'Dent';
+    var selectRepair = 'Straighten';
+
+    // Premium Agency Sandbox State
+    var agySettleDays = 40;
+    var agyCalculationMode = 'element';
+
+    // Slot Capacity Custom Sandbox State
+    var slotUtilization = 75;
+    var slotVendor = 'MAERSK_SlotHoldings';
+    var slotContractType = 'Segment';
+
+    // EMS Module Custom Sandbox State
+    var emsActiveYard = 'INCOK_COCHIN_YARD_1';
+
+    // Core Init Function
+    window.onload = function () {
+      renderModulesGrid();
+      selectModule('CORE');
+      renderTimeline();
+      recalculateCurrentMove();
+      generateExportWorkflowSteps();
+      setExportStep(0);
+      clickImportNode('discharge', document.querySelector('.lane-node'));
+    };
+
+    // General Navigation Routing
+    function switchTab(tabId, el) {
+      activeTabId = tabId;
+      document.querySelectorAll('.tab-view').forEach(view => view.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+
+      document.getElementById(tabId).classList.add('active');
+      el.classList.add('active');
+    }
+
+    // Tab 2: Dynamic Modules Code
+    function renderModulesGrid() {
+      var grid = document.getElementById('modulesGrid');
+      grid.innerHTML = MODULES_DATA.map(m => `
+        <div class="module-card ${m.code === selectedModuleCode ? 'active-card' : ''}" onclick="selectModule('${m.code}', this)">
+          <div>
+            <div class="module-code">${m.code}</div>
+            <div class="module-title">${m.name}</div>
+            <div class="module-subtitle">${m.subtitle}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function selectModule(code, cardEl = null) {
+      selectedModuleCode = code;
+
+      document.querySelectorAll('.module-card').forEach(card => card.classList.remove('active-card'));
+      if (cardEl) {
+        cardEl.classList.add('active-card');
+      } else {
+        renderModulesGrid();
+      }
+
+      var mod = MODULES_DATA.find(m => m.code === code);
+      var panel = document.getElementById('modulePanel');
+
+      var interactiveHTML = '';
+      if (mod.interactiveType === 'cmnr') {
+        interactiveHTML = `
+          <div class="cmnr-calc-box">
+            <span style="font-size:11px; font-weight:800; color:var(--navy);">LIVE STENCIL ESTIMATOR</span>
+            <div class="cmnr-selects">
+              <select id="cmnrFace" onchange="updateCmnr()"><option>Roof</option><option>Door</option><option>Floor</option><option>Left Wall</option></select>
+              <select id="cmnrComp" onchange="updateCmnr()"><option>Panel</option><option>Post</option><option>Corner Casting</option></select>
+              <select id="cmnrDamage" onchange="updateCmnr()"><option>Dent</option><option>Hole</option><option>Rust</option></select>
+              <select id="cmnrRepair" onchange="updateCmnr()"><option>Straighten</option><option>Patch</option><option>Welding</option></select>
+            </div>
+            <div class="cmnr-result">
+              <div>
+                <div style="font-size:11px; color:var(--slate);">System Tariff (Cochin Depot Basis)</div>
+                <div style="font-weight:700; font-size:13px;" id="cmnrFormula">Roof Panel Straighten</div>
+              </div>
+              <div class="cmnr-price" id="cmnrPriceDisplay">$120.00</div>
+            </div>
+          </div>
+        `;
+      } else if (mod.interactiveType === 'agency') {
+        // High-Fidelity Custom Agency Sandbox
+        interactiveHTML = `
+          <div class="settlement-box" style="margin-top:14px; background:var(--white); border:1px solid var(--line); padding:16px; border-radius:12px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <span style="font-size:11px; font-weight:800; color:var(--cobalt); text-transform:uppercase;">Agency Settlement Scope</span>
+              <div style="font-size:12.5px; font-weight:800; color:var(--navy-deep);"><span id="windowLabel">${agySettleDays} Days</span></div>
+            </div>
+            
+            <input type="range" class="settlement-slider" min="15" max="90" value="${agySettleDays}" id="settleSlider" style="width:100%; margin-bottom:14px;" oninput="updateSettleWindow(this.value)">
+
+            <!-- Commission Calculation Toggle Buttons -->
+            <div style="display:flex; gap:6px; margin-bottom:14px; background:var(--ice-2); padding:4px; border-radius:8px;">
+              <button id="btnAgyModeElem" class="flow-tab-btn active" style="padding:6px 12px; font-size:11px; flex:1; border-radius:6px; font-weight:800;" onclick="setAgyCalculationMode('element')">Element-wise</button>
+              <button id="btnAgyModeCont" class="flow-tab-btn" style="padding:6px 12px; font-size:11px; flex:1; border-radius:6px; font-weight:800;" onclick="setAgyCalculationMode('container')">Per-Container</button>
+            </div>
+
+            <!-- Verified Financial Accruals -->
+            <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:14px; background:var(--ice-2); padding:12px; border-radius:8px; border:1px solid var(--line);">
+              <div>
+                <div style="font-size:10px; color:var(--slate); font-weight:700;">Agent Collections (Cr)</div>
+                <div style="font-size:13.5px; font-weight:800; color:var(--green);" id="agyCollected">$0.00</div>
+              </div>
+              <div>
+                <div style="font-size:10px; color:var(--slate); font-weight:700;">Agent Local Bills Paid (Dr)</div>
+                <div style="font-size:13.5px; font-weight:800; color:var(--rose);" id="agyPaid">$0.00</div>
+              </div>
+              <div style="grid-column: 1 / -1; border-top:1px dashed var(--line); padding-top:8px; margin-top:4px; display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                  <div style="font-size:10px; color:var(--slate); font-weight:700;">Provisioned Commission</div>
+                  <div style="font-size:14px; font-weight:800; color:var(--navy-deep);" id="agyCommission">$0.00</div>
+                </div>
+                <div style="text-align:right;">
+                  <div style="font-size:10px; color:var(--slate); font-weight:700;">Settle Balance Due</div>
+                  <div style="font-size:14px; font-weight:800; color:var(--cobalt);" id="agyNetDue">$0.00</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Reconciliation Log -->
+            <div style="font-size:11px; font-weight:800; color:var(--navy-deep); margin-bottom:6px; display:flex; align-items:center; gap:5px;">
+              <span class="live-accent" style="width:6px; height:6px;"></span> Reconciled Commission Auditing
+            </div>
+            <div id="agyAuditTrail" style="max-height:110px; overflow-y:auto; background:var(--ink); color:#38bdf8; font-family:monospace; padding:10px; border-radius:6px; font-size:10px; line-height:1.4;">
+              <!-- Generated Dynamically -->
+            </div>
+
+            <button class="action-btn" style="padding:10px 16px; font-size:12.5px; width:100%; justify-content:center; margin-top:14px; font-weight:800;" onclick="executeAgencySettle()">
+              1-Click Settle & Actuate Accounts
+            </button>
+          </div>
+        `;
+      } else if (mod.interactiveType === 'tariffs') {
+        interactiveHTML = `
+          <div class="cmnr-calc-box" style="background:var(--ice-2); border:1px solid var(--line); border-radius:12px; padding:18px;">
+            <div style="font-size:11px; font-weight:800; color:var(--navy); margin-bottom:8px;">SYSTEM CORE TARIFF INDEX</div>
+            <table style="width:100%; font-size:11.5px; border-collapse:collapse;">
+              <thead>
+                <tr style="text-align:left; background:var(--line); color:var(--navy-deep);">
+                  <th style="padding:6px;">Element</th>
+                  <th style="padding:6px;">Category</th>
+                  <th style="padding:6px;">Base 20'</th>
+                  <th style="padding:6px;">Base 40'</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td style="padding:6px; border-bottom:1px solid var(--line);">BLFE (Doc Fee)</td><td style="padding:6px; border-bottom:1px solid var(--line);">Revenue</td><td style="padding:6px; border-bottom:1px solid var(--line); font-weight:600;">$60</td><td style="padding:6px; border-bottom:1px solid var(--line); font-weight:600;">$90</td></tr>
+                <tr><td style="padding:6px; border-bottom:1px solid var(--line);">BOF (Ocean Freight)</td><td style="padding:6px; border-bottom:1px solid var(--line);">Revenue</td><td style="padding:6px; border-bottom:1px solid var(--line); font-weight:600;">$950</td><td style="padding:6px; border-bottom:1px solid var(--line); font-weight:600;">$1400</td></tr>
+                <tr><td style="padding:6px; border-bottom:1px solid var(--line);">THC-C (Term. Cost)</td><td style="padding:6px; border-bottom:1px solid var(--line);">Cost</td><td style="padding:6px; border-bottom:1px solid var(--line); font-weight:600;">$170</td><td style="padding:6px; border-bottom:1px solid var(--line); font-weight:600;">$240</td></tr>
+                <tr><td style="padding:6px;">YLOF (Yard Lift)</td><td style="padding:6px;">Cost</td><td style="padding:6px; font-weight:600;">$45</td><td style="padding:6px; font-weight:600;">$70</td></tr>
+              </tbody>
+            </table>
+          </div>
+        `;
+      } else if (mod.interactiveType === 'fleet') {
+        // HIGH-FIDELITY EMS WORKSPACE
+        interactiveHTML = `
+          <div style="background:var(--ice-2); padding:16px; border:1px solid var(--line); border-radius:12px; margin-top:10px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <span style="font-size:11px; font-weight:800; color:var(--navy); text-transform:uppercase;">EMS Container Inspector</span>
+              <select id="emsYardSelect" onchange="updateEmsSandbox(this.value)" style="padding:4px 8px; border-radius:6px; border:1px solid var(--line); font-size:11px; font-weight:600;">
+                <option value="COCHIN">Cochin Yard (INCOK)</option>
+                <option value="JEBEL">Jebel Ali (AEJEA)</option>
+                <option value="ROTTER">Rotterdam (NLROT)</option>
+              </select>
+            </div>
+
+            <!-- EMS Empty Inventory Surcharge Report -->
+            <div style="background:var(--white); border-radius:8px; border:1px solid var(--line); padding:12px; margin-bottom:10px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                <span style="font-size:12px; font-weight:800; color:var(--rose);">Empty Inventory Report</span>
+                <span style="font-size:10px; background:#fee2e2; color:var(--rose); padding:2px 6px; border-radius:4px; font-weight:bold;">Saves Revenue Leakage</span>
+              </div>
+              <div style="display:grid; grid-template-columns:1.2fr 1fr; gap:10px; font-size:12px;">
+                <div>Yard Idle Stock: <strong style="color:var(--navy-deep);" id="emsEmptyQty">214 Empty TEUs</strong></div>
+                <div style="text-align:right;">Storage Surcharge: <strong style="color:var(--rose);" id="emsLeakRate">$4,280/day</strong></div>
+              </div>
+              <div style="font-size:10.5px; color:var(--slate); margin-top:6px; display:flex; align-items:center; gap:4px;">
+                <span class="live-accent" style="background:var(--amber); width:6px; height:6px;"></span> 
+                Warning: Idle stock over 14 days is accruing empty rental fees.
+              </div>
+            </div>
+
+            <!-- EMS Incoming Inventory Report -->
+            <div style="background:var(--white); border-radius:8px; border:1px solid var(--line); padding:12px;">
+              <div style="font-size:12px; font-weight:800; color:var(--navy-soft); margin-bottom:6px;">Incoming Inventory Report</div>
+              <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; text-align:center; font-size:11px;">
+                <div style="background:var(--ice-2); padding:6px; border-radius:6px;">
+                  <div style="font-weight:800; color:var(--cobalt);" id="emsPendingDisch">24</div>
+                  <div>To Discharge</div>
+                </div>
+                <div style="background:var(--ice-2); padding:6px; border-radius:6px;">
+                  <div style="font-weight:800; color:var(--cobalt);" id="emsPendingPort">18</div>
+                  <div>Return Empty</div>
+                </div>
+                <div style="background:var(--ice-2); padding:6px; border-radius:6px;">
+                  <div style="font-weight:800; color:var(--cobalt);" id="emsPendingStuff">12</div>
+                  <div>At Shipper</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (mod.interactiveType === 'slots') {
+        // HIGH-FIDELITY SLOT CAPACITY WORKSPACE
+        interactiveHTML = `
+          <div style="background:var(--ice-2); padding:16px; border:1px solid var(--line); border-radius:12px; margin-top:10px;">
+            <div style="font-size:11px; font-weight:800; color:var(--navy); text-transform:uppercase; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+              <span>Slot Allocator &amp; Utilization</span>
+              <span style="font-size:10px; background:var(--ice); color:var(--navy); padding:2px 6px; border-radius:4px;">Cap checks active</span>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1.2fr; gap:10px; margin-bottom:12px;">
+              <div class="param-group">
+                <label style="font-size:10px;">Vendor</label>
+                <select id="slotVendorSel" onchange="updateSlotSandbox()" style="padding:6px; font-size:11.5px; border-radius:6px; border:1px solid var(--line); background:#fff;">
+                  <option value="MAERSK">Maersk Line</option>
+                  <option value="CMA">CMA CGM Slots</option>
+                  <option value="MSC">MSC Charter</option>
+                </select>
+              </div>
+              <div class="param-group">
+                <label style="font-size:10px;">Contract Type</label>
+                <select id="slotContractSel" onchange="updateSlotSandbox()" style="padding:6px; font-size:11.5px; border-radius:6px; border:1px solid var(--line); background:#fff;">
+                  <option value="Segment">Segment Allocation</option>
+                  <option value="DeadFreight">Dead Freight Guarantee</option>
+                  <option value="ThroughSlot">Through Slot Agreement</option>
+                  <option value="CY">CY-CY Allocations</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Interactive Gauge -->
+            <div style="background:var(--white); border-radius:8px; border:1px solid var(--line); padding:12px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-size:12px; font-weight:800;" id="slotStatusTitle">Maersk Line (Segment)</span>
+                <span id="slotPercentLabel" style="font-size:12px; font-weight:800; color:var(--navy-soft);">75% Utilised</span>
+              </div>
+              <input type="range" id="slotSlider" min="50" max="110" value="75" oninput="adjustSlotSlider(this.value)" style="width:100%; margin-bottom:8px;">
+              
+              <div id="slotAlertContainer" style="font-size:11px; padding:6px 10px; border-radius:6px; background:#d1fae5; color:#065f46; font-weight:600; display:flex; align-items:center; gap:4px;">
+                <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#10b981;"></span>
+                Allocation safe. Within bounds. No over-utilization costs.
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (mod.interactiveType === 'exim') {
+        // HIGH-FIDELITY EXIM WORKSPACE WITH REPORTING & EGM/IGM FIILINGS
+        interactiveHTML = `
+          <div style="background:var(--ice-2); padding:16px; border:1px solid var(--line); border-radius:12px; margin-top:10px;">
+            <div style="font-size:11px; font-weight:800; color:var(--navy); text-transform:uppercase; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+              <span>EXIM Manifest Filing Hub</span>
+              <div style="display:flex; gap:4px;">
+                <span style="font-size:10px; background:var(--green); color:white; padding:2px 6px; border-radius:4px; font-weight:bold;">EGM</span>
+                <span style="font-size:10px; background:var(--cobalt); color:white; padding:2px 6px; border-radius:4px; font-weight:bold;">IGM</span>
+              </div>
+            </div>
+
+            <!-- EXIM Built-in Reports -->
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
+              <button class="flow-tab-btn active" id="btnEximSummary" style="font-size:11px; padding:8px; text-align:center;" onclick="toggleEximReport('summary')">Export Summary</button>
+              <button class="flow-tab-btn" id="btnEximDaily" style="font-size:11px; padding:8px; text-align:center;" onclick="toggleEximReport('daily')">Daily Activity</button>
+            </div>
+
+            <div id="eximReportBox" style="background:var(--white); border-radius:8px; border:1px solid var(--line); padding:12px; font-size:11.5px; min-height:110px;">
+              <!-- Dynamic Report Contents -->
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px; font-size:11px; background:#fff; padding:8px 12px; border-radius:6px; border:1px solid var(--line);">
+              <span style="font-weight:700; color:var(--navy-deep);">Filing Integration Status:</span>
+              <span style="color:var(--green); font-weight:800;">✓ Active Gateways</span>
+            </div>
+          </div>
+        `;
+      } else if (mod.interactiveType === 'accounting') {
+        interactiveHTML = `
+          <div style="background:var(--ice-2); padding:16px; border:1px solid var(--line); border-radius:12px; margin-top:10px;">
+            <div style="font-size:11px; font-weight:800; color:var(--navy); text-transform:uppercase; margin-bottom:8px;">EVENT BASED PROVISION POSTINGS</div>
+            <div style="background:var(--white); border-radius:8px; border:1px solid var(--line); padding:12px; font-family:monospace; font-size:11px; line-height:1.4;">
+              <div style="color:var(--green);">[POST] DISPATCH ➔ Provisioned BLFE Asset</div>
+              <div style="color:var(--green);">[POST] GATE-IN  ➔ Provisioned THC Revenue</div>
+              <div style="color:var(--rose);">[POST] ON-BOARD ➔ Accrued Gantry Cost</div>
+              <div style="color:var(--navy);">[RECON] INVOICE ➔ Actuating to actual books</div>
+            </div>
+          </div>
+        `;
+      } else if (mod.interactiveType === 'security') {
+        interactiveHTML = `
+          <div style="background:var(--ice-2); padding:16px; border:1px solid var(--line); border-radius:12px; margin-top:10px;">
+            <div style="font-size:11px; font-weight:800; color:var(--navy); text-transform:uppercase; margin-bottom:8px;">GRANULAR USER PERMISSION MATRIX</div>
+            <div style="background:var(--white); border-radius:8px; border:1px solid var(--line); padding:10px; font-size:11px;">
+              <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid var(--line);"><span>Core Master Tariffs Read/Write</span><span style="color:var(--rose); font-weight:800;">Corporate Only</span></div>
+              <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid var(--line);"><span>Depot Yard In / Gate Inspections</span><span style="color:var(--green); font-weight:800;">Yard Partner</span></div>
+              <div style="display:flex; justify-content:space-between; padding:4px 0;"><span>Agency settlements collection</span><span style="color:var(--cobalt); font-weight:800;">Regional Agent</span></div>
+            </div>
+          </div>
+        `;
+      } else if (mod.interactiveType === 'insights') {
+        // HIGH-FIDELITY UTILS PANEL WITH DYNAMIC DOWNLOAD EXPORTS & INTEGRATION DETAILS
+        interactiveHTML = `
+          <div style="background:var(--ice-2); padding:16px; border:1px solid var(--line); border-radius:12px; margin-top:10px;">
+            <div style="font-size:11px; font-weight:800; color:var(--navy); text-transform:uppercase; margin-bottom:10px;">inTEUtion Documentation Exports</div>
+            <p style="font-size:11.5px; color:var(--slate); margin-bottom:10px;">Export system manifests for direct integration with third-party networks.</p>
+
+            <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:8px; margin-bottom:12px;">
+              <button class="action-btn" style="padding:8px 10px; font-size:11.5px; justify-content:center; background:var(--white); color:var(--navy-deep); border:1px solid var(--line);" onclick="triggerExport('JSON')">JSON Manifest</button>
+              <button class="action-btn" style="padding:8px 10px; font-size:11.5px; justify-content:center; background:var(--white); color:var(--navy-deep); border:1px solid var(--line);" onclick="triggerExport('EDI')">EDI Exchange</button>
+              <button class="action-btn" style="padding:8px 10px; font-size:11.5px; justify-content:center; background:var(--white); color:var(--navy-deep); border:1px solid var(--line);" onclick="triggerExport('PDF')">PDF Document</button>
+              <button class="action-btn" style="padding:8px 10px; font-size:11.5px; justify-content:center; background:var(--white); color:var(--navy-deep); border:1px solid var(--line);" onclick="triggerExport('Excel')">Excel Sheet</button>
+            </div>
+
+            <div style="background:var(--white); border-radius:8px; border:1px dashed var(--line); padding:10px; font-size:11px;">
+              <strong>Custom Integrations?</strong> We provide dedicated teams to build API endpoints and secure SFTP structures with your terminal vendors.
+            </div>
+          </div>
+        `;
+      }
+
+      panel.innerHTML = `
+        <div class="feature-header">
+          <span>inTEUtion Modules Suite</span>
+          <h3>${mod.name}</h3>
+        </div>
+        <div class="feature-body">
+          <p style="margin-bottom:20px; font-size:14px; color:var(--slate);">${mod.desc}</p>
+          <div style="font-weight:700; font-size:13px; color:var(--navy-deep); margin-top:10px;">PROTOTYPE SANDBOX</div>
+          ${interactiveHTML}
+        </div>
+      `;
+
+      if (mod.interactiveType === 'cmnr') {
+        updateCmnr();
+      } else if (mod.interactiveType === 'agency') {
+        updateAgencyDashboard();
+      } else if (mod.interactiveType === 'exim') {
+        toggleEximReport('summary');
+      } else if (mod.interactiveType === 'fleet') {
+        updateEmsSandbox('COCHIN');
+      }
+    }
+
+    // Interactive EMS Reports sandbox
+    function updateEmsSandbox(yard) {
+      emsActiveYard = yard;
+      var emsEmptyQty = document.getElementById('emsEmptyQty');
+      var emsLeakRate = document.getElementById('emsLeakRate');
+      var emsPendingDisch = document.getElementById('emsPendingDisch');
+      var emsPendingPort = document.getElementById('emsPendingPort');
+      var emsPendingStuff = document.getElementById('emsPendingStuff');
+
+      if (yard === 'COCHIN') {
+        if (emsEmptyQty) emsEmptyQty.textContent = "182 Empty TEUs";
+        if (emsLeakRate) emsLeakRate.textContent = "$3,640/day";
+        if (emsPendingDisch) emsPendingDisch.textContent = "24";
+        if (emsPendingPort) emsPendingPort.textContent = "18";
+        if (emsPendingStuff) emsPendingStuff.textContent = "12";
+      } else if (yard === 'JEBEL') {
+        if (emsEmptyQty) emsEmptyQty.textContent = "390 Empty TEUs";
+        if (emsLeakRate) emsLeakRate.textContent = "$7,800/day";
+        if (emsPendingDisch) emsPendingDisch.textContent = "58";
+        if (emsPendingPort) emsPendingPort.textContent = "35";
+        if (emsPendingStuff) emsPendingStuff.textContent = "19";
+      } else {
+        if (emsEmptyQty) emsEmptyQty.textContent = "95 Empty TEUs";
+        if (emsLeakRate) emsLeakRate.textContent = "$1,900/day";
+        if (emsPendingDisch) emsPendingDisch.textContent = "15";
+        if (emsPendingPort) emsPendingPort.textContent = "9";
+        if (emsPendingStuff) emsPendingStuff.textContent = "8";
+      }
+    }
+
+    // Interactive Slot Capacity contract & utilization
+    function adjustSlotSlider(val) {
+      slotUtilization = parseInt(val);
+      var label = document.getElementById('slotPercentLabel');
+      var alertCont = document.getElementById('slotAlertContainer');
+
+      if (label) label.textContent = `${slotUtilization}% Utilised`;
+
+      if (alertCont) {
+        if (slotUtilization > 100) {
+          alertCont.style.background = '#fee2e2';
+          alertCont.style.color = '#991b1b';
+          alertCont.innerHTML = `
+            <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--rose);"></span>
+            ⚠️ Over-utilization penalty triggered! Extra slots charged at premium contract rates.
+          `;
+        } else {
+          alertCont.style.background = '#d1fae5';
+          alertCont.style.color = '#065f46';
+          alertCont.innerHTML = `
+            <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#10b981;"></span>
+            Allocation safe. Within bounds. No over-utilization costs.
+          `;
+        }
+      }
+    }
+
+    function updateSlotSandbox() {
+      var vendor = document.getElementById('slotVendorSel').value;
+      var contract = document.getElementById('slotContractSel').value;
+      var statusTitle = document.getElementById('slotStatusTitle');
+
+      if (statusTitle) {
+        var vendorName = "Maersk Line";
+        if (vendor === 'CMA') vendorName = "CMA CGM";
+        if (vendor === 'MSC') vendorName = "MSC Charter";
+
+        statusTitle.textContent = `${vendorName} (${contract})`;
+      }
+    }
+
+    // Interactive EXIM summary toggles (EGM / IGM embedded)
+    function toggleEximReport(reportType) {
+      var btnSummary = document.getElementById('btnEximSummary');
+      var btnDaily = document.getElementById('btnEximDaily');
+      var reportBox = document.getElementById('eximReportBox');
+
+      if (reportType === 'summary') {
+        btnSummary.classList.add('active');
+        btnDaily.classList.remove('active');
+        reportBox.innerHTML = `
+          <div style="font-weight:700; color:var(--navy-deep); margin-bottom:6px;">Export Summary (Month-to-Date)</div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Total Bookings:</span><strong>184 slots</strong></div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>EGM Filed Manifests:</span><strong style="color:var(--green);">172/184</strong></div>
+          <div style="display:flex; justify-content:space-between;"><span>Pending filings:</span><strong style="color:var(--amber);">12 draft</strong></div>
+        `;
+      } else {
+        btnSummary.classList.remove('active');
+        btnDaily.classList.add('active');
+        reportBox.innerHTML = `
+          <div style="font-weight:700; color:var(--navy-deep); margin-bottom:6px;">Export Daily Activity Report</div>
+          <div style="font-size:10.5px; color:var(--slate); margin-bottom:6px;">Laden boxes booked but not yet On-Board (BFF):</div>
+          <div style="border-left:2px solid var(--cobalt); padding-left:6px; margin-bottom:4px;">
+            INTU290183 / Jebel Ali (AEJEA) <span style="color:var(--amber); font-weight:700;">(Yet to Onboard)</span>
+          </div>
+          <div style="border-left:2px solid var(--cobalt); padding-left:6px;">
+            INTU409382 / Cochin (INCOK) <span style="color:var(--amber); font-weight:700;">(Yet to Onboard)</span>
+          </div>
+        `;
+      }
+    }
+
+    // Dynamic Download export simulator
+    function triggerExport(format) {
+      showToast(
+        "Document Exported",
+        `System successfully compiled manifest and formatted data into a premium ${format} export payload. Download initiated.`,
+        "success"
+      );
+    }
+
+    function updateSettleWindow(val) {
+      agySettleDays = parseInt(val);
+      var label = document.getElementById('windowLabel');
+      if (label) label.textContent = `${val} Days`;
+      updateAgencyDashboard();
+    }
+
+    function setAgyCalculationMode(mode) {
+      agyCalculationMode = mode;
+      var btnElem = document.getElementById('btnAgyModeElem');
+      var btnCont = document.getElementById('btnAgyModeCont');
+      if (btnElem && btnCont) {
+        if (mode === 'element') {
+          btnElem.classList.add('active');
+          btnCont.classList.remove('active');
+        } else {
+          btnElem.classList.remove('active');
+          btnCont.classList.add('active');
+        }
+      }
+      updateAgencyDashboard();
+    }
+
+    function updateAgencyDashboard() {
+      var numContainers = Math.round(agySettleDays * 0.45) + 3;
+      var totalCollections = numContainers * 1820;
+      var totalPayments = numContainers * 380;
+
+      var commission = 0;
+      var commissionTypeLog = '';
+      if (agyCalculationMode === 'element') {
+        commission = (numContainers * 45) + (numContainers * 15);
+        commissionTypeLog = `Element-wise Mapped Surcharges (Basic Ocean Freight 2.5% + fixed Terminal local fees)`;
+      } else {
+        commission = numContainers * 55;
+        commissionTypeLog = `Container Load/Discharge Surcharges verified against physical terminal lifts`;
+      }
+
+      var netToRemit = totalCollections - totalPayments - commission;
+
+      var collectedEl = document.getElementById('agyCollected');
+      var paidEl = document.getElementById('agyPaid');
+      var commEl = document.getElementById('agyCommission');
+      var netDueEl = document.getElementById('agyNetDue');
+      var auditEl = document.getElementById('agyAuditTrail');
+
+      if (collectedEl) collectedEl.textContent = `$${totalCollections.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+      if (paidEl) paidEl.textContent = `$${totalPayments.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+      if (commEl) commEl.textContent = `$${commission.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+      if (netDueEl) netDueEl.textContent = `$${netToRemit.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+
+      if (auditEl) {
+        auditEl.innerHTML = `
+          <div style="color:#a855f7;">[AGY_SYS] RECONCILIATION RUNNING</div>
+          <div>[DATA] Scanned ${numContainers} physical containers within ${agySettleDays}-days range</div>
+          <div>[INFO] Checked local THC-C vs carrier manifests: 100% OK</div>
+          <div>[TRUST] Mapping commission via: ${commissionTypeLog}</div>
+          <div style="color:#10b981;">[STATUS] Verified trust mapping. Net remittance to line: $${netToRemit.toLocaleString('en-US', { minimumFractionDigits: 2 })} with zero leakage.</div>
+        `;
+      }
+    }
+
+    function executeAgencySettle() {
+      showToast(
+        "Settlement Reconciled",
+        `Accrued agent commissions and collections finalized for the ${agySettleDays}-day window. Provisioned accruals successfully actuated.`,
+        "success"
+      );
+    }
+
+    function updateDaysLabel(labelId, val) {
+      document.getElementById(labelId).textContent = `${val} Days`;
+    }
+
+    // Tab 3: Move Engine Dynamic Logic
+    function renderTimeline() {
+      var track = document.getElementById('timelineTrack');
+      track.innerHTML = MOVES_DATA.map((move, idx) => `
+        <div class="timeline-node ${idx === activeTimelineNodeIdx ? 'active' : ''}" onclick="selectTimelineNode(${idx})">
+          <div class="node-icon-wrapper">
+            ${move.icon}
+          </div>
+          <div class="node-code">${move.code}</div>
+          <div class="node-desc">${move.name}</div>
+        </div>
+      `).join('');
+    }
+
+    function selectTimelineNode(idx) {
+      activeTimelineNodeIdx = idx;
+      renderTimeline();
+      recalculateCurrentMove();
+    }
+
+    function recalculateCurrentMove() {
+      var containerSize = document.getElementById('paramContainer').value;
+      var isLaden = document.getElementById('paramLaden').value;
+      var route = document.getElementById('paramRoute').value;
+
+      var activeMove = MOVES_DATA[activeTimelineNodeIdx];
+      var stickyStage = document.getElementById('stickyStage');
+
+      stickyStage.innerHTML = '';
+
+      provisionedAccruals = [];
+      var is40 = containerSize.startsWith('40');
+
+      for (var mIdx = 0; mIdx <= activeTimelineNodeIdx; mIdx++) {
+        var move = MOVES_DATA[mIdx];
+
+        move.elements.forEach((elem) => {
+          var amount = 0;
+          var tariffBasis = '';
+
+          if (elem.isTemporal) {
+            var days = parseInt(document.getElementById(elem.sourceDaysId).value) || 0;
+            var rate = is40 ? elem.rate40 : elem.rate20;
+            amount = rate * days;
+            tariffBasis = `${days} Days x $${rate}/day`;
+          } else {
+            amount = is40 ? elem.base40 : elem.base20;
+            tariffBasis = elem.formula;
+          }
+
+          if (route === 'COCHIN_ROTTER' && elem.code === 'BOF') {
+            amount += 800;
+            tariffBasis += ' (+Rotterdam Premium)';
+          }
+
+          provisionedAccruals.push({
+            event: move.code,
+            code: elem.code,
+            name: elem.name,
+            type: elem.type,
+            formula: tariffBasis,
+            amount: amount
+          });
+        });
+      }
+
+      if (activeMove.elements.length === 0) {
+        stickyStage.innerHTML = `
+          <div style="text-align:center; color:var(--slate); max-width:280px; font-size:13.5px;">
+            <div style="font-weight:bold; color:var(--navy-deep); font-size:16px; margin-bottom:10px;">${activeMove.code} Milestone Active</div>
+            This movement records the physical container state. No direct elements are provisioned on this specific milestone.
+          </div>
+        `;
+      } else {
+        var newStickyHTML = '';
+        activeMove.elements.forEach((elem, index) => {
+          var amount = 0;
+          var basis = '';
+
+          if (elem.isTemporal) {
+            var days = parseInt(document.getElementById(elem.sourceDaysId).value) || 0;
+            var rate = is40 ? elem.rate40 : elem.rate20;
+            amount = rate * days;
+            basis = `${days} days @ $${rate}/day`;
+          } else {
+            amount = is40 ? elem.base40 : elem.base20;
+            basis = elem.formula;
+          }
+
+          if (route === 'COCHIN_ROTTER' && elem.code === 'BOF') {
+            amount += 800;
+            basis += ' (+Rotterdam)';
+          }
+
+          var rotVal = index % 2 === 0 ? '-3deg' : '4deg';
+          newStickyHTML += `
+            <div class="sticky-note ${elem.type}" style="--rot: ${rotVal}">
+              <div>
+                <div class="sticky-type">${elem.type} Element</div>
+                <div class="sticky-elem-name">${elem.name}</div>
+                <div class="sticky-elem-code">${elem.code}</div>
+                <div style="font-size:10px; color:rgba(113,63,18,0.7); margin-top:4px;">${basis}</div>
+              </div>
+              <div class="sticky-amount">$${amount}</div>
+            </div>
+          `;
+        });
+        stickyStage.innerHTML = `<div class="sticky-note-grid">${newStickyHTML}</div>`;
+      }
+
+      renderProvisionsTable();
+    }
+
+    function renderProvisionsTable() {
+      var ledgerBody = document.getElementById('ledgerBody');
+      var gpBadge = document.getElementById('gpLedgerBadge');
+
+      if (provisionedAccruals.length === 0) {
+        ledgerBody.innerHTML = `
+          <tr>
+            <td colspan="6" style="text-align: center; color: var(--slate); padding: 30px;">
+              No provisioned transactions captured yet. Select movement nodes like Dispatch to Shipper.
+            </td>
+          </tr>
+        `;
+        gpBadge.textContent = 'Provisional Margin: $0';
+        return;
+      }
+
+      var revenueSum = 0;
+      var costSum = 0;
+
+      ledgerBody.innerHTML = provisionedAccruals.map(l => {
+        if (l.type === 'revenue') revenueSum += l.amount;
+        else costSum += l.amount;
+
+        return `
+          <tr>
+            <td><strong style="color:var(--navy);">${l.event}</strong></td>
+            <td><code>${l.code}</code></td>
+            <td style="font-weight:600;">${l.name}</td>
+            <td style="text-transform:uppercase; font-size:11px; font-weight:700; color: ${l.type === 'revenue' ? 'var(--green)' : 'var(--rose)'}">${l.type}</td>
+            <td style="color:var(--slate);">${l.formula}</td>
+            <td class="ledger-amount ${l.type}">${l.type === 'revenue' ? '+' : '-'}$${l.amount}</td>
+          </tr>
+        `;
+      }).join('');
+
+      var margin = revenueSum - costSum;
+      gpBadge.textContent = `Provisional Margin: $${margin}`;
+    }
+
+    // Tab 4: Operational Workflows Code
+    function toggleWorkflowMode(mode) {
+      currentWorkflowMode = mode;
+
+      var expBtn = document.getElementById('exportFlowBtn');
+      var impBtn = document.getElementById('importFlowBtn');
+      var expWrapper = document.getElementById('exportWorkflowWrapper');
+      var impWrapper = document.getElementById('importWorkflowWrapper');
+
+      if (mode === 'export') {
+        expBtn.classList.add('active');
+        impBtn.classList.remove('active');
+        expWrapper.style.display = 'grid';
+        impWrapper.style.display = 'none';
+        setExportStep(0);
+      } else {
+        expBtn.classList.remove('active');
+        impBtn.classList.add('active');
+        expWrapper.style.display = 'none';
+        impWrapper.style.display = 'grid';
+        clickImportNode('discharge', document.querySelector('#importWorkflowWrapper .lane-node'));
+      }
+    }
+
+    // Generate Export Timeline Checklist with contextual move-code display
+    function generateExportWorkflowSteps() {
+      var stepList = document.getElementById('exportStepList');
+      stepList.innerHTML = EXPORT_STEPS.map((step, idx) => {
+        var isMove = ['DSO', 'OFO', 'BFF'].includes(step.event);
+        var subText = isMove ? `Move Code: <strong>${step.event}</strong>` : `Operational Step`;
+        return `
+          <div class="workflow-card-step" id="expStepCard-${idx}" onclick="setExportStep(${idx})">
+            <div class="step-circle">${step.num}</div>
+            <div class="step-text">
+              <h4>${step.stage}</h4>
+              <span>${subText}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function setExportStep(idx) {
+      document.querySelectorAll('.workflow-card-step').forEach((card, cIdx) => {
+        card.classList.remove('active');
+        card.classList.toggle('completed', cIdx < idx);
+      });
+
+      var selectedCard = document.getElementById(`expStepCard-${idx}`);
+      if (selectedCard) {
+        selectedCard.classList.add('active');
+        selectedCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      var step = EXPORT_STEPS[idx];
+      var panel = document.getElementById('exportDocPanel');
+      var isMove = ['DSO', 'OFO', 'BFF'].includes(step.event);
+
+      var screenMockHTML = '';
+      if (step.event === 'QTE') {
+        screenMockHTML = `
+          <div class="sim-title-inner">Quotation Master Draft #Q-2026-003</div>
+          <div class="sim-line"><span class="sim-label">SHIPPER     :</span> <span class="sim-val">INDO FOODS LTD</span></div>
+          <div class="sim-line"><span class="sim-label">ROUTE_CODE  :</span> <span class="sim-val">COCHIN ➔ ROTTERDAM</span></div>
+          <div class="sim-line"><span class="sim-label">VALID_UNTIL :</span> <span class="sim-val">2026-06-30</span></div>
+          <div class="sim-line"><span class="sim-label">BASIC_FREIG :</span> <span class="sim-val">$1,400.00 (Tariff Validated)</span></div>
+        `;
+      } else if (step.event === 'BKG') {
+        screenMockHTML = `
+          <div class="sim-title-inner">NVOCC Booking Receipt #B-409183</div>
+          <div class="sim-line"><span class="sim-label">SHIPPER     :</span> <span class="sim-val">INDO FOODS LTD</span></div>
+          <div class="sim-line"><span class="sim-label">CARRIER_SLOT:</span> <span class="sim-val">MESSINA COMMITTED (CAP Module)</span></div>
+          <div class="sim-line"><span class="sim-label">STATUS       :</span> <span class="sim-val">Tariff Booking Created</span></div>
+        `;
+      } else if (step.event === 'CRO') {
+        screenMockHTML = `
+          <div class="sim-title-inner">Container Release Order (EMS System)</div>
+          <div class="sim-line"><span class="sim-label">RELEASE_REF :</span> <span class="sim-val">CRO-99031-YARD1</span></div>
+          <div class="sim-line"><span class="sim-label">EQUIP_REQ   :</span> <span class="sim-val">1 x 40HC Dry Cargo Worthy</span></div>
+          <div class="sim-line"><span class="sim-label">ALLOC_UNIT  :</span> <span class="sim-val">INTU4093821 (Lease Validated)</span></div>
+        `;
+      } else if (step.event === 'OFO') {
+        screenMockHTML = `
+          <div class="sim-title-inner">Origin Gate Entry (OFO Move Code)</div>
+          <div class="sim-line"><span class="sim-label">UNIT_REF    :</span> <span class="sim-val">INTU4093821 (Gate-In)</span></div>
+          <div class="sim-line"><span class="sim-label">SEAL_CONF   :</span> <span class="sim-val">SL-2019483-OK</span></div>
+          <div class="sim-line"><span class="sim-label">ACC_PROVISIONS:</span> <span class="sim-val">THC-C, THC-R, TOLL Surcharges Accrued</span></div>
+        `;
+      } else if (step.event === 'BLP') {
+        screenMockHTML = `
+          <div class="sim-title-inner">BL Release Hold &amp; Filings</div>
+          <div class="sim-line"><span class="sim-label">EGM_FILING_ID :</span> <span class="sim-val">EGM-2026-99021</span></div>
+          <div class="sim-line"><span class="sim-label">STATUS        :</span> <span class="sim-val" style="color:var(--green); font-weight:bold;">EGM FILED &amp; ACKNOWLEDGED</span></div>
+          <div class="sim-line"><span class="sim-label">CUSTOMS_AUTH  :</span> <span class="sim-val">PORT GATES PASSED</span></div>
+        `;
+      } else if (step.event === 'INV') {
+        screenMockHTML = `
+          <div class="sim-title-inner">Commercial Invoice Posting</div>
+          <div class="sim-line"><span class="sim-label">INVOICE_REF :</span> <span class="sim-val">INV-2026-9041</span></div>
+          <div class="sim-line"><span class="sim-label">BILLABLE_TO :</span> <span class="sim-val">INDO FOODS LTD</span></div>
+          <div class="sim-line"><span class="sim-label">SUBTOTAL    :</span> <span class="sim-val">$1,720.00 USD</span></div>
+          <div class="sim-line"><span class="sim-label">ACC_STATE   :</span> <span class="sim-val">Provisions Actuated to Accounts Receivable / Revenue</span></div>
+        `;
+      } else {
+        screenMockHTML = `
+          <div class="sim-title-inner">inTEUtion ERP Event Tracker</div>
+          <div class="sim-line"><span class="sim-label">OPERATIONAL :</span> <span class="sim-val">${step.stage}</span></div>
+          <div class="sim-line"><span class="sim-label">TIMESTAMP   :</span> <span class="sim-val">2026-05-25 16:47</span></div>
+          <div class="sim-line"><span class="sim-label">ACC_STATE   :</span> <span class="sim-val">Systemic Tracking Milestone Active</span></div>
+        `;
+      }
+
+      var moveBoxHTML = isMove ? `
+        <div style="margin-top:auto; padding-top:20px; border-top:1px solid var(--line); display:flex; align-items:center; gap:14px;">
+          <div style="width:50px; height:50px; border-radius:12px; background:var(--ice); color:var(--navy); display:flex; align-items:center; justify-content:center; font-family:'Sora'; font-weight:800; font-size:16px;">
+            ${step.event}
+          </div>
+          <div><small style="display:block; opacity:0.7; font-size:11px; letter-spacing:1.5px; font-weight:700; text-transform:uppercase;">Move Code Mapped Surcharge</small><b>${step.stage}</b></div>
+        </div>
+      ` : '';
+
+      panel.innerHTML = `
+        <div>
+          <div class="doc-badge">${isMove ? 'Move Code Update Trigger' : 'Operational Milestone'}</div>
+          <div class="doc-title">${step.stage}</div>
+          <div style="font-size:14px; line-height:1.6; color:var(--slate); margin-bottom:20px;">${step.desc}</div>
+          <div class="simulated-screen">
+            ${screenMockHTML}
+          </div>
+        </div>
+        
+        ${moveBoxHTML}
+
+        <div style="display:flex; gap:12px; margin-top:20px;">
+          <button class="action-btn" style="flex:1; background:var(--ice-2); color:var(--navy); padding:12px;" onclick="setExportStep(${Math.max(0, idx - 1)})">Previous Milestone</button>
+          <button class="action-btn" style="flex:1; padding:12px;" onclick="setExportStep(${Math.min(15, idx + 1)})">Next Step ✓</button>
+        </div>
+      `;
+    }
+
+    function clickImportNode(key, el) {
+      document.querySelectorAll('#importWorkflowWrapper .lane-node').forEach(node => node.classList.remove('active'));
+      el.classList.add('active');
+
+      var mockData = IMPORT_FLOW_MOCKS[key];
+      var panel = document.getElementById('importDocPanel');
+
+      var importSimHTML = mockData.sim;
+      // Inject dynamic IGM reference for discharges
+      if (key === 'discharge') {
+        importSimHTML += `\nIGM_FILING_ID: IGM-2026-44018\nIGM_STATUS   : FILED & APPROVED (POD COCHIN)`;
+      }
+
+      panel.innerHTML = `
+        <div>
+          <div class="doc-badge">${mockData.badge}</div>
+          <div class="doc-title">${mockData.title}</div>
+          <div class="doc-desc">${mockData.desc}</div>
+          <div class="simulated-screen">
+            ${importSimHTML}
+          </div>
+        </div>
+        <div style="font-size:12px; color:var(--slate); font-style:italic;">
+          *Accrual mappings are controlled by the Core module. When this state registers, the Accounting module calculates the final DA variance.
+        </div>
+      `;
+    }
+  </script>
+</body>
+
+</html>
