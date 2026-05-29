@@ -1708,7 +1708,7 @@ body::before {
    ============================================ */
 .cta-section {
     padding: 5rem 0;
-  background: linear-gradient(90deg,rgba(21, 16, 115, 1) 0%, rgba(44, 44, 191, 1) 35%, rgba(0, 119, 255, 1) 100%);
+   background: linear-gradient(90deg,rgb(31, 24, 165) 0%, rgba(44, 44, 191, 1) 35%, rgba(0, 119, 255, 1) 100%);
     color: var(--white);
     text-align: center;
     position: relative;
@@ -3583,7 +3583,8 @@ body::before {
 
 /* Value CTA Section */
 .value-cta {
-  background: linear-gradient(90deg,rgba(21, 16, 115, 1) 0%, rgba(44, 44, 191, 1) 35%, rgba(0, 119, 255, 1) 100%);
+    background: linear-gradient(90deg,rgb(31, 24, 165) 0%, rgba(44, 44, 191, 1) 35%, rgba(0, 119, 255, 1) 100%);
+
     padding: 5rem 0;
     text-align: center;
     color: var(--white);
