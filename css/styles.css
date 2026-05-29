@@ -11,6 +11,7 @@
     --brand-blue-lighter: #EFF6FF;
     --brand-indigo: #4F46E5;
     --brand-indigo-light: #818CF8;
+    --brand-blue-super-dark:#01256d;
 
     --blue-50: #EFF6FF;
     --blue-100: #DBEAFE;
@@ -1157,18 +1158,16 @@ body::before {
 .product-title {
     font-size: 1.6rem;
     font-weight: 700;
-    color: var(--brand-blue-dark);
+    color: var(--brand-blue-super-dark);
     margin-bottom: 1.25rem;
     line-height: 1.3;
     transition: color 0.3s ease;
 }
 
-.product-card:hover .product-title {
-    color: var(--brand-blue);
-}
+
 
 .product-link {
-    color: var(--brand-blue);
+    color: var(--brand-blue-super-dark);
     text-decoration: none;
     transition: var(--transition);
 }
@@ -1709,7 +1708,7 @@ body::before {
    ============================================ */
 .cta-section {
     padding: 5rem 0;
-    background: linear-gradient(135deg, var(--brand-blue) 0%, var(--brand-blue-dark) 100%);
+  background: linear-gradient(90deg,rgba(21, 16, 115, 1) 0%, rgba(44, 44, 191, 1) 35%, rgba(0, 119, 255, 1) 100%);
     color: var(--white);
     text-align: center;
     position: relative;
@@ -1804,7 +1803,7 @@ body::before {
 }
 
 .footer-description {
-    color: var(--text-light);
+
     line-height: 1.6;
 }
 
@@ -2811,7 +2810,7 @@ body::before {
 .blog-cta-section {
     margin-top: 4rem;
     padding: 3rem;
-    background: linear-gradient(135deg, var(--brand-blue) 0%, var(--brand-blue-dark) 100%);
+    background: linear-gradient(135deg, var(--brand-blue) 50%, var(--blue-900) 50%);
     border-radius: 16px;
     text-align: center;
     color: var(--white);
@@ -3584,7 +3583,7 @@ body::before {
 
 /* Value CTA Section */
 .value-cta {
-    background: linear-gradient(135deg, var(--brand-blue-dark) 0%, var(--brand-blue) 100%);
+  background: linear-gradient(90deg,rgba(21, 16, 115, 1) 0%, rgba(44, 44, 191, 1) 35%, rgba(0, 119, 255, 1) 100%);
     padding: 5rem 0;
     text-align: center;
     color: var(--white);
@@ -3751,7 +3750,7 @@ body {
 }
 
 /* Color updates for text headers inside cards */
-.product-title,
+
 .testimonial-name,
 .achievement-title,
 .value-pillar-title,
@@ -3777,7 +3776,7 @@ body {
 .copyright,
 .footer-links a,
 .contact-link {
-    color: var(--text-gray) !important;
+    color: var(--blue-800) !important;
 }
 
 .footer-links a:hover,
