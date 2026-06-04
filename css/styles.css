@@ -1606,9 +1606,7 @@ body::before {
 }
 
 .customer-logo {
-    background: linear-gradient(135deg,
-            rgba(255, 255, 255, 0.9) 0%,
-            var(--off-white) 100%);
+
     padding: 2rem;
     border-radius: 16px;
     display: flex;
@@ -1643,9 +1641,8 @@ body::before {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(0, 102, 204, 0.1) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
+ 
+   
 }
 
 .customer-logo:nth-child(1) {
@@ -1685,14 +1682,12 @@ body::before {
     width: auto;
     height: auto;
     object-fit: contain;
-    filter: grayscale(100%);
-    opacity: 0.7;
-    transition: var(--transition);
+
+     transition: var(--transition);
 }
 
 .customer-logo:hover .customer-logo-img {
-    filter: grayscale(0%);
-    opacity: 1;
+
     transform: scale(1.05);
 }
 
@@ -1798,7 +1793,7 @@ body::before {
 .footer-title {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--brand-blue-light);
+    color: var(--brand-blue-lighter);
     margin-bottom: 1rem;
 }
 
@@ -3311,7 +3306,7 @@ body::before {
 @media (prefers-reduced-motion: no-preference) {
 
     .product-card,
-    .customer-logo,
+ 
     .footer-section {
         opacity: 0;
         animation: fadeInUp 0.8s ease-out forwards;
@@ -3777,23 +3772,21 @@ body {
 .copyright,
 .footer-links a,
 .contact-link {
-    color: var(--blue-800) !important;
+    color: var(--blue-500) !important;
 }
 
 .footer-links a:hover,
 .contact-link:hover {
-    color: var(--brand-blue-light) !important;
+    color: var(--brand-indigo-light) !important;
 }
 
 /* Grayscale Logos for Premium Look */
 .customer-logo-img {
-    filter: grayscale(100%) opacity(0.5) !important;
+        
     transition: var(--transition) !important;
 }
 
-.customer-logo:hover .customer-logo-img {
-    filter: grayscale(0%) opacity(1) !important;
-}
+
 
 /* Theme Toggle Button Styling */
 .theme-toggle {
@@ -4506,5 +4499,231 @@ body {
     100% {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   Landing Page Revamp - Premium Glassmorphic UI/UX Redesign
+   ========================================================================== */
+
+/* 1. ambient background light orbs (3d depth) */
+.hero-home .container-visual {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.hero-home .floating-container {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(130px);
+    opacity: 0.22;
+    pointer-events: none;
+    will-change: transform;
+}
+
+.hero-home .floating-container:nth-child(1) {
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.7) 0%, transparent 70%);
+    top: -10%;
+    left: 10%;
+    animation: ambientFloat1 24s ease-in-out infinite alternate;
+}
+
+.hero-home .floating-container:nth-child(2) {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.6) 0%, transparent 70%);
+    bottom: -15%;
+    right: 5%;
+    animation: ambientFloat2 28s ease-in-out infinite alternate;
+}
+
+.hero-home .floating-container:nth-child(3) {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, transparent 70%);
+    top: 30%;
+    right: 25%;
+    animation: ambientFloat3 20s ease-in-out infinite alternate;
+}
+
+/* 2. true glassmorphic card overlay */
+.hero-home .hero-content {
+    background: rgba(8, 11, 24, 0.5) !important;
+    backdrop-filter: blur(28px) saturate(210%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(210%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.13) !important;
+    border-radius: 36px !important;
+    box-shadow: 
+        0 40px 80px rgba(0, 0, 0, 0.5), 
+        inset 0 1px 0 rgba(255, 255, 255, 0.22), 
+        0 0 90px rgba(37, 99, 235, 0.12) !important;
+    padding: 5rem 3.5rem !important;
+    max-width: 950px !important;
+    margin: 0 auto !important;
+    position: relative !important;
+    z-index: 10 !important;
+    overflow: hidden !important;
+    animation: heroFloat 8s ease-in-out infinite !important;
+}
+
+.hero-home .hero-content::before,
+.hero-home .hero-content::after {
+    display: none !important; /* disable old visual filters */
+}
+
+/* 3. premium typography styling */
+.hero-home .hero-headline {
+    font-size: 3.6rem !important;
+    font-weight: 850 !important;
+    background: linear-gradient(135deg, #FFFFFF 0%, #E0E7FF 45%, #C7D2FE 75%, #818CF8 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    line-height: 1.12 !important;
+    letter-spacing: -0.03em !important;
+    margin-bottom: 1.5rem !important;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.35) !important;
+}
+
+.hero-home .hero-subheadline-1 {
+    font-size: 1.85rem !important;
+    font-weight: 750 !important;
+    color: #FFFFFF !important; /* premium high-contrast white */
+    letter-spacing: -0.01em !important;
+    margin-bottom: 1.75rem !important;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+.hero-home .hero-subheadline-2 {
+    font-size: 1.15rem !important;
+    font-weight: 450 !important;
+    color: rgba(241, 245, 249, 0.92) !important;
+    line-height: 1.7 !important;
+    letter-spacing: 0.01em !important;
+    max-width: 780px !important;
+    margin: 0 auto 3rem auto !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* 4. high-contrast pulsing cta button */
+.hero-home .btn-cta {
+    background: linear-gradient(135deg, #2563EB 0%, #4F46E5 100%) !important;
+    color: #FFFFFF !important;
+    font-size: 1.1rem !important;
+    font-weight: 750 !important;
+    padding: 1.15rem 3rem !important;
+    border-radius: 14px !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+}
+
+.hero-home .btn-cta:hover {
+    transform: translateY(-5px) scale(1.02) !important;
+    box-shadow: 
+        0 15px 40px rgba(37, 99, 235, 0.6), 
+        0 0 35px rgba(99, 102, 241, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+    filter: brightness(1.1) !important;
+}
+
+.hero-home .btn-cta:active {
+    transform: translateY(-1px) !important;
+}
+
+.hero-home .demo-icon {
+    font-size: 1.3rem !important;
+    transition: transform 0.3s ease !important;
+}
+
+.hero-home .btn-cta:hover .demo-icon {
+    transform: scale(1.1) rotate(-8deg);
+}
+
+/* 5. animations */
+@keyframes heroFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes ambientFloat1 {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    100% {
+        transform: translate(80px, 40px) scale(1.1);
+    }
+}
+
+@keyframes ambientFloat2 {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    100% {
+        transform: translate(-100px, -60px) scale(1.15);
+    }
+}
+
+@keyframes ambientFloat3 {
+    0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+    100% {
+        transform: translate(60px, -40px) scale(0.9) rotate(90deg);
+    }
+}
+
+/* 6. media responsive overrides */
+@media (max-width: 992px) {
+    .hero-home .hero-content {
+        padding: 4rem 2rem !important;
+        margin: 0 1rem !important;
+    }
+    .hero-home .hero-headline {
+        font-size: 2.8rem !important;
+    }
+    .hero-home .hero-subheadline-1 {
+        font-size: 1.5rem !important;
+    }
+    .hero-home .hero-subheadline-2 {
+        font-size: 1.05rem !important;
+        margin-bottom: 2.25rem !important;
+    }
+    .hero-home .btn-cta {
+        padding: 1rem 2.5rem !important;
+        font-size: 1rem !important;
+    }
+}
+
+@media (max-width: 580px) {
+    .hero-home .hero-content {
+        padding: 3rem 1.5rem !important;
+    }
+    .hero-home .hero-headline {
+        font-size: 2.1rem !important;
+    }
+    .hero-home .hero-subheadline-1 {
+        font-size: 1.25rem !important;
+    }
+    .hero-home .hero-subheadline-2 {
+        font-size: 0.95rem !important;
     }
 }
