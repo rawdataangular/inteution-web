@@ -687,7 +687,7 @@ body::before {
 .hero-home .btn-primary {
     background-color: var(--white);
     color: var(--brand-blue);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), 0 8px 32px rgba(0, 102, 204, 0.3);
+    box-shadow: 0 4px 20px rgba(50, 10, 96, 0.3), 0 8px 32px rgba(9, 113, 217, 0.4);
     font-weight: 700;
     font-size: 1.2rem;
     padding: 1.25rem 2.5rem;
@@ -3957,54 +3957,7 @@ body {
     transition: opacity 0.5s ease;
 }
 
-.hero-home {
-    min-height: 85vh !important;
-    padding-bottom: 160px !important;
-    /* extra padding to allow overlapping cards */
-    position: relative;
-    background: #080B11 !important;
-    overflow: visible !important;
-}
 
-.hero-home .hero-overlay {
-    background: linear-gradient(180deg, rgba(8, 11, 17, 0.4) 0%, rgba(8, 11, 17, 0.85) 100%) !important;
-    z-index: 1;
-}
-
-.hero-home .hero-content {
-    background: rgba(14, 14, 14, 0.4);
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
-    position: relative;
-    z-index: 10;
-}
-
-.hero-home .hero-headline {
-    font-size: 3rem;
-    font-weight: 650;
-    color: #91a1e4 !important;
-    line-height: 1.15;
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.02em;
-    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5) !important;
-}
-
-.hero-home .hero-subheadline-1 {
-    font-size: 1.75rem;
-    color: #FFFFFF !important;
-    opacity: 0.95;
-    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4) !important;
-}
-
-.hero-home .hero-subheadline-2 {
-    font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.9) !important;
-    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4) !important;
-}
 
 /* Products section sits cleanly under the visual image backdrop */
 @media (min-width: 992px) {
@@ -4503,227 +4456,502 @@ body {
 }
 
 /* ==========================================================================
-   Landing Page Revamp - Premium Glassmorphic UI/UX Redesign
+   Landing Page Revamp - Premium Glassmorphic UI/UX Redesign (v2)
    ========================================================================== */
 
-/* 1. ambient background light orbs (3d depth) */
-.hero-home .container-visual {
-    position: absolute;
-    top: 0;
+/* 1. Global Full-Length Glassmorphic Header */
+.header {
+    position: fixed;
+    top: 0 !important;
     left: 0;
     right: 0;
-    bottom: 0;
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(24px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+    border-bottom: 1px solid rgba(0, 102, 204, 0.08) !important;
+    box-shadow: 0 4px 30px rgba(15, 23, 42, 0.03) !important;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+[data-theme="dark"] .header {
+    background: rgba(8, 11, 17, 0.65) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+.header.scrolled {
+    background: rgba(255, 255, 255, 0.8) !important;
+    border-bottom-color: rgba(0, 102, 204, 0.12) !important;
+    box-shadow: 0 4px 30px rgba(15, 23, 42, 0.06) !important;
+}
+
+[data-theme="dark"] .header.scrolled {
+    background: rgba(8, 11, 17, 0.85) !important;
+    border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+.navbar {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0.85rem 20px !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    transition: all 0.3s ease;
+}
+
+.navbar .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+    width: 100%;
+}
+
+/* 2. Concentric Background Ripple Rings & Floating Bubbles */
+.hero-home {
+    min-height: 100vh !important;
+    padding: 95px 0 45px !important;
+    background: radial-gradient(circle at 15% 15%, rgba(110, 112, 224, 0.419) 0%, transparent 55%), radial-gradient(circle at 85% 85%, rgba(100, 229, 197, 0.277) 0%, transparent 55%), linear-gradient(135deg, #f5f7fb 0%, #e4ecf7 100%) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: background 0.3s ease;
+}
+
+[data-theme="dark"] .hero-home {
+    background: radial-gradient(circle at 15% 15%, rgba(129, 140, 248, 0.45) 0%, transparent 60%), radial-gradient(circle at 85% 85%, rgba(45, 212, 191, 0.35) 0%, transparent 60%), linear-gradient(135deg, #16162a 0%, #222244 100%) !important;
+}
+
+.hero-bg-ripples {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    z-index: 2;
+    z-index: 0;
     pointer-events: none;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.hero-home .floating-container {
+.hero-bg-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.50 !important;
+    pointer-events: none;
+    z-index: 0;
+    max-width: 320px;
+    height: auto;
+    filter: drop-shadow(0 10px 20px rgba(99, 102, 241, 0.1));
+}
+
+.ripple {
     position: absolute;
     border-radius: 50%;
-    filter: blur(130px);
-    opacity: 0.22;
-    pointer-events: none;
-    will-change: transform;
+    border: 1px dashed rgba(99, 102, 241, 0.12);
+    background: transparent;
+    animation: ripplePulse 12s linear infinite;
 }
 
-.hero-home .floating-container:nth-child(1) {
-    width: 450px;
-    height: 450px;
-    background: radial-gradient(circle, rgba(37, 99, 235, 0.7) 0%, transparent 70%);
-    top: -10%;
-    left: 10%;
-    animation: ambientFloat1 24s ease-in-out infinite alternate;
+[data-theme="dark"] .ripple {
+    border-color: rgba(99, 102, 241, 0.15);
 }
 
-.hero-home .floating-container:nth-child(2) {
+.ripple-1 {
     width: 500px;
     height: 500px;
-    background: radial-gradient(circle, rgba(99, 102, 241, 0.6) 0%, transparent 70%);
-    bottom: -15%;
-    right: 5%;
-    animation: ambientFloat2 28s ease-in-out infinite alternate;
+    animation-duration: 16s;
 }
 
-.hero-home .floating-container:nth-child(3) {
-    width: 350px;
-    height: 350px;
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, transparent 70%);
-    top: 30%;
-    right: 25%;
-    animation: ambientFloat3 20s ease-in-out infinite alternate;
+.ripple-2 {
+    width: 800px;
+    height: 800px;
+    animation-duration: 24s;
+    animation-delay: -4s;
 }
 
-/* 2. true glassmorphic card overlay */
-.hero-home .hero-content {
-    background: rgba(8, 11, 24, 0.5) !important;
-    backdrop-filter: blur(28px) saturate(210%) !important;
-    -webkit-backdrop-filter: blur(28px) saturate(210%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.13) !important;
-    border-radius: 36px !important;
-    box-shadow: 
-        0 40px 80px rgba(0, 0, 0, 0.5), 
-        inset 0 1px 0 rgba(255, 255, 255, 0.22), 
-        0 0 90px rgba(37, 99, 235, 0.12) !important;
-    padding: 5rem 3.5rem !important;
-    max-width: 950px !important;
-    margin: 0 auto !important;
-    position: relative !important;
-    z-index: 10 !important;
-    overflow: hidden !important;
-    animation: heroFloat 8s ease-in-out infinite !important;
+.ripple-3 {
+    width: 1100px;
+    height: 1100px;
+    animation-duration: 32s;
+    animation-delay: -8s;
 }
 
-.hero-home .hero-content::before,
-.hero-home .hero-content::after {
-    display: none !important; /* disable old visual filters */
-}
-
-/* 3. premium typography styling */
-.hero-home .hero-headline {
-    font-size: 3.6rem !important;
-    font-weight: 850 !important;
-    background: linear-gradient(135deg, #FFFFFF 0%, #E0E7FF 45%, #C7D2FE 75%, #818CF8 100%) !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    line-height: 1.12 !important;
-    letter-spacing: -0.03em !important;
-    margin-bottom: 1.5rem !important;
-    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.35) !important;
-}
-
-.hero-home .hero-subheadline-1 {
-    font-size: 1.85rem !important;
-    font-weight: 750 !important;
-    color: #FFFFFF !important; /* premium high-contrast white */
-    letter-spacing: -0.01em !important;
-    margin-bottom: 1.75rem !important;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
-}
-
-.hero-home .hero-subheadline-2 {
-    font-size: 1.15rem !important;
-    font-weight: 450 !important;
-    color: rgba(241, 245, 249, 0.92) !important;
-    line-height: 1.7 !important;
-    letter-spacing: 0.01em !important;
-    max-width: 780px !important;
-    margin: 0 auto 3rem auto !important;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
-}
-
-/* 4. high-contrast pulsing cta button */
-.hero-home .btn-cta {
-    background: linear-gradient(135deg, #2563EB 0%, #4F46E5 100%) !important;
-    color: #FFFFFF !important;
-    font-size: 1.1rem !important;
-    font-weight: 750 !important;
-    padding: 1.15rem 3rem !important;
-    border-radius: 14px !important;
-    border: 1px solid rgba(255, 255, 255, 0.18) !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 0.75rem !important;
-    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    cursor: pointer !important;
-    text-decoration: none !important;
-}
-
-.hero-home .btn-cta:hover {
-    transform: translateY(-5px) scale(1.02) !important;
-    box-shadow: 
-        0 15px 40px rgba(37, 99, 235, 0.6), 
-        0 0 35px rgba(99, 102, 241, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
-    filter: brightness(1.1) !important;
-}
-
-.hero-home .btn-cta:active {
-    transform: translateY(-1px) !important;
-}
-
-.hero-home .demo-icon {
-    font-size: 1.3rem !important;
-    transition: transform 0.3s ease !important;
-}
-
-.hero-home .btn-cta:hover .demo-icon {
-    transform: scale(1.1) rotate(-8deg);
-}
-
-/* 5. animations */
-@keyframes heroFloat {
-    0%, 100% {
-        transform: translateY(0);
+@keyframes ripplePulse {
+    0% {
+        transform: rotate(0deg) scale(1);
     }
     50% {
-        transform: translateY(-8px);
-    }
-}
-
-@keyframes ambientFloat1 {
-    0% {
-        transform: translate(0, 0) scale(1);
+        transform: rotate(180deg) scale(1.03);
     }
     100% {
-        transform: translate(80px, 40px) scale(1.1);
+        transform: rotate(360deg) scale(1);
     }
 }
 
-@keyframes ambientFloat2 {
+/* Floating Glass Bubbles (inspired by abstract design) */
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.03) 70%, transparent 100%);
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.25), inset 0 -3px 6px rgba(0, 0, 0, 0.3), 0 10px 25px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+    z-index: 1;
+    animation: floatBubble 12s ease-in-out infinite alternate;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bubble-icon {
+    max-width: 45%;
+    max-height: 45%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    opacity: 0.25;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2)) brightness(1.1);
+    transition: opacity 0.3s ease;
+}
+
+.bubble-1 {
+    width: 220px;
+    height: 220px;
+    left: -60px;
+    bottom: 10%;
+    animation-duration: 14s;
+    animation-delay: -2s;
+}
+
+.bubble-2 {
+    width: 140px;
+    height: 140px;
+    left: 97px;
+    top: 22%;
+    animation-duration: 10s;
+    animation-delay: -5s;
+}
+
+.bubble-3 {
+    width: 90px;
+    height: 90px;
+    left: 89%;
+    bottom: 48%;
+    animation-duration: 8s;
+    animation-delay: -1s;
+}
+
+.bubble-4 {
+    width: 110px;
+    height: 110px;
+    right: 5%;
+    bottom: 8%;
+    animation-duration: 11s;
+    animation-delay: -3s;
+}
+
+.bubble-5 {
+    width: 160px;
+    height: 160px;
+    right: 12%;
+    top: -50px;
+    animation-duration: 15s;
+    animation-delay: -7s;
+}
+
+@keyframes floatBubble {
     0% {
-        transform: translate(0, 0) scale(1);
+        transform: translateY(0) scale(1) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-15px) scale(1.02) rotate(3deg);
     }
     100% {
-        transform: translate(-100px, -60px) scale(1.15);
+        transform: translateY(10px) scale(0.98) rotate(-3deg);
     }
 }
 
-@keyframes ambientFloat3 {
-    0% {
-        transform: translate(0, 0) scale(1) rotate(0deg);
+/* 3. Beveled Glass Card */
+.hero-card-border-wrap {
+    position: relative;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(138, 118, 237, 0.25) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(92, 92, 97, 0.15) 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 80px 100%, 0 calc(100% - 80px));
+    border-radius: 32px;
+    box-shadow: 0 30px 60px rgba(9, 9, 21, 0.4);
+    transition: all 0.4s ease;
+    z-index: 10;
+}
+
+[data-theme="dark"] .hero-card-border-wrap {
+    background: linear-gradient(135deg, rgba(234, 161, 161, 0.15) 0%, rgba(101, 77, 77, 0.02) 50%, rgba(99, 102, 241, 0.1) 100%);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+}
+
+.hero-card {
+    background: linear-gradient(135deg, rgba(20, 20, 35, 0.65) 0%, rgba(10, 10, 20, 0.45) 100%);
+    backdrop-filter: blur(30px) saturate(120%);
+    -webkit-backdrop-filter: blur(30px) saturate(120%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 79px 100%, 0 calc(100% - 79px));
+    border-radius: 31px;
+    padding: 2.25rem 3rem 1.75rem;
+    position: relative;
+    overflow: hidden;
+}
+
+[data-theme="dark"] .hero-card {
+    background: linear-gradient(135deg, rgba(12, 12, 24, 0.75) 0%, rgba(6, 6, 12, 0.5) 100%);
+}
+
+/* 4. Card Main Layout */
+.hero-card-main {
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 2.5rem;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.hero-card-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.hero-headline-modern {
+    font-size: 2.8rem;
+    font-weight: 800;
+    line-height: 1.15;
+    color: #FFFFFF;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+}
+
+.hero-subheadline-modern {
+    font-size: 1.02rem;
+    line-height: 1.6;
+    color: rgba(241, 245, 249, 0.75);
+    margin-bottom: 1.5rem;
+    max-width: 620px;
+}
+
+.hero-cta-modern {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-cta-modern {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: #FFFFFF;
+    color: #0F172A;
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+}
+
+.btn-cta-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.btn-cta-modern .arrow-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.btn-cta-modern:hover .arrow-icon {
+    transform: translateX(4px);
+}
+
+/* 5. 3D Visual Asset Styling */
+.hero-card-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-visual-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.hero-3d-art {
+
+    opacity: 0.7;
+    max-width: 100%;
+    max-height: 360px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 15px 30px rgba(27, 28, 74, 0.25));
+}
+
+@keyframes floatArt {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
     }
-    100% {
-        transform: translate(60px, -40px) scale(0.9) rotate(90deg);
+    50% {
+        transform: translateY(-10px) rotate(1.2deg);
     }
 }
 
-/* 6. media responsive overrides */
+/* 6. Value Grid Columns */
+.hero-card-bottom {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.75rem;
+}
+
+.value-col {
+    position: relative;
+    display: flex;
+    gap: 1rem;
+}
+
+.value-col:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -1rem;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.value-num {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--brand-blue-light);
+    font-family: monospace;
+    margin-top: 0.15rem;
+}
+
+.value-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.value-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 0.4rem;
+}
+
+.value-desc {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: rgba(241, 245, 249, 0.62);
+}
+
+/* 7. Media Responsiveness overrides */
+@media (max-width: 1024px) {
+    .hero-headline-modern {
+        font-size: 2.5rem;
+    }
+    .hero-card {
+        padding: 2rem 2.25rem 1.5rem;
+    }
+    .hero-card-main {
+        gap: 1.5rem;
+    }
+    .hero-3d-art {
+        max-height: 220px;
+    }
+}
+
 @media (max-width: 992px) {
-    .hero-home .hero-content {
-        padding: 4rem 2rem !important;
-        margin: 0 1rem !important;
+    .hero-home {
+        padding: 90px 10px 40px !important;
     }
-    .hero-home .hero-headline {
-        font-size: 2.8rem !important;
+    .hero-card-main {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-bottom: 2rem;
+        text-align: center;
     }
-    .hero-home .hero-subheadline-1 {
-        font-size: 1.5rem !important;
+    .hero-card-left {
+        align-items: center;
     }
-    .hero-home .hero-subheadline-2 {
-        font-size: 1.05rem !important;
-        margin-bottom: 2.25rem !important;
+    .hero-subheadline-modern {
+        margin-left: auto;
+        margin-right: auto;
     }
-    .hero-home .btn-cta {
-        padding: 1rem 2.5rem !important;
-        font-size: 1rem !important;
+    .hero-card-bottom {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        padding-top: 1.5rem;
+    }
+    .value-col {
+        gap: 0.75rem;
+    }
+    .value-col:not(:last-child)::after {
+        display: none;
+    }
+    .value-col {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding-bottom: 1.25rem;
+    }
+    .value-col:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+    .hero-card-border-wrap {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 60px 100%, 0 calc(100% - 60px));
+        border-radius: 24px;
+        margin: 0 1rem;
+    }
+    .hero-card {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 59px 100%, 0 calc(100% - 59px));
+        border-radius: 23px;
+        padding: 2.25rem 1.5rem 1.5rem;
+    }
+    .hero-3d-art {
+        max-width: 60%;
+        max-height: 200px;
     }
 }
 
 @media (max-width: 580px) {
-    .hero-home .hero-content {
-        padding: 3rem 1.5rem !important;
+    .hero-headline-modern {
+        font-size: 2.1rem;
     }
-    .hero-home .hero-headline {
-        font-size: 2.1rem !important;
+    .hero-subheadline-modern {
+        font-size: 0.95rem;
     }
-    .hero-home .hero-subheadline-1 {
-        font-size: 1.25rem !important;
+    .btn-cta-modern {
+        padding: 0.8rem 1.75rem;
+        font-size: 0.95rem;
     }
-    .hero-home .hero-subheadline-2 {
-        font-size: 0.95rem !important;
+    .hero-3d-art {
+        max-width: 80%;
     }
 }
