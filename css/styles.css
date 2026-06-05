@@ -5192,14 +5192,213 @@ body {
 }
 
 /* ============================================
-   ERP Featured Product Card Styles
+   ERP Featured Product Carousel Styles
    ============================================ */
-.erp-featured-card-wrapper {
-  width: 100%;
-  margin: 2rem auto 4.5rem;
-  max-width: var(--container-max-width);
+.erp-carousel-wrapper {
   position: relative;
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 2rem auto 4.5rem;
+  padding: 0 40px;
+  box-sizing: border-box;
   z-index: 10;
+}
+
+.erp-carousel-container {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 32px;
+}
+
+.erp-carousel-track {
+  display: flex;
+  width: 100%;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  touch-action: pan-y;
+}
+
+.erp-carousel-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 5px;
+}
+
+.erp-carousel-slide .erp-featured-card {
+  margin: 0 auto;
+}
+
+/* Carousel Controls */
+.erp-carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  color: var(--brand-blue-dark);
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .erp-carousel-control {
+  background: rgba(15, 21, 36, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-dark);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.erp-carousel-control:hover {
+  background: var(--brand-blue);
+  color: var(--white);
+  border-color: var(--brand-blue);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+}
+
+[data-theme="dark"] .erp-carousel-control:hover {
+  background: var(--brand-blue-light);
+  color: #000000;
+  border-color: var(--brand-blue-light);
+  box-shadow: 0 6px 16px rgba(96, 165, 250, 0.4);
+}
+
+.erp-carousel-prev {
+  left: -15px;
+}
+
+.erp-carousel-next {
+  right: -15px;
+}
+
+/* Dots Indicators */
+.erp-carousel-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  z-index: 10;
+}
+
+.erp-carousel-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--brand-blue);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0;
+  position: relative;
+}
+
+.erp-carousel-dot::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand-blue);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.erp-carousel-dot:hover {
+  transform: scale(1.2);
+  border-color: var(--brand-blue-light);
+}
+
+.erp-carousel-dot.active {
+  border-color: var(--brand-blue);
+  background: var(--brand-blue);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+}
+
+.erp-carousel-dot.active::before {
+  transform: translate(-50%, -50%) scale(1);
+  background: var(--white);
+}
+
+.erp-carousel-track.grabbing {
+  cursor: grabbing;
+}
+
+/* Assistify Custom Colors & Glowing */
+.erp-badge-assistify {
+  background: rgba(37, 211, 102, 0.08) !important;
+  color: #128c7e !important;
+}
+
+[data-theme="dark"] .erp-badge-assistify {
+  background: rgba(37, 211, 102, 0.15) !important;
+  color: #4ade80 !important;
+}
+
+.erp-visual-glow-assistify {
+  background: radial-gradient(circle, rgba(37, 211, 102, 0.18) 0%, transparent 70%) !important;
+}
+
+[data-theme="dark"] .erp-visual-glow-assistify {
+  background: radial-gradient(circle, rgba(74, 222, 128, 0.15) 0%, transparent 70%) !important;
+}
+
+/* Emojis highlights formatting */
+.highlight-icon.highlight-emoji {
+  font-size: 0.95rem;
+  background: transparent;
+}
+
+.emoji-money {
+  background: rgba(251, 191, 36, 0.1) !important;
+}
+
+.emoji-vessel {
+  background: rgba(59, 130, 246, 0.1) !important;
+}
+
+.emoji-speed {
+  background: rgba(239, 68, 68, 0.1) !important;
+}
+
+/* Responsive adjustment for controls */
+@media (max-width: 1320px) {
+  .erp-carousel-wrapper {
+    padding: 0 20px;
+  }
+  .erp-carousel-prev {
+    left: 10px;
+  }
+  .erp-carousel-next {
+    right: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .erp-carousel-control {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  .erp-carousel-prev {
+    left: 5px;
+  }
+  .erp-carousel-next {
+    right: 5px;
+  }
 }
 
 .erp-featured-card {
@@ -5529,7 +5728,7 @@ body {
   .erp-featured-image {
     max-height: 220px;
   }
-  .erp-featured-card-wrapper {
+  .erp-carousel-wrapper {
     margin: 1.5rem auto 3.5rem;
   }
   .erp-know-more-link {

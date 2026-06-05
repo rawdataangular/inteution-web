@@ -802,6 +802,190 @@ document.addEventListener('DOMContentLoaded', function () {
         const successCloseBtn = bodyContainer.querySelector('#successCloseBtn');
         successCloseBtn.addEventListener('click', closeDemoModal);
     }
+
+    // ============================================
+    // ERP Featured Products Carousel
+    // ============================================
+    const erpTrack = document.getElementById('erpCarouselTrack');
+    const erpWrapper = document.querySelector('.erp-carousel-wrapper');
+    if (erpTrack && erpWrapper) {
+        const erpSlides = Array.from(erpTrack.children);
+        const nextBtn = erpWrapper.querySelector('.erp-carousel-next');
+        const prevBtn = erpWrapper.querySelector('.erp-carousel-prev');
+        const dotsContainer = erpWrapper.querySelector('.erp-carousel-dots');
+        
+        let currentIndex = 1;
+        let isMoving = false;
+        const slideCount = erpSlides.length;
+        
+        // 1. Setup Clones for Infinite Loop
+        const firstClone = erpSlides[0].cloneNode(true);
+        const lastClone = erpSlides[slideCount - 1].cloneNode(true);
+        
+        firstClone.classList.add('is-clone');
+        lastClone.classList.add('is-clone');
+        
+        erpTrack.appendChild(firstClone);
+        erpTrack.insertBefore(lastClone, erpSlides[0]);
+        
+        // Set initial transform position showing slide index 1 (original first slide)
+        const updatePosition = () => {
+            erpTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+        };
+        
+        // Initialize position
+        erpTrack.style.transition = 'none';
+        updatePosition();
+        
+        // 2. Generate Dot Indicators dynamically
+        for (let i = 0; i < slideCount; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'erp-carousel-dot';
+            dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                if (isMoving) return;
+                goToSlide(i + 1);
+            });
+            dotsContainer.appendChild(dot);
+        }
+        const dots = dotsContainer.querySelectorAll('.erp-carousel-dot');
+        
+        const updateDots = () => {
+            let activeDotIndex = currentIndex - 1;
+            if (currentIndex === 0) {
+                activeDotIndex = slideCount - 1;
+            } else if (currentIndex === slideCount + 1) {
+                activeDotIndex = 0;
+            }
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === activeDotIndex);
+            });
+        };
+        
+        const goToSlide = (targetIndex, animate = true) => {
+            if (isMoving) return;
+            if (animate) {
+                isMoving = true;
+                erpTrack.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            } else {
+                erpTrack.style.transition = 'none';
+            }
+            currentIndex = targetIndex;
+            updatePosition();
+            updateDots();
+        };
+        
+        // Handle transitions resetting index for loop
+        erpTrack.addEventListener('transitionend', () => {
+            isMoving = false;
+            if (currentIndex === slideCount + 1) {
+                goToSlide(1, false);
+            } else if (currentIndex === 0) {
+                goToSlide(slideCount, false);
+            }
+        });
+        
+        const handleNext = () => {
+            if (isMoving) return;
+            goToSlide(currentIndex + 1);
+        };
+        
+        const handlePrev = () => {
+            if (isMoving) return;
+            goToSlide(currentIndex - 1);
+        };
+        
+        nextBtn.addEventListener('click', handleNext);
+        prevBtn.addEventListener('click', handlePrev);
+        
+        // 3. Autoplay functionality
+        let autoPlayTimer = setInterval(handleNext, 6000);
+        
+        const resetAutoPlay = () => {
+            clearInterval(autoPlayTimer);
+            autoPlayTimer = setInterval(handleNext, 6000);
+        };
+        
+        erpWrapper.addEventListener('mouseenter', () => clearInterval(autoPlayTimer));
+        erpWrapper.addEventListener('mouseleave', resetAutoPlay);
+        
+        // 4. Touch & Drag/Swipe Support
+        let startX = 0;
+        let dragOffset = 0;
+        let isDragging = false;
+        
+        const getClientX = (e) => {
+            return e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+        };
+        
+        const onDragStart = (e) => {
+            if (isMoving) return;
+            isDragging = true;
+            clearInterval(autoPlayTimer);
+            
+            startX = getClientX(e);
+            erpTrack.style.transition = 'none';
+            erpTrack.classList.add('grabbing');
+        };
+        
+        const onDragMove = (e) => {
+            if (!isDragging) return;
+            const currentX = getClientX(e);
+            dragOffset = currentX - startX;
+            
+            const trackWidth = erpTrack.offsetWidth;
+            const dragPercentage = (dragOffset / trackWidth) * 100;
+            
+            erpTrack.style.transform = `translateX(calc(-${currentIndex * 100}% + ${dragPercentage}%))`;
+        };
+        
+        const onDragEnd = () => {
+            if (!isDragging) return;
+            isDragging = false;
+            erpTrack.classList.remove('grabbing');
+            
+            const threshold = erpTrack.offsetWidth * 0.15;
+            
+            if (Math.abs(dragOffset) > threshold) {
+                if (dragOffset > 0) {
+                    handlePrev();
+                } else {
+                    handleNext();
+                }
+            } else {
+                goToSlide(currentIndex);
+            }
+            
+            dragOffset = 0;
+            resetAutoPlay();
+        };
+        
+        // Touch events
+        erpTrack.addEventListener('touchstart', onDragStart, { passive: true });
+        erpTrack.addEventListener('touchmove', onDragMove, { passive: true });
+        erpTrack.addEventListener('touchend', onDragEnd);
+        
+        // Mouse events
+        erpTrack.addEventListener('mousedown', onDragStart);
+        window.addEventListener('mousemove', onDragMove);
+        window.addEventListener('mouseup', onDragEnd);
+        
+        // Prevent images/links dragging inside card
+        erpTrack.querySelectorAll('img, a').forEach(el => {
+            el.addEventListener('dragstart', (e) => e.preventDefault());
+        });
+        
+        // Handle window resizing
+        let resizeDebounce;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeDebounce);
+            resizeDebounce = setTimeout(() => {
+                erpTrack.style.transition = 'none';
+                updatePosition();
+            }, 100);
+        });
+    }
 });
 
 
