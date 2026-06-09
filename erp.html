@@ -383,10 +383,12 @@
       }
     }
 
-    .ship-silhouette svg {
+    .ship-silhouette svg,
+    .ship-silhouette img {
       width: 50px;
       height: 50px;
       animation: counterSpin 20s linear infinite;
+      object-fit: contain;
     }
 
     @keyframes counterSpin {
@@ -504,8 +506,13 @@
 
     .module-subtitle {
       font-size: 12px;
-      color: #000208;
+      color: #0e1c47ff;
       margin-top: 2px;
+    }
+
+     .module-subtitle:hover{
+      color: #dce0f4;
+      
     }
 
     
@@ -1214,6 +1221,108 @@
         opacity: 0.7;
       }
     }
+
+    /* Premium Capabilities Grid */
+    .capabilities-container {
+      margin-top: 60px;
+      border-top: 1px solid var(--line);
+      padding-top: 50px;
+    }
+
+    .capabilities-header {
+      margin-bottom: 40px;
+      max-width: 800px;
+    }
+
+    .capabilities-header h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--navy-deep);
+      margin-bottom: 16px;
+    }
+
+    .capabilities-header p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--slate);
+    }
+
+    .capabilities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+
+    .capability-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 28px 24px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    .capability-card::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: linear-gradient(to bottom, var(--navy), var(--cobalt));
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.25s ease;
+    }
+
+    .capability-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--cobalt);
+      box-shadow: var(--shadow);
+    }
+
+    .capability-card:hover::after {
+      transform: scaleY(1);
+    }
+
+    .capability-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--ice);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--navy);
+      transition: all 0.3s ease;
+    }
+
+    .capability-card:hover .capability-icon {
+      background: linear-gradient(135deg, var(--navy), var(--cobalt));
+      color: var(--white);
+      transform: scale(1.05);
+    }
+
+    .capability-title {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--navy-deep);
+    }
+
+    .capability-desc {
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--slate);
+    }
   </style>
 </head>
 
@@ -1282,10 +1391,7 @@
           <h2>Event Based Accounting ERP for NVOCCs</h2>
           <h1>in<span style="color:#1322a8;">TEU</span>tion</h1>
           <p>
-            Next-gen ERP built For NVOCC operations — sleek, smart, and built for the new age of logistics..
-            Instead of manual invoicing and fragile tracking, <strong>every container movement</strong> (such as
-            Dispatch to Shipper, Port Gate-In, or On-Board) triggers mapped cost and revenue elements, resolving tariffs
-            automatically.
+          inTEUtion is purpose-built for NVOCCs to manage the complete lifecycle of every container - engineered not just for the digital age, but for the modern information age. It includes dedicated modules for Equipment Management, Capacity Planning, EXIM operations, and CMNR (Container Maintenance & Repair).
           </p>
 
           <div class="badge-grid">
@@ -1327,15 +1433,206 @@
           <div class="diamond-shape diamond-3"></div>
           <div class="graphic-center">
             <div class="ship-silhouette">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <path d="M2 17h20l-2.5 4h-15L2 17zM5 17V9a3 3 0 013-3h8a3 3 0 013 3v8" />
-                <path d="M9 6V3h6v3" />
+              <img src="assets/icon_w.png" alt="inTEUtion Icon">
+            </div>
+            <h2 style="font-family:'Sora'; font-weight:800; font-size:24px; margin-bottom:6px;">Stop Guessing. Start Profiting.</h2>
+            <p style="opacity:0.8; font-size:14px; max-width:280px; margin: 0 auto;">The Executive Software Platform for Streamlined Container Operations</p>
+          </div>
+        </div>
+      </div>
+
+
+       <div class="capabilities-container">
+        <div class="capabilities-header"
+          style="display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; margin-bottom: 40px; width: 100%;">
+          <div style="max-width: 750px;">
+            <span
+              style="font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 800; color: var(--cobalt); text-transform: uppercase; letter-spacing: 1.5px; display: inline-block; margin-bottom: 8px;">Product
+              Core Capabilities</span>
+            <h2>Industry-Leading Operations</h2>
+            <p>
+              The platform includes powerful capabilities such as a <strong>powerful tariff/pricing
+                engine</strong>, <strong>automated demurrage/detention management</strong>, <strong>real-time visibility
+                dashboards</strong>, <strong>robust EDI integrations</strong>, and <strong>granular job-level
+                profitability tracking</strong>.
+            </p>
+          </div>
+  
+        </div>
+
+        <div class="capabilities-grid">
+          <!-- Card 1: Tariff Engine -->
+          <div class="capability-card">
+            <div class="capability-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path
+                  d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z">
+                </path>
               </svg>
             </div>
-            <h3 style="font-family:'Sora'; font-weight:800; font-size:24px; margin-bottom:6px;">Event × Element</h3>
-            <p style="opacity:0.8; font-size:14px; max-width:280px; margin: 0 auto;">One physical movement automatically
-              triggers all relevant accounting lines.</p>
+            <div class="capability-title">Tariff &amp; Pricing Engine</div>
+            <div class="capability-desc">Powerful logic resolving dynamic regional tariffs and contract rates
+              automatically based on event updates.</div>
           </div>
+
+          <!-- Card 2: Move-Based Tariffs & Demurrage -->
+          <div class="capability-card">
+            <div class="capability-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+                <path d="M12 2v2"></path>
+                <path d="M12 20v2"></path>
+                <path d="M4.93 4.93l1.41 1.41"></path>
+                <path d="M17.66 17.66l1.41 1.41"></path>
+                <path d="M2 12h2"></path>
+                <path d="M20 12h2"></path>
+                <path d="M6.34 17.66l-1.41 1.41"></path>
+                <path d="M19.07 4.93l-1.41 1.41"></path>
+              </svg>
+            </div>
+            <div class="capability-title">Event(Move)-Based Tariffs</div>
+            <div class="capability-desc">Automatically provisions shipping rates, local port surcharges, and temporal
+              container demurrages/detentions the moment a move is updated, ensuring zero unbilled leakage.</div>
+          </div>
+
+          <!-- Card 3: Visibility Dashboards -->
+          <div class="capability-card">
+            <div class="capability-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="9" y1="3" x2="9" y2="21"></line>
+                <line x1="15" y1="3" x2="15" y2="21"></line>
+                <line x1="3" y1="9" x2="21" y2="9"></line>
+                <line x1="3" y1="15" x2="21" y2="15"></line>
+              </svg>
+            </div>
+            <div class="capability-title">Visibility Dashboards</div>
+            <div class="capability-desc">Instant dynamic monitoring tracking global fleet container flows, logistics
+              timelines, and system metrics.</div>
+          </div>
+
+          <!-- Card 4: EDI Integrations -->
+          <div class="capability-card">
+            <div class="capability-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+            </div>
+            <div class="capability-title">Robust EDI Integrations</div>
+            <div class="capability-desc">Sleek electronic data interchange exchanging data automatically with carriers,
+              depot partners, and customs gateways.</div>
+          </div>
+
+          <!-- Card 5: Profitability Tracking -->
+          <div class="capability-card">
+            <div class="capability-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <div class="capability-title">Job-Level Profitability</div>
+            <div class="capability-desc">Granular real-time accounting and provisional margin tracking mapping actual vs
+              estimated costs per unit booking.</div>
+          </div>
+
+          <!-- Card 8: Agency Settlement -->
+          <div class="capability-card">
+            <div class="capability-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <div class="capability-title">Agency Settlement</div>
+            <div class="capability-desc">Tracks regional collections, agent commissions, and Disbursement Accounts (DA)
+              within a custom time window for simple 1-click leakage-free closure.</div>
+          </div>
+
+          <!-- Card 9: Customizable and Extensible -->
+          <div class="capability-card">
+            <div class="capability-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" y1="21" x2="4" y2="14"></line>
+                <line x1="4" y1="10" x2="4" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12" y2="3"></line>
+                <line x1="20" y1="21" x2="20" y2="16"></line>
+                <line x1="20" y1="12" x2="20" y2="3"></line>
+                <line x1="1" y1="14" x2="7" y2="14"></line>
+                <line x1="9" y1="8" x2="15" y2="8"></line>
+                <line x1="17" y1="16" x2="23" y2="16"></line>
+              </svg>
+            </div>
+            <div class="capability-title">Customizable &amp; Extensible</div>
+            <div class="capability-desc">Adaptable architecture built to accomodate custom operational
+              requirements and tailored NVOCC business models.</div>
+          </div>
+
+          <!-- Card 10: Third-Party Integration Ready -->
+          <div class="capability-card">
+            <div class="capability-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
+            </div>
+            <div class="capability-title">Third-Party Integration Ready</div>
+            <div class="capability-desc">Our modern API based architecture enables custom integration with external
+              partners and systems ensuring seamless data exchange</div>
+          </div>
+
+          <!-- Card 11: Reports -->
+          <div class="capability-card">
+            <div class="capability-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+                <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2z"
+                  stroke-dasharray="3,3"></path>
+              </svg>
+            </div>
+            <div class="capability-title">Reports</div>
+            <div class="capability-desc">Module-level reports deliver actionable insights on container movement,
+              business flow, container availability, cost accrual, and more - enabling data-driven decisions and
+              business continuity.</div>
+          </div>
+
+          <!-- Card 12: User Management and Authentication -->
+          <div class="capability-card">
+            <div class="capability-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <rect x="16" y="11" width="6" height="8" rx="1" stroke-width="2"></rect>
+                <path d="M19 11V9a2 2 0 0 0-4 0v2"></path>
+              </svg>
+            </div>
+            <div class="capability-title">User Management &amp; Authentication</div>
+            <div class="capability-desc">inTEUtion features granular access management with configurable user roles and
+              permissions, ensuring robust security and controlled access tailored to each user's function.</div>
+          </div>
+        </div>
+
+        <!-- Center Explore Button leading to Modules Tab -->
+        <div style="display: flex; justify-content: center; margin-top: 55px; margin-bottom: 25px; width: 100%;">
+        
         </div>
       </div>
 

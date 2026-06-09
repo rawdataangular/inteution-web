@@ -5274,6 +5274,23 @@ body {
   box-shadow: 0 6px 16px rgba(96, 165, 250, 0.4);
 }
 
+.carousel-nav-icon {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: block;
+}
+
+.erp-carousel-prev:hover .carousel-nav-icon {
+  transform: translateX(-2px);
+}
+
+.erp-carousel-next:hover .carousel-nav-icon {
+  transform: translateX(2px);
+}
+
 .erp-carousel-prev {
   left: -15px;
 }
@@ -5786,6 +5803,16 @@ body {
   vertical-align: middle;
   transition: transform 0.3s ease;
   pointer-events: none;
+}
+
+.dropdown-menu {
+  list-style: none !important;
+  list-style-type: none !important;
+}
+
+.dropdown-menu li {
+  list-style: none !important;
+  list-style-type: none !important;
 }
 
 /* Show dropdown menu on hover on Desktop */
