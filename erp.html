@@ -1347,6 +1347,87 @@
       line-height: 1.5;
       color: var(--slate);
     }
+
+    /* Responsive Media Queries */
+    @media (max-width: 1024px) {
+      .tab-view {
+        padding: 30px 20px;
+      }
+
+      .vision-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        min-height: auto;
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
+
+      .modules-layout {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .module-feature-panel {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 32px;
+      }
+
+      .hero-content h2 {
+        font-size: 14px;
+        margin-bottom: 16px;
+      }
+
+      .hero-art-box {
+        height: 320px;
+      }
+
+      .modules-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .capabilities-container {
+        margin-top: 40px;
+        padding-top: 30px;
+      }
+
+      .capabilities-header {
+        margin-bottom: 24px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .badge-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tab-view {
+        padding: 20px 16px;
+      }
+
+      .hero-content h1 {
+        font-size: 28px;
+      }
+
+      .hero-art-box {
+        height: 260px;
+      }
+
+      .modules-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .module-feature-panel {
+        padding: 20px 15px;
+      }
+    }
   </style>
 </head>
 
@@ -1468,8 +1549,7 @@
 
 
        <div class="capabilities-container">
-        <div class="capabilities-header"
-          style="display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; margin-bottom: 40px; width: 100%;">
+        <div class="capabilities-header">
           <div style="max-width: 750px;">
             <span
               style="font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 800; color: var(--cobalt); text-transform: uppercase; letter-spacing: 1.5px; display: inline-block; margin-bottom: 8px;">Product
