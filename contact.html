@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-228718713"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-228718713');
+</script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get in touch with inTEUtion. We welcome your enquiries. Contact us for custom maritime software solutions, liner ERP, and product demo scheduling.">
+    <title>Contact Us - inTEUtion</title>
+    <link rel="icon" type="image/png" href="assets/icon.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        // Inline theme selector to prevent white screen flash
+        (function () {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+    <script src="js/main.js" defer></script>
+    <style>
+        .contact-hero {
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+        }
+        
+        .contact-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .icon-box svg {
+            transition: transform 0.3s ease;
+        }
+
+        .contact-detail-card:hover .icon-box svg {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        @media (max-width: 992px) {
+            .contact-grid {
+                grid-template-columns: 1fr !important;
+                gap: 2.5rem !important;
+            }
+            .hero-headline {
+                font-size: 2.5rem !important;
+            }
+        }
+        
+        @media (max-width: 580px) {
+            .contact-grid {
+                gap: 2rem !important;
+            }
+            .contact-form-panel {
+                padding: 2.5rem 1.5rem !important;
+            }
+            .form-row {
+                flex-direction: column !important;
+                gap: 1.5rem !important;
+            }
+            .contact-detail-card {
+                padding: 1.5rem !important;
+                gap: 1rem !important;
+            }
+            .icon-box {
+                width: 50px !important;
+                height: 50px !important;
+                font-size: 1.5rem !important;
+            }
+            .icon-box svg {
+                width: 22px !important;
+                height: 22px !important;
+            }
+            .hero-headline {
+                font-size: 2rem !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="index.html" class="logo">
+                        <img src="assets/logo-big.png" alt="inTEUtion" class="logo-img">
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Product <span class="chevron">▼</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="erp.html" class="dropdown-item">inTEUtion</a></li>
+                            <li><a href="assistify-light.html" class="dropdown-item">Assistify</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="value.html" class="nav-link">What You Get</a></li>
+
+                    <li><a href="about.html" class="nav-link">About Us</a></li>
+                    <!-- <li><a href="careers.html" class="nav-link">Careers</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li> -->
+                    <li><a href="contact.html" class="nav-link active">Contact</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <span class="sun-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="4" />
+                            <path
+                                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                        </svg>
+                    </span>
+                    <span class="moon-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+                        </svg>
+                    </span>
+                </button>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Welcoming Message Header / Hero Section -->
+    <section class="hero contact-hero" style="min-height: 45vh; padding-top: 120px; display: flex; align-items: center; justify-content: center; position: relative;">
+        <div class="hero-background">
+            <div class="wave-animation"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content" style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <span class="badge" style="background: rgba(37, 99, 235, 0.1); color: var(--brand-blue); padding: 8px 20px; border-radius: 100px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 1.25rem;">Get In Touch</span>
+                <h1 class="hero-headline" style="font-size: 3.25rem; margin-bottom: 1rem; line-height: 1.2; font-weight: 800;">We Welcome Your Enquiry</h1>
+                <p class="hero-subheadline-2" style="font-size: 1.25rem; color: var(--text-gray); max-width: 650px; margin: 0 auto;">
+                    Have an operational challenge, integration request, or wish to schedule a custom demo? Our team of maritime technology experts is ready to assist.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Details & Map & Enquiry Form Section -->
+    <section class="contact-main" style="padding: 5rem 0; background: var(--bg-primary);">
+        <div class="container" style="max-width: var(--container-max-width); margin: 0 auto; padding: 0 1.5rem;">
+            <div class="contact-grid" style="display: grid; gap: 3.5rem; align-items: start;">
+                
+                <!-- Left Side: Contact Cards & Google Map Redirection -->
+                <div class="contact-info-panel" style="display: flex; flex-direction: column; gap: 2rem;">
+                    
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <h2 style="font-size: 2rem; font-weight: 700; color: var(--text-dark); margin: 0;">Let's Connect</h2>
+                    
+                    </div>
+
+                    <!-- Phone Card -->
+                    <div class="contact-detail-card product-card" style="padding: 2rem; display: flex; align-items: flex-start; gap: 1.5rem;">
+                        <div class="icon-box" style="background: rgba(37, 99, 235, 0.1); color: var(--brand-blue); width: 60px; height: 60px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.75rem; flex-shrink: 0;">
+                            <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <h3 class="product-title" style="font-size: 1.25rem; font-weight: 700; margin: 0;">Let's Talk</h3>
+                            <p class="product-tagline" style="color: var(--brand-blue); font-weight: 600; font-size: 1rem; margin: 0;">We're Just a Call Away.</p>
+                            <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.25rem;">
+                                <a href="tel:+918714335326" class="contact-link" style="font-size: 1.1rem; font-weight: 700; text-decoration: none; color: var(--text-dark); display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s;">
+                                    +91 87 14 335 326
+                                </a>
+                                <a href="https://wa.me/918714335326" target="_blank" class="btn btn-know-more" style="padding: 8px 16px; font-size: 0.9rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; align-self: flex-start; margin-top: 0.25rem; font-weight: 600;">
+                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.498 1.453 5.418 1.454 5.461 0 9.905-4.441 9.908-9.899.002-2.643-1.026-5.127-2.895-7.001C17.19 1.83 14.71 0.803 12.008.803c-5.462 0-9.907 4.444-9.91 9.9.002 1.958.51 3.874 1.472 5.56l-.979 3.578 3.666-.961zm11.377-7.854c-.265-.133-1.57-.775-1.812-.862-.243-.088-.419-.133-.596.133-.176.265-.683.862-.837 1.04-.154.176-.308.198-.573.065-.265-.133-1.12-.413-2.133-1.319-.789-.704-1.322-1.574-1.477-1.84-.154-.265-.016-.409.117-.541.12-.12.265-.309.398-.464.133-.155.176-.265.265-.442.088-.177.044-.332-.022-.464-.066-.133-.596-1.436-.816-1.966-.215-.518-.432-.448-.597-.456-.153-.008-.33-.009-.507-.009-.176 0-.462.066-.704.309-.243.243-.925.904-.925 2.21 0 1.306.947 2.561 1.08 2.738.132.176 1.863 2.846 4.512 3.987.63.272 1.122.434 1.507.557.633.201 1.21.173 1.666.1.507-.081 1.57-.641 1.79-1.26.22-.617.22-1.148.154-1.26-.066-.11-.243-.198-.507-.33z"/>
+                                    </svg>
+                                    Chat on WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Email Card -->
+                    <div class="contact-detail-card product-card" style="padding: 2rem; display: flex; align-items: flex-start; gap: 1.5rem;">
+                        <div class="icon-box" style="background: rgba(37, 99, 235, 0.1); color: var(--brand-blue); width: 60px; height: 60px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.75rem; flex-shrink: 0;">
+                            <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <h3 class="product-title" style="font-size: 1.25rem; font-weight: 700; margin: 0;">Email Us</h3>
+                            <p class="product-tagline" style="color: var(--brand-blue); font-weight: 600; font-size: 1rem; margin: 0;">Drop Us a Message.</p>
+                            <a href="mailto:info@inteution.com" class="contact-link" style="font-size: 1.1rem; font-weight: 700; text-decoration: none; color: var(--text-dark); transition: color 0.2s; margin-top: 0.25rem;">
+                                info@inteution.com
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Address & Map Redirection Card -->
+                    <div class="contact-detail-card product-card" style="padding: 2rem; display: flex; align-items: flex-start; gap: 1.5rem;">
+                        <div class="icon-box" style="background: rgba(37, 99, 235, 0.1); color: var(--brand-blue); width: 60px; height: 60px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.75rem; flex-shrink: 0;">
+                            <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem; width: 100%;">
+                            <h3 class="product-title" style="font-size: 1.25rem; font-weight: 700; margin: 0;">Office Address</h3>
+                            <p class="product-tagline" style="color: var(--brand-blue); font-weight: 600; font-size: 1rem; margin: 0;">Visit Our Location.</p>
+                            <p class="footer-address" style="font-size: 1.05rem; line-height: 1.6; margin: 0.5rem 0 1rem 0; color: var(--text-gray);">
+                                2nd Floor, Transasia Corporate Park<br>
+                                XIV/396-C, Seaport - Airport Rd<br>
+                                Chittethukara, Kakkanad<br>
+                                Kerala 682037, India
+                            </p>
+                            <a href="https://www.google.com/maps/place/Trans+Asia+Corporate+Park+Kochi/data=!4m2!3m1!1s0x0:0x877d18f8ac04742e?sa=X&ved=1t:2428&ictx=111" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="align-self: flex-start; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; font-weight: 700; padding: 10px 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);">
+                                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
+                                    <line x1="9" y1="3" x2="9" y2="18"></line>
+                                    <line x1="15" y1="6" x2="15" y2="21"></line>
+                                </svg>
+                                Open in Google Maps
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Embedded Interactive Google Map -->
+                    <div class="product-card" style="padding: 8px; border-radius: 24px; overflow: hidden; height: 320px; box-shadow: var(--shadow-lg);">
+                        <iframe 
+                            src="https://maps.google.com/maps?q=9.9958415,76.3512028&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0; border-radius: 16px;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+
+                </div>
+
+                <!-- Right Side: Enquiry Form for Demo -->
+                <div class="contact-form-panel product-card" style="padding: 3rem 2.5rem; display: flex; flex-direction: column; gap: 2rem;">
+                    
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem; text-align: left;">
+                        <span style="color: var(--brand-blue); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em;">Request A Demo</span>
+                        <h2 class="product-title" style="font-size: 2rem; font-weight: 700; margin: 0;">Enquire for Demo</h2>
+                        <p style="color: var(--text-gray); font-size: 1rem; line-height: 1.5; margin: 0.5rem 0 0 0;">
+                            Experience our executive software platform live. Fill out the operational audit enquiry form, and our deep-domain experts will schedule a personalized walkthrough.
+                        </p>
+                    </div>
+
+                    <form id="contactEnquiryForm" class="demo-form" novalidate style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        <!-- Web3Forms Hidden Settings -->
+                        <input type="hidden" name="access_key" value="50a6b5a6-8cfb-4cfb-b18d-d840b9d9f434">
+                        <input type="hidden" name="subject" value="New Demo Enquiry from inTEUtion Contact Page">
+                        <input type="hidden" name="from_name" value="inTEUtion Contact Page Form">
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+                        <!-- Name field -->
+                        <div class="form-group">
+                            <label for="contactName" class="form-label">Full Name<span>*</span></label>
+                            <input type="text" id="contactName" name="name" class="form-input" placeholder="e.g. John Doe" required autocomplete="name" style="padding: 14px 18px; border-radius: 12px; font-size: 1rem;">
+                        </div>
+
+                        <!-- Email field -->
+                        <div class="form-group">
+                            <label for="contactEmail" class="form-label">Work Email<span>*</span></label>
+                            <input type="email" id="contactEmail" name="email" class="form-input" placeholder="name@company.com" required autocomplete="email" style="padding: 14px 18px; border-radius: 12px; font-size: 1rem;">
+                        </div>
+
+                        <!-- Row: Phone & Company -->
+                        <div class="form-row" style="display: flex; gap: 1.5rem; width: 100%;">
+                            <div class="form-group" style="flex: 1;">
+                                <label for="contactPhone" class="form-label">Phone Number</label>
+                                <input type="tel" id="contactPhone" name="phone" class="form-input" placeholder="+1 (555) 000-0000" autocomplete="tel" style="padding: 14px 18px; border-radius: 12px; font-size: 1rem;">
+                            </div>
+                            <div class="form-group" style="flex: 1;">
+                                <label for="contactCompany" class="form-label">Company Name<span>*</span></label>
+                                <input type="text" id="contactCompany" name="company" class="form-input" placeholder="e.g. Global Logistics Inc." required style="padding: 14px 18px; border-radius: 12px; font-size: 1rem;">
+                            </div>
+                        </div>
+
+                        <!-- Message Field -->
+                        <div class="form-group">
+                            <label for="contactMessage" class="form-label">Message / Operational Challenges</label>
+                            <textarea id="contactMessage" name="message" class="form-textarea" placeholder="Tell us about your current NVOCC or liner operational challenges, volumes, or software integration goals..." style="padding: 14px 18px; border-radius: 12px; font-size: 1rem; min-height: 120px; resize: vertical;"></textarea>
+                        </div>
+
+                        <!-- Status Message Container -->
+                        <div id="contactFormStatus" class="form-status" style="margin-top: 0.5rem;"></div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" id="submitInquiryBtn" class="btn-submit" style="padding: 16px; border-radius: 12px; font-size: 1.1rem; width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.75rem; border: none; font-weight: 700;">
+                            <span>Submit Enquiry</span>
+                            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                        </button>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">inTEUtion</h3>
+                    <p class="footer-description">The Executive Software Platform for Streamlined Container Operations
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="value.html">What You Get</a></li>
+                        <!-- <li><a href="careers.html">Careers</a></li>
+                        <li><a href="blog.html">Blog</a></li> -->
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <a #href="https://wa.me/918714335326" target="_blank" class="contact-link">
+                                <span class="contact-icon">💬</span>
+                                WhatsApp: +91 87 14 335 326
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:info@inteution.com" class="contact-link">
+                                <span class="contact-icon">✉️</span>
+                                info@inteution.com
+                            </a>
+                        </li>
+                        <li>
+                            <div class="footer-social-links">
+                                <a href="https://www.linkedin.com/company/inteution/" target="_blank" rel="noopener noreferrer" class="social-link">
+                                    <img src="assets/linkedin.png" alt="LinkedIn" class="social-icon-img">
+                                </a>
+                                <a href="https://www.instagram.com/we_are_inteution/" target="_blank" rel="noopener noreferrer" class="social-link">
+                                    <img src="assets/instagram.png" alt="Instagram" class="social-icon-img">
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Address</h4>
+                    <p class="footer-address">
+                        2nd Floor, Transasia Corporate Park<br>
+                        XIV/396-C, Seaport - Airport Rd<br>
+                        Chittethukara, Kakkanad<br>
+                        Kerala 682037, India
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2026 inTEUtion. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#privacy">Privacy Policy</a>
+                    <span class="separator">|</span>
+                    <a href="#terms">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Form Handler Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('contactEnquiryForm');
+            const submitBtn = document.getElementById('submitInquiryBtn');
+            const statusDiv = document.getElementById('contactFormStatus');
+            const formPanel = form.parentElement;
+
+            if (form) {
+                form.addEventListener('submit', async function (e) {
+                    e.preventDefault();
+
+                    // Reset status
+                    statusDiv.style.display = 'none';
+                    statusDiv.className = 'form-status';
+                    statusDiv.textContent = '';
+
+                    // Inputs
+                    const nameInput = document.getElementById('contactName');
+                    const emailInput = document.getElementById('contactEmail');
+                    const companyInput = document.getElementById('contactCompany');
+                    const phoneInput = document.getElementById('contactPhone');
+                    const messageInput = document.getElementById('contactMessage');
+
+                    // Validations
+                    if (!nameInput.value.trim()) {
+                        showError("Name is required.");
+                        nameInput.focus();
+                        return;
+                    }
+
+                    if (!emailInput.value.trim() || !validateEmail(emailInput.value.trim())) {
+                        showError("A valid Work Email is required.");
+                        emailInput.focus();
+                        return;
+                    }
+
+                    if (!companyInput.value.trim()) {
+                        showError("Company Name is required.");
+                        companyInput.focus();
+                        return;
+                    }
+
+                    // Disable fields and add loader spinner
+                    toggleFormState(true);
+                    const originalBtnHTML = submitBtn.innerHTML;
+                    submitBtn.innerHTML = `<span class="spinner"></span> <span>Sending Enquiry...</span>`;
+
+                    // Prepare JSON body
+                    const object = {
+                        access_key: form.querySelector('[name="access_key"]').value,
+                        subject: form.querySelector('[name="subject"]').value,
+                        from_name: form.querySelector('[name="from_name"]').value,
+                        name: nameInput.value.trim(),
+                        email: emailInput.value.trim(),
+                        phone: phoneInput.value.trim(),
+                        company: companyInput.value.trim(),
+                        message: messageInput.value.trim()
+                    };
+
+                    const botcheck = form.querySelector('[name="botcheck"]');
+                    if (botcheck && botcheck.checked) {
+                        object.botcheck = "on";
+                    }
+
+                    try {
+                        const response = await fetch('https://api.web3forms.com/submit', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify(object)
+                        });
+
+                        const result = await response.json();
+
+                        if (response.status === 200) {
+                            showSuccessState();
+                        } else {
+                            showError(result.message || "Unable to send request. Please try again.");
+                            toggleFormState(false);
+                            submitBtn.innerHTML = originalBtnHTML;
+                        }
+                    } catch (error) {
+                        console.error('Contact Form Error:', error);
+                        showError("Connection error. Please check your internet and try again.");
+                        toggleFormState(false);
+                        submitBtn.innerHTML = originalBtnHTML;
+                    }
+                });
+            }
+
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+
+            function showError(msg) {
+                statusDiv.textContent = msg;
+                statusDiv.classList.add('error');
+                statusDiv.style.display = 'block';
+            }
+
+            function toggleFormState(isDisabled) {
+                const inputs = form.querySelectorAll('.form-input, .form-textarea, button');
+                inputs.forEach(input => {
+                    if (isDisabled) {
+                        input.setAttribute('disabled', 'true');
+                    } else {
+                        input.removeAttribute('disabled');
+                    }
+                });
+            }
+
+            function showSuccessState() {
+                formPanel.innerHTML = `
+                    <div class="demo-success-view" style="animation: fadeInUp 0.5s ease-out; text-align: center; padding: 2.5rem 1rem;">
+                        <div class="success-icon-wrapper" style="width: 80px; height: 80px; background: rgba(16, 185, 129, 0.1); color: #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 1.5rem auto; border: 2px solid rgba(16, 185, 129, 0.2); animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);">✓</div>
+                        <h3 class="success-title" style="font-size: 1.6rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.75rem;">Enquiry Received!</h3>
+                        <p class="success-message" style="font-size: 1rem; color: var(--text-gray); line-height: 1.6; margin-bottom: 2.5rem; max-width: 420px; margin-left: auto; margin-right: auto;">Thank you for your enquiry. Our liner operations consulting team has been notified and will contact you shortly to schedule your personalized product demonstration walkthrough.</p>
+                        <a href="index.html" class="btn btn-cta" style="text-decoration: none; padding: 14px 35px; font-weight: 700; border-radius: 12px; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);">
+                            <span>Return Home</span>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+
+</html>

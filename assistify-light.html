@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="inTEUtion - Executive Software Platform for Streamlined Container Operations">
+    <title>Assistify </title>
+    <link rel="icon" type="image/png" href="assets/icon.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        // Inline theme selector to prevent white screen flash
+        (function () {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+    <script src="js/main.js" defer></script>
+    <style>
+        /* Page specific overrides */
+        .assistify-hero {
+            padding: 8rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, var(--blue-50) 0%, var(--white) 100%);
+        }
+
+        [data-theme="dark"] .assistify-hero {
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+        }
+
+        .assistify-hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .assistify-badge {
+            background: rgba(37, 211, 102, 0.08);
+            color: #128c7e;
+            padding: 0.45rem 1.1rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        [data-theme="dark"] .assistify-badge {
+            background: rgba(37, 211, 102, 0.15);
+            color: #4ade80;
+        }
+
+        .assistify-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .assistify-title .highlight {
+            background: linear-gradient(135deg, var(--brand-blue) 0%, #128c7e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        [data-theme="dark"] .assistify-title .highlight {
+            background: linear-gradient(135deg, var(--brand-blue-light) 0%, #4ade80 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .assistify-desc {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+        }
+
+        .assistify-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .assistify-image {
+            max-width: 100%;
+            max-height: 400px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 24px;
+            filter: drop-shadow(0 20px 40px rgba(18, 140, 126, 0.15));
+            animation: floatArt 6s ease-in-out infinite;
+        }
+
+        @keyframes floatArt {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* Glass Cards Section */
+        .assistify-content-section {
+            padding: 4rem 0 6rem;
+            background: var(--bg-secondary);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.4) 100%);
+            backdrop-filter: blur(20px) saturate(140%);
+            -webkit-backdrop-filter: blur(20px) saturate(140%);
+            border: 1px solid rgba(18, 140, 126, 0.15);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            transition: all 0.4s ease;
+        }
+
+        [data-theme="dark"] .glass-card {
+            background: linear-gradient(135deg, rgba(15, 21, 36, 0.6) 0%, rgba(30, 41, 59, 0.4) 100%);
+            border-color: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-6px);
+            border-color: #4ade80;
+            box-shadow: 0 20px 40px rgba(37, 211, 102, 0.1);
+        }
+
+        .glass-card h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .glass-card h2 span.icon {
+            color: #128c7e;
+            font-size: 1.8rem;
+        }
+
+        [data-theme="dark"] .glass-card h2 span.icon {
+            color: #4ade80;
+        }
+
+        .feature-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            font-size: 1.05rem;
+            color: var(--text-gray);
+            line-height: 1.5;
+        }
+
+        .feature-list li .item-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(37, 211, 102, 0.08);
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        [data-theme="dark"] .feature-list li .item-icon {
+            background: rgba(37, 211, 102, 0.15);
+        }
+
+        .feature-list li.adv-item {
+            gap: 1.2rem;
+        }
+
+        .feature-list li .adv-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feature-list li .adv-title {
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .feature-list li .adv-desc {
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        /* Use Cases and Impact Section styling */
+        .use-cases-container {
+            margin-top: 4rem;
+            padding: 3rem;
+            background: linear-gradient(135deg, rgba(239, 246, 255, 0.3) 0%, rgba(255, 255, 255, 0.5) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        [data-theme="dark"] .use-cases-container {
+            background: linear-gradient(135deg, rgba(15, 21, 36, 0.4) 0%, rgba(30, 41, 59, 0.2) 100%);
+        }
+
+        .uc-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: var(--text-light);
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .pills {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .pill {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .pill:hover {
+            border-color: #4ade80;
+            color: #fff;
+            background: #128c7e;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.2);
+        }
+
+        .impact-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 2.5rem;
+        }
+
+        .impact-item {
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .impact-item .check-icon {
+            color: #128c7e;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        [data-theme="dark"] .impact-item .check-icon {
+            color: #4ade80;
+        }
+
+        /* Responsive styling */
+        @media (max-width: 992px) {
+            .assistify-hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+            }
+            .assistify-badge {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .assistify-visual {
+                order: -1;
+            }
+            .assistify-image {
+                max-height: 300px;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .assistify-title {
+                font-size: 2.1rem;
+            }
+            .glass-card {
+                padding: 2rem 1.5rem;
+            }
+            .use-cases-container {
+                padding: 2rem 1rem;
+            }
+            .pills {
+                gap: 0.5rem;
+            }
+            .pill {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+            .impact-grid {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-left: 1rem;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="index.html" class="logo">
+                        <img src="assets/logo-big.png" alt="inTEUtion" class="logo-img">
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle active" aria-haspopup="true" aria-expanded="false">Product <span class="chevron">▼</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="erp.html" class="dropdown-item">inTEUtion</a></li>
+                            <li><a href="assistify-light.html" class="dropdown-item">Assistify</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="value.html" class="nav-link">What You Get</a></li>
+
+                    <li><a href="about.html" class="nav-link">About Us</a></li>
+                    <!-- <li><a href="careers.html" class="nav-link">Careers</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li> -->
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <span class="sun-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="4" />
+                            <path
+                                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                        </svg>
+                    </span>
+                    <span class="moon-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+                        </svg>
+                    </span>
+                </button>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="assistify-hero">
+        <div class="container">
+            <div class="assistify-hero-grid">
+                <div class="hero-content-left">
+                    <span class="assistify-badge">WhatsApp Automation Suite</span>
+                    <h1 class="assistify-title">Smarter NVOCC Sales.<br>Instant Business Conversations.<br><span class="highlight">Faster Growth.</span></h1>
+                    <p class="assistify-desc">
+                        Assistify is a WhatsApp automation platform built for liner shipping companies. It empowers sales executives to instantly check slot rates, route availability, vessel schedules, and container inventory—while engaging customers faster and managing communication at scale.
+                        <br><br>
+                        <strong>From rate inquiry to confirmed booking—instantly on WhatsApp.</strong>
+                    </p>
+                    <div class="hero-cta-btn">
+                        <a href="javascript:void(0)" class="btn btn-primary">
+                            Schedule A Demo <span class="arrow-icon">→</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="assistify-visual">
+                    <div class="erp-visual-glow erp-visual-glow-assistify"></div>
+                    <img src="assets/wa.png" alt="Assistify WhatsApp ERP Integration" class="assistify-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Section -->
+    <section class="assistify-content-section">
+        <div class="container">
+            <!-- Features & Advantages Grid -->
+            <div class="features-grid">
+                <!-- Key Features -->
+                <div class="glass-card">
+                    <h2><span class="icon">⚓</span> Key Features</h2>
+                    <ul class="feature-list">
+                        <li>
+                            <span class="item-icon">💰</span>
+                            <span><strong>Instant WhatsApp rates:</strong> Reps find and share slot rates inside chat window in seconds.</span>
+                        </li>
+                        <li>
+                            <span class="item-icon">🚢</span>
+                            <span><strong>Vessel schedules:</strong> Real-time access to vessel routing and schedule availability.</span>
+                        </li>
+                        <li>
+                            <span class="item-icon">📦</span>
+                            <span><strong>Live inventory:</strong> Real-time container inventory updates at regional depots.</span>
+                        </li>
+                        <li>
+                            <span class="item-icon">🔄</span>
+                            <span><strong>Lead follow-ups:</strong> Automated reminders and workflows for active quotes.</span>
+                        </li>
+                        <li>
+                            <span class="item-icon">🔌</span>
+                            <span><strong>ERP Integration:</strong> Seamless link with your core enterprise shipping databases.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Sales Advantages -->
+                <div class="glass-card">
+                    <h2><span class="icon">📈</span> Sales Advantages</h2>
+                    <ul class="feature-list">
+                        <li class="adv-item">
+                            <span class="item-icon">⚡</span>
+                            <div class="adv-content">
+                                <span class="adv-title">Faster Response Time</span>
+                                <span class="adv-desc">Close more business by being the first to respond to inquiries.</span>
+                            </div>
+                        </li>
+                        <li class="adv-item">
+                            <span class="item-icon">🤝</span>
+                            <div class="adv-content">
+                                <span class="adv-title">Strengthened Relationships</span>
+                                <span class="adv-desc">Quick, consistent communication over customers' preferred channel.</span>
+                            </div>
+                        </li>
+                        <li class="adv-item">
+                            <span class="item-icon">🚀</span>
+                            <div class="adv-content">
+                                <span class="adv-title">Higher Conversion Rates</span>
+                                <span class="adv-desc">Reduce negotiation drop-offs with instant rate dispatching.</span>
+                            </div>
+                        </li>
+                        <li class="adv-item">
+                            <span class="item-icon">⏱️</span>
+                            <div class="adv-content">
+                                <span class="adv-title">Zero Manual Overhead</span>
+                                <span class="adv-desc">Automate tedious provision lookups and free up sales reps' time.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Use Cases & Impact Container -->
+            <div class="use-cases-container">
+                <div class="uc-title">Streamlining Core Shipping Operations</div>
+                <div class="pills">
+                    <div class="pill">Slot Rates</div>
+                    <div class="pill">Route & Vessel Availability</div>
+                    <div class="pill">Box Inventory</div>
+                    <div class="pill">Customer Support</div>
+                </div>
+
+                <div class="impact-grid">
+                    <div class="impact-item">
+                        <span class="check-icon">✓</span>
+                        <span>Improved turnaround time for quotes</span>
+                    </div>
+                    <div class="impact-item">
+                        <span class="check-icon">✓</span>
+                        <span>Better customer satisfaction metrics</span>
+                    </div>
+                    <div class="impact-item">
+                        <span class="check-icon">✓</span>
+                        <span>Scalable communication with large client bases</span>
+                    </div>
+                    <div class="impact-item">
+                        <span class="check-icon">✓</span>
+                        <span>Increased container booking conversions</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Transform Your Operations?</h2>
+                <p class="cta-description">Get a personalized demo and see how inTEUtion can streamline your container operations</p>
+                <a href="javascript:void(0)" class="btn btn-cta">
+                    <span class="demo-icon">📅</span>
+                    Schedule A Demo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact Section -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">inTEUtion</h3>
+                    <p class="footer-description">The Executive Software Platform for Streamlined Container Operations</p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="value.html">What You Get</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <a #href="https://wa.me/918714335326" target="_blank" class="contact-link">
+                                <span class="contact-icon">💬</span>
+                                WhatsApp: +91 87 14 335 326
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:info@inteution.com" class="contact-link">
+                                <span class="contact-icon">✉️</span>
+                                info@inteution.com
+                            </a>
+                        </li>
+                        <li>
+                            <div class="footer-social-links">
+                                <a href="https://www.linkedin.com/company/inteution/" target="_blank" rel="noopener noreferrer" class="social-link">
+                                    <img src="assets/linkedin.png" alt="LinkedIn" class="social-icon-img">
+                                </a>
+                                <a href="https://www.instagram.com/we_are_inteution/" target="_blank" rel="noopener noreferrer" class="social-link">
+                                    <img src="assets/instagram.png" alt="Instagram" class="social-icon-img">
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Address</h4>
+                    <p class="footer-address">
+                        2nd Floor, Transasia Corporate Park<br>
+                        XIV/396-C, Seaport - Airport Rd<br>
+                        Chittethukara, Kakkanad<br>
+                        Kerala 682037, India
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2026 inTEUtion. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#privacy">Privacy Policy</a>
+                    <span class="separator">|</span>
+                    <a href="#terms">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
