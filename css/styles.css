@@ -1884,8 +1884,8 @@ body::before {
    Footer Section
    ============================================ */
 .footer {
-  background-color: var(--text-dark);
-  color: var(--white);
+  background-color: #0b0f19 !important; /* Always dark slate-blue background */
+  color: #cbd5e1 !important;            /* Always readable slate-300 text */
   padding: 3rem 0 1rem;
 }
 
@@ -1903,19 +1903,20 @@ body::before {
 .footer-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--brand-blue-lighter);
+  color: #38bdf8 !important;            /* Sky blue Gemini accent */
   margin-bottom: 1rem;
 }
 
 .footer-description {
   line-height: 1.6;
+  color: #94a3b8 !important;            /* Muted slate text */
 }
 
 .footer-heading {
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: var(--white);
+  color: #ffffff !important;            /* Pure white heading */
 }
 
 .footer-links {
@@ -1927,13 +1928,13 @@ body::before {
 }
 
 .footer-links a {
-  color: var(--text-light);
+  color: #94a3b8 !important;
   text-decoration: none;
   transition: var(--transition);
 }
 
 .footer-links a:hover {
-  color: var(--brand-blue-light);
+  color: #38bdf8 !important;
   padding-left: 5px;
 }
 
@@ -1946,7 +1947,7 @@ body::before {
 }
 
 .contact-link {
-  color: var(--text-light);
+  color: #94a3b8 !important;            /* Muted slate text */
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -1955,7 +1956,7 @@ body::before {
 }
 
 .contact-link:hover {
-  color: var(--brand-blue-light);
+  color: #38bdf8 !important;            /* Sky blue hover */
 }
 
 .contact-icon {
@@ -1963,7 +1964,7 @@ body::before {
 }
 
 .footer-address {
-  color: var(--text-light);
+  color: #94a3b8 !important;            /* Muted slate text */
   line-height: 1.8;
 }
 
@@ -1978,7 +1979,7 @@ body::before {
 }
 
 .copyright {
-  color: var(--text-light);
+  color: #94a3b8 !important;            /* Muted slate text */
 }
 
 .footer-legal {
@@ -1988,17 +1989,17 @@ body::before {
 }
 
 .footer-legal a {
-  color: var(--text-light);
+  color: #94a3b8 !important;            /* Muted slate text */
   text-decoration: none;
   transition: var(--transition);
 }
 
 .footer-legal a:hover {
-  color: var(--brand-blue-light);
+  color: #38bdf8 !important;            /* Sky blue hover */
 }
 
 .separator {
-  color: var(--text-light);
+  color: #64748b !important;
 }
 
 /* ============================================
@@ -3938,18 +3939,8 @@ body {
 .achievement-description,
 .value-pillar-description,
 .job-text,
-.blog-card-excerpt,
-.footer-description,
-.footer-address,
-.copyright,
-.footer-links a,
-.contact-link {
+.blog-card-excerpt {
   color: var(--blue-500) !important;
-}
-
-.footer-links a:hover,
-.contact-link:hover {
-  color: var(--brand-indigo-light) !important;
 }
 
 /* Grayscale Logos for Premium Look */
