@@ -56,10 +56,10 @@
 }
 
 [data-theme="dark"] {
-  /* Brand Accent Colors adjusted for dark mode */
-  --brand-blue: #3b82f6;
+  /* Brand Accent Colors adjusted for dark mode - Sleek soft sky/blue */
+  --brand-blue: #38bdf8;
   --brand-blue-dark: #2563eb;
-  --brand-blue-light: #93c5fd;
+  --brand-blue-light: #60a5fa;
   --brand-blue-lighter: #0f172a;
 
   --blue-50: #0f172a;
@@ -67,38 +67,35 @@
   --blue-200: #334155;
   --blue-300: #475569;
   --blue-400: #64748b;
-  --blue-500: #3b82f6;
+  --blue-500: #38bdf8;
   --blue-600: #2563eb;
-  --blue-700: #1d4ed8;
-  --blue-800: #1e40af;
-  --blue-900: #1e3a8a;
+  --blue-700: #1e40af;
+  --blue-800: #1e3a8a;
+  --blue-900: #0f172a;
 
-  /* Theme-dependent tokens (Dark mode values) */
-  --bg-primary: #080b11;
-  --bg-secondary: #0f1524;
-  --bg-tertiary: #172033;
+  /* Theme-dependent tokens (VS Code / Gemini inspired dark theme) */
+  --bg-primary: #0f172a;   /* Slate 900 */
+  --bg-secondary: #1e293b; /* Slate 800 */
+  --bg-tertiary: #334155;  /* Slate 700 */
 
-  --white: #0f1524;
-  --off-white: #172033;
-  --text-dark: #ffffff;
-  /* Pure white titles in dark mode for pop-out headers */
-  --text-gray: #e2e8f0;
-  /* Much brighter Slate 200 for outstanding text readability */
-  --text-light: #94a3b8;
-  --border-color: rgba(255, 255, 255, 0.08);
+  --white: #1e293b;        /* Slate 800 */
+  --off-white: #334155;    /* Slate 700 */
+  --text-dark: #cbd5e1;    /* Slate 300 - softer for readability */
+  --text-gray: #94a3b8;    /* Slate 400 */
+  --text-light: #64748b;   /* Slate 500 */
+  --border-color: rgba(148, 163, 184, 0.12); /* Soft slate border */
 
   /* Premium Glassmorphic properties */
-  --card-bg: rgba(15, 21, 36, 0.4);
-  /* Reduced opacity for elegant backdrop show-through */
-  --card-border: rgba(255, 255, 255, 0.04);
-  --header-bg: rgba(8, 11, 17, 0.75);
+  --card-bg: rgba(30, 41, 59, 0.75);
+  --card-border: rgba(148, 163, 184, 0.08);
+  --header-bg: rgba(15, 23, 42, 0.85);
 
   /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.5);
-  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.6);
-  --shadow-glow: rgba(99, 102, 241, 0.15);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.35);
+  --shadow-glow: rgba(56, 189, 248, 0.1);
 }
 
 /* ============================================
@@ -1887,8 +1884,8 @@ body::before {
    Footer Section
    ============================================ */
 .footer {
-  background-color: var(--text-dark);
-  color: var(--white);
+  background-color: #0b0f19 !important; /* Always dark slate-blue background */
+  color: #cbd5e1 !important;            /* Always readable slate-300 text */
   padding: 3rem 0 1rem;
 }
 
@@ -1906,19 +1903,20 @@ body::before {
 .footer-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--brand-blue-lighter);
+  color: #38bdf8 !important;            /* Sky blue Gemini accent */
   margin-bottom: 1rem;
 }
 
 .footer-description {
   line-height: 1.6;
+  color: #94a3b8 !important;            /* Muted slate text */
 }
 
 .footer-heading {
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: var(--white);
+  color: #ffffff !important;            /* Pure white heading */
 }
 
 .footer-links {
@@ -1930,13 +1928,13 @@ body::before {
 }
 
 .footer-links a {
-  color: var(--text-light);
+  color: #94a3b8 !important;
   text-decoration: none;
   transition: var(--transition);
 }
 
 .footer-links a:hover {
-  color: var(--brand-blue-light);
+  color: #38bdf8 !important;
   padding-left: 5px;
 }
 
@@ -1949,7 +1947,7 @@ body::before {
 }
 
 .contact-link {
-  color: var(--text-light);
+  color: #94a3b8 !important;            /* Muted slate text */
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -1958,7 +1956,7 @@ body::before {
 }
 
 .contact-link:hover {
-  color: var(--brand-blue-light);
+  color: #38bdf8 !important;            /* Sky blue hover */
 }
 
 .contact-icon {
@@ -1966,7 +1964,7 @@ body::before {
 }
 
 .footer-address {
-  color: var(--text-light);
+  color: #94a3b8 !important;            /* Muted slate text */
   line-height: 1.8;
 }
 
@@ -1981,7 +1979,7 @@ body::before {
 }
 
 .copyright {
-  color: var(--text-light);
+  color: #94a3b8 !important;            /* Muted slate text */
 }
 
 .footer-legal {
@@ -1991,17 +1989,17 @@ body::before {
 }
 
 .footer-legal a {
-  color: var(--text-light);
+  color: #94a3b8 !important;            /* Muted slate text */
   text-decoration: none;
   transition: var(--transition);
 }
 
 .footer-legal a:hover {
-  color: var(--brand-blue-light);
+  color: #38bdf8 !important;            /* Sky blue hover */
 }
 
 .separator {
-  color: var(--text-light);
+  color: #64748b !important;
 }
 
 /* ============================================
@@ -3941,18 +3939,8 @@ body {
 .achievement-description,
 .value-pillar-description,
 .job-text,
-.blog-card-excerpt,
-.footer-description,
-.footer-address,
-.copyright,
-.footer-links a,
-.contact-link {
+.blog-card-excerpt {
   color: var(--blue-500) !important;
-}
-
-.footer-links a:hover,
-.contact-link:hover {
-  color: var(--brand-indigo-light) !important;
 }
 
 /* Grayscale Logos for Premium Look */
@@ -5914,5 +5902,39 @@ body {
   .dropdown-item:hover {
     padding-left: 1.5rem; /* Turn off indentation animation on mobile hover */
     background-color: rgba(37, 99, 235, 0.05);
+  }
+
+  /* Dark mode mobile menu overrides */
+  [data-theme="dark"] .nav-menu {
+    background: rgba(15, 23, 42, 0.98) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  [data-theme="dark"] .nav-menu .nav-link {
+    color: var(--text-dark) !important;
+  }
+
+  [data-theme="dark"] .nav-menu .nav-link.active {
+    background: rgba(56, 189, 248, 0.15) !important;
+    color: #38bdf8 !important;
+  }
+
+  [data-theme="dark"] .nav-menu .nav-link:hover {
+    background: rgba(56, 189, 248, 0.08) !important;
+    color: #38bdf8 !important;
+  }
+
+  [data-theme="dark"] .dropdown-menu {
+    background: rgba(255, 255, 255, 0.03) !important;
+  }
+
+  [data-theme="dark"] .dropdown-item {
+    color: var(--text-gray) !important;
+  }
+
+  [data-theme="dark"] .dropdown-item:hover {
+    background-color: rgba(56, 189, 248, 0.1) !important;
+    color: #38bdf8 !important;
   }
 }

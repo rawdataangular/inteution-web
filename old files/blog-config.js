@@ -3,22 +3,23 @@
 // Add new blogs here following the same structure
 
 const blogConfig = {
-    1: {
-        id: 1,
-        filename: 'blog1-pricing.html',
-        title: 'See Profitability Before You Commit',
-        category: 'Pricing Engine',
-        excerpt: 'Simulate → Benchmark → Decide. The InTEUtion Pricing Engine empowers shipping lines with unparalleled commercial visibility, enabling data-driven decisions before locking in rates or reserving space.',
-        highlights: [
-            '35% Cost Visibility',
-            '50% Faster Closure',
-            '< 1 min Simulation'
-        ],
-        videoUrl: 'https://pricing.inteution.com/assets/popup.mp4',
-        icon: '📊',
-        date: '2024',
-        // Fallback content if file fetch fails
-        fallbackContent: `<div class="blog-article-header">
+  1: {
+    id: 1,
+    filename: "blog1-pricing.html",
+    title: "See Profitability Before You Commit",
+    category: "Pricing Engine",
+    excerpt:
+      "Simulate → Benchmark → Decide. The InTEUtion Pricing Engine empowers shipping lines with unparalleled commercial visibility, enabling data-driven decisions before locking in rates or reserving space.",
+    highlights: [
+      "35% Cost Visibility",
+      "50% Faster Closure",
+      "< 1 min Simulation",
+    ],
+    videoUrl: "https://pricing.inteution.com/assets/popup.mp4",
+    icon: "📊",
+    date: "2024",
+    // Fallback content if file fetch fails
+    fallbackContent: `<div class="blog-article-header">
             <div class="blog-article-category">Pricing Engine</div>
             <h1 class="blog-article-title">See Profitability Before You Commit</h1>
             <p class="blog-article-subtitle">Simulate → Benchmark → Decide</p>
@@ -92,21 +93,20 @@ const blogConfig = {
         <div class="blog-cta-section">
             <h2 class="blog-cta-title">Start Making Data-Backed Pricing Decisions Today</h2>
             <p class="blog-cta-text">Take control of your pricing and space allocation with InTEUtion's powerful platform. Let our team guide you through a personalized demo to demonstrate how our tools can transform your operations no obligation required.</p>
-            <a href="https://wa.me/918714335326" class="btn btn-primary" target="_blank">Book My Demo</a>
-        </div>`
-    }
-    // Add more blogs here:
-    // 2: {
-    //     id: 2,
-    //     filename: 'blog2-example.html',
-    //     title: 'Blog Title 2',
-    //     category: 'Category',
-    //     excerpt: 'Blog excerpt...',
-    //     highlights: ['Highlight 1', 'Highlight 2'],
-    //     videoUrl: 'https://example.com/video.mp4',
-    //     icon: '📊',
-    //     date: '2024',
-    //     fallbackContent: '...'
-    // }
+            <a href="https://wa.me/918592859274" class="btn btn-primary" target="_blank">Book My Demo</a>
+        </div>`,
+  },
+  // Add more blogs here:
+  // 2: {
+  //     id: 2,
+  //     filename: 'blog2-example.html',
+  //     title: 'Blog Title 2',
+  //     category: 'Category',
+  //     excerpt: 'Blog excerpt...',
+  //     highlights: ['Highlight 1', 'Highlight 2'],
+  //     videoUrl: 'https://example.com/video.mp4',
+  //     icon: '📊',
+  //     date: '2024',
+  //     fallbackContent: '...'
+  // }
 };
-
