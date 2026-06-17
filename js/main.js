@@ -578,7 +578,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const demoButtons = [];
     document.querySelectorAll('a, button').forEach(el => {
         const text = el.textContent.trim().toLowerCase();
-        if (text.includes('schedule a demo')) {
+        if (text.includes('schedule a demo') || text.includes('see what we built')) {
             demoButtons.push(el);
         }
     });
