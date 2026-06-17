@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-228718713"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-228718713');
+</script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Empower NVOCC clients with a branded self-service customer portal. Live container tracking, online quote requests, booking management, document access, and invoice visibility.">
+    <title>Customer Self-Servicing Portal — inTEUtion</title>
+    <link rel="icon" type="image/png" href="assets/icon.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        // Inline theme selector to prevent white screen flash
+        (function () {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+    <script src="js/main.js" defer></script>
+    <style>
+        /* Page specific overrides */
+        .portal-hero {
+            padding: 8rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, var(--blue-50) 0%, var(--white) 100%);
+        }
+
+        [data-theme="dark"] .portal-hero {
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+        }
+
+        .portal-hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .portal-badge {
+            background: rgba(99, 102, 241, 0.08);
+            color: #4f46e5;
+            padding: 0.45rem 1.1rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        [data-theme="dark"] .portal-badge {
+            background: rgba(99, 102, 241, 0.15);
+            color: #818cf8;
+        }
+
+        .portal-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .portal-title .highlight {
+            background: linear-gradient(135deg, var(--brand-blue) 0%, #4f46e5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        [data-theme="dark"] .portal-title .highlight {
+            background: linear-gradient(135deg, var(--brand-blue-light) 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .portal-desc {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+        }
+
+        .portal-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .portal-image {
+            max-width: 100%;
+            max-height: 400px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 24px;
+            filter: drop-shadow(0 20px 40px rgba(99, 102, 241, 0.15));
+            animation: floatArt 6s ease-in-out infinite;
+        }
+
+        @keyframes floatArt {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* Problem Strip styling */
+        .problem-strip {
+            background: linear-gradient(90deg, rgba(239, 246, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%);
+            border-top: 1px solid rgba(37, 99, 235, 0.1);
+            border-bottom: 1px solid rgba(37, 99, 235, 0.1);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        [data-theme="dark"] .problem-strip {
+            background: linear-gradient(90deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.9) 100%);
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .problem-strip p {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: var(--text-gray);
+            padding: 0 20px;
+        }
+
+        .problem-strip strong {
+            color: var(--brand-blue-dark);
+        }
+
+        [data-theme="dark"] .problem-strip strong {
+            color: var(--brand-blue);
+        }
+
+        /* Section layout */
+        .portal-section {
+            padding: 6rem 0;
+            background: var(--bg-primary);
+        }
+
+        .portal-section.alt-bg {
+            background: var(--bg-secondary);
+        }
+
+        .section-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: var(--brand-blue);
+            margin-bottom: 1.25rem;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.25;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            letter-spacing: -0.01em;
+        }
+
+        .section-sub {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem auto;
+            line-height: 1.6;
+        }
+
+        /* Key Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.4) 100%);
+            backdrop-filter: blur(20px) saturate(140%);
+            -webkit-backdrop-filter: blur(20px) saturate(140%);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        [data-theme="dark"] .feature-card {
+            background: linear-gradient(135deg, rgba(15, 21, 36, 0.6) 0%, rgba(30, 41, 59, 0.4) 100%);
+            border-color: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--brand-blue-light);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.1);
+        }
+
+        .feature-card .f-icon {
+            font-size: 2rem;
+            margin-bottom: 1.25rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: rgba(99, 102, 241, 0.08);
+        }
+
+        [data-theme="dark"] .feature-card .f-icon {
+            background: rgba(99, 102, 241, 0.15);
+        }
+
+        .feature-card h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-gray);
+        }
+
+        /* Workflow steps (How it works) */
+        .workflow-section {
+            background: linear-gradient(135deg, #0f172a 0%, #01256d 100%) !important;
+            padding: 6rem 0;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .workflow-section::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.01) 0 1px, transparent 1px 40px);
+            pointer-events: none;
+        }
+
+        .workflow-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            position: relative;
+            margin-top: 2rem;
+        }
+
+        .workflow-steps::after {
+            content: "";
+            position: absolute;
+            top: 25px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-num {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            border: 4px solid #0f172a;
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover .step-num {
+            transform: scale(1.1);
+            background: #60a5fa;
+            box-shadow: 0 0 25px rgba(96, 165, 250, 0.6);
+        }
+
+        .step h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            margin-top: 0;
+        }
+
+        .step p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Business Advantages Section */
+        .advantage-section {
+            padding: 6rem 0;
+            background: var(--bg-secondary);
+        }
+
+        .advantage-inner {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 4.5rem;
+            align-items: center;
+        }
+
+        .metrics-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .metric {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: left;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s ease;
+        }
+
+        .metric:hover {
+            transform: translateY(-4px);
+        }
+
+        .metric-num {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--brand-blue);
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-num span {
+            color: var(--brand-blue);
+        }
+
+        .metric-label {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            font-weight: 600;
+        }
+
+        .advantage-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .adv-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.75rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .adv-item:hover {
+            border-color: var(--brand-blue-light);
+            transform: translateX(4px);
+        }
+
+        .adv-check {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(37, 99, 235, 0.08);
+            color: var(--brand-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        [data-theme="dark"] .adv-check {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+        }
+
+        .adv-item h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.4rem;
+            margin-top: 0;
+        }
+
+        .adv-item p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-light);
+        }
+
+        /* Integration Note Section */
+        .integration-section {
+            padding: 4rem 0;
+            background: var(--bg-primary);
+        }
+
+        .integration-note {
+            background: linear-gradient(135deg, rgba(239, 246, 255, 0.5) 0%, rgba(255, 255, 255, 0.8) 100%);
+            border: 1px solid rgba(37, 99, 235, 0.15);
+            border-radius: 24px;
+            padding: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            box-shadow: var(--shadow-md);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        [data-theme="dark"] .integration-note {
+            background: linear-gradient(135deg, rgba(15, 21, 36, 0.6) 0%, rgba(30, 41, 59, 0.4) 100%);
+            border-color: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .int-icon {
+            font-size: 2.5rem;
+            width: 70px;
+            height: 70px;
+            border-radius: 18px;
+            background: rgba(37, 99, 235, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        [data-theme="dark"] .int-icon {
+            background: rgba(56, 189, 248, 0.15);
+        }
+
+        .integration-note p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-gray);
+            margin: 0;
+        }
+
+        /* Responsive styling */
+        @media (max-width: 1200px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .portal-hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+            }
+            .portal-badge {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .portal-visual {
+                order: -1;
+            }
+            .portal-image {
+                max-height: 300px;
+            }
+            .advantage-inner {
+                grid-template-columns: 1fr;
+                gap: 3.5rem;
+            }
+            .workflow-steps {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2.5rem;
+            }
+            .workflow-steps::after {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .metrics-row {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .portal-title {
+                font-size: 2.1rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .workflow-steps {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .integration-note {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* Interactive Workflow Widget */
+        .portal-visual-widget {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 500px;
+            background: linear-gradient(135deg, #07163c 0%, #030c25 100%);
+            padding: 2.2rem 1.8rem;
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .widget-track {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            position: relative;
+            gap: 1.2rem;
+            box-sizing: border-box;
+        }
+
+        .widget-card {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 0.9rem 1.2rem;
+            gap: 1rem;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-sizing: border-box;
+        }
+
+        .widget-card:hover {
+            transform: translateY(-2px) scale(1.02);
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .widget-icon-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .widget-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            text-align: left;
+        }
+
+        .widget-title {
+            color: #ffffff !important;
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin: 0;
+            line-height: 1.2;
+            font-family: inherit;
+        }
+
+        .widget-sub {
+            color: #94a3b8 !important;
+            font-size: 0.85rem;
+            margin: 0;
+            font-weight: 500;
+            line-height: 1.2;
+            font-family: inherit;
+        }
+
+        .widget-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.35rem 0.8rem;
+            border-radius: 20px;
+            text-transform: capitalize;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* Badges matching colors in screenshot */
+        .badge-submitted {
+            background: rgba(14, 165, 233, 0.15);
+            color: #0ea5e9;
+        }
+
+        .badge-confirmed {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+        }
+
+        .badge-ready {
+            background: rgba(245, 158, 11, 0.15);
+            color: #f59e0b;
+        }
+
+        .badge-live {
+            background: rgba(20, 184, 166, 0.15);
+            color: #14b8a6;
+            animation: pulseTeal 2s infinite;
+        }
+
+        .badge-pending {
+            background: rgba(148, 163, 184, 0.15);
+            color: #94a3b8;
+        }
+
+        /* Connecting vertical line segment */
+        .widget-line {
+            position: absolute;
+            left: calc(1.8rem + 22px); /* Centered with icon box */
+            top: 3rem;
+            bottom: 3rem;
+            width: 2px;
+            background: repeating-linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0.1),
+                rgba(255, 255, 255, 0.1) 4px,
+                transparent 4px,
+                transparent 8px
+            );
+            z-index: 1;
+        }
+
+        @keyframes pulseTeal {
+            0% {
+                box-shadow: 0 0 0 0 rgba(20, 184, 166, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 6px rgba(20, 184, 166, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(20, 184, 166, 0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="index.html" class="logo">
+                        <img src="assets/logo-big.png" alt="inTEUtion" class="logo-img">
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Products<span class="chevron">▼</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="erp.html" class="dropdown-item">inTEUtion</a></li>
+                            <li><a href="assistify-light.html" class="dropdown-item">Assistify</a></li>
+                              <li><a href="customer-self-servicing-portal.html" class="dropdown-item">Customer Portal</a> </li>
+                        </ul>
+                    </li>
+                    <li><a href="value.html" class="nav-link">What You Get</a></li>
+                    <li><a href="about.html" class="nav-link active">About Us</a></li>
+                    
+                    <!-- <li><a href="careers.html" class="nav-link">Careers</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li> -->
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <span class="sun-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="4" />
+                            <path
+                                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                        </svg>
+                    </span>
+                    <span class="moon-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+                        </svg>
+                    </span>
+                </button>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="portal-hero">
+        <div class="container">
+            <div class="portal-hero-grid">
+                <div class="hero-content-left">
+                    <span class="portal-badge">Customer Self-Service Portal</span>
+                    <h1 class="portal-title">Your Customers,<br>Always in the<br><span class="highlight">Loop..</span></h1>
+                    <p class="portal-desc">
+                        Provide a modern, secure, and branded portal for your NVOCC customers. Allow them to track containers, request slots, verify booking statuses, access draft/original Bills of Lading, and pay invoices online without picking up the phone.
+                    </p>
+                    <div class="hero-cta-btn">
+                        <a href="javascript:void(0)" class="btn btn-primary">
+                            Schedule A Demo <span class="arrow-icon">→</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="portal-visual">
+                    <div class="portal-visual-widget">
+                        <div class="widget-line"></div>
+                        <div class="widget-track">
+                            <!-- Card 1 -->
+                            <div class="widget-card">
+                                <div class="widget-icon-box">💬</div>
+                                <div class="widget-info">
+                                    <h4 class="widget-title">Quote Request</h4>
+                                    <p class="widget-sub">SHA &rarr; JNPT &middot; 2 &times; 40HC</p>
+                                </div>
+                                <div class="widget-badge badge-submitted">Submitted</div>
+                            </div>
+                            <!-- Card 2 -->
+                            <div class="widget-card">
+                                <div class="widget-icon-box">📋</div>
+                                <div class="widget-info">
+                                    <h4 class="widget-title">Booking Confirmed</h4>
+                                    <p class="widget-sub">BK-2024-00841 &middot; ETA Aug 12</p>
+                                </div>
+                                <div class="widget-badge badge-confirmed">Confirmed</div>
+                            </div>
+                            <!-- Card 3 -->
+                            <div class="widget-card">
+                                <div class="widget-icon-box">📄</div>
+                                <div class="widget-info">
+                                    <h4 class="widget-title">Bill of Lading</h4>
+                                    <p class="widget-sub">BL-SHA-08841 &middot; Ready</p>
+                                </div>
+                                <div class="widget-badge badge-ready">Ready</div>
+                            </div>
+                            <!-- Card 4 -->
+                            <div class="widget-card">
+                                <div class="widget-icon-box">📍</div>
+                                <div class="widget-info">
+                                    <h4 class="widget-title">Container Tracking</h4>
+                                    <p class="widget-sub">TCKU3456789 &middot; In Transit</p>
+                                </div>
+                                <div class="widget-badge badge-live">Live</div>
+                            </div>
+                            <!-- Card 5 -->
+                            <div class="widget-card">
+                                <div class="widget-icon-box">🧾</div>
+                                <div class="widget-info">
+                                    <h4 class="widget-title">Invoice</h4>
+                                    <p class="widget-sub">INV-2024-0391 &middot; $4,200</p>
+                                </div>
+                                <div class="widget-badge badge-pending">Pending</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROBLEM STRIP -->
+    <div class="problem-strip">
+        <p>NVOCCs lose hours every week to <strong>repetitive customer queries</strong> — "Where's my container?", "Can I get the BL?", "What's the invoice status?" The Portal eliminates that friction entirely.</p>
+    </div>
+
+    <!-- KEY FEATURES -->
+    <section class="portal-section alt-bg">
+        <div class="container">
+            <div class="section-label">⚓ Key Features</div>
+            <h2 class="section-title">Everything your customer needs,<br>in one place.</h2>
+            <p class="section-sub">No more chasing staff. No more email threads. Customers log in and find exactly what they need.</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="f-icon">💬</span>
+                    <h3>Instant Quote Requests</h3>
+                    <p>Customers submit rate inquiries directly from the portal. NVOCCs respond faster, win more business.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="f-icon">📋</span>
+                    <h3>Booking Management</h3>
+                    <p>Create, view, and manage bookings without a single phone call. Full visibility into status and ETAs.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="f-icon">📄</span>
+                    <h3>Bill of Lading Access</h3>
+                    <p>Download draft and original BLs the moment they're ready — no waiting, no chasing.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="f-icon">📍</span>
+                    <h3>Live Container Tracking</h3>
+                    <p>Real-time status updates for every container, from gate-in to final delivery at destination.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="f-icon">🧾</span>
+                    <h3>Invoice & Payment Visibility</h3>
+                    <p>All invoices in one dashboard — outstanding, paid, and due — with full transaction history.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="f-icon">🔔</span>
+                    <h3>Proactive Notifications</h3>
+                    <p>Automated alerts for booking confirmations, vessel departures, arrivals, and document availability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WORKFLOW -->
+    <section class="portal-section workflow-section">
+        <div class="container">
+            <div class="section-label" style="color: var(--brand-blue-light);">Streamlining Core Shipping Operations</div>
+            <h2 class="section-title" style="color: var(--white);">How it works</h2>
+            <p class="section-sub" style="color: rgba(255,255,255,0.65);">A seamless journey from inquiry to delivery — entirely through the portal.</p>
+
+            <div class="workflow-steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <h4>Request a Quote</h4>
+                    <p style="color: rgba(255,255,255,0.65);">Customer submits origin, destination, cargo type, and volume.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <h4>Confirm Booking</h4>
+                    <p style="color: rgba(255,255,255,0.65);">Accepts the rate and places a booking — all inside the portal.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <h4>Track & Receive Docs</h4>
+                    <p style="color: rgba(255,255,255,0.65);">Monitor container movement and download BLs as they're issued.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <h4>View & Settle Invoices</h4>
+                    <p style="color: rgba(255,255,255,0.65);">Access all invoices and payment history without contacting finance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADVANTAGES -->
+    <div class="advantage-section">
+        <div class="container">
+            <div class="advantage-inner">
+                <div>
+                    <div class="section-label">📈 Business Advantages</div>
+                    <h2 class="section-title" style="text-align: left;">Better for your customers.<br>Better for your team.</h2>
+                    <p class="section-sub" style="text-align: left; margin-left: 0; margin-bottom: 2rem;">The portal isn't just a convenience — it reshapes how NVOCCs and their customers work together.</p>
+
+                    <div class="metrics-row">
+                        <div class="metric">
+                            <div class="metric-num">↓70%</div>
+                            <div class="metric-label">Inbound status queries</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-num">24/7</div>
+                            <div class="metric-label">Self-service access</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-num">↑3×</div>
+                            <div class="metric-label">Booking turnaround speed</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-num">0</div>
+                            <div class="metric-label">Calls to check BL status</div>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="advantage-list">
+                    <li class="adv-item">
+                        <div class="adv-check">✓</div>
+                        <div>
+                            <h4>Faster Response Time</h4>
+                            <p>Customers get answers instantly — no hold times, no missed calls, no email backlog.</p>
+                        </div>
+                    </li>
+                    <li class="adv-item">
+                        <div class="adv-check">✓</div>
+                        <div>
+                            <h4>Stronger Customer Relationships</h4>
+                            <p>Transparency builds trust. Customers who can see their data are customers who stay.</p>
+                        </div>
+                    </li>
+                    <li class="adv-item">
+                        <div class="adv-check">✓</div>
+                        <div>
+                            <h4>Higher Booking Conversions</h4>
+                            <p>Frictionless quoting and booking removes drop-off points in the sales funnel.</p>
+                        </div>
+                    </li>
+                    <li class="adv-item">
+                        <div class="adv-check">✓</div>
+                        <div>
+                            <h4>Zero Manual Overhead</h4>
+                            <p>Free up operations staff from repetitive queries — let them focus on exceptions, not status updates.</p>
+                        </div>
+                    </li>
+                    <li class="adv-item">
+                        <div class="adv-check">✓</div>
+                        <div>
+                            <h4>Scalable Without Headcount</h4>
+                            <p>Handle 10× the customer volume without adding a single customer service rep.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- INTEGRATION NOTE -->
+    <section class="integration-section">
+        <div class="container">
+            <div class="integration-note">
+                <div class="int-icon">🔗</div>
+                <p><strong>Open Integration Architecture</strong> — The inTEUtion Customer Portal is built to connect. We are open to integrating with third-party ERPs and existing shipping management systems, so you don't have to rip and replace your current stack to give customers a world-class experience.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Give Your Customers<br>the Experience They Deserve?</h2>
+                <p class="cta-description">Get a personalized demo and see how the inTEUtion Customer Portal can transform your customer relationships.</p>
+                <a href="javascript:void(0)" class="btn btn-cta">
+                    <span class="demo-icon">🚀</span>
+                    Schedule A Demo
+                </a>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">inTEUtion</h3>
+                    <p class="footer-description">The Executive Software Platform for Streamlined Container Operations
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="value.html">What You Get</a></li>
+                        <!-- <li><a href="careers.html">Careers</a></li>
+                        <li><a href="blog.html">Blog</a></li> -->
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <a #href="https://wa.me/918592859274" target="_blank" class="contact-link">
+                                <span class="contact-icon">💬</span>
+                                WhatsApp: +91 87 14 335 326
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:info@inteution.com" class="contact-link">
+                                <span class="contact-icon">✉️</span>
+                                info@inteution.com
+                            </a>
+                        </li>
+                        <li>
+                            <div class="footer-social-links">
+                                <a href="https://www.linkedin.com/company/inteution/" target="_blank" rel="noopener noreferrer" class="social-link">
+                                    <img src="assets/linkedin.png" alt="LinkedIn" class="social-icon-img">
+                                </a>
+                                <a href="https://www.instagram.com/we_are_inteution/" target="_blank" rel="noopener noreferrer" class="social-link">
+                                    <img src="assets/instagram.png" alt="Instagram" class="social-icon-img">
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Address</h4>
+                    <p class="footer-address">
+                        2nd Floor, Transasia Corporate Park<br>
+                        XIV/396-C, Seaport - Airport Rd<br>
+                        Chittethukara, Kakkanad<br>
+                        Kerala 682037, India
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2026 inTEUtion. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#privacy">Privacy Policy</a>
+                    <span class="separator">|</span>
+                    <a href="#terms">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
