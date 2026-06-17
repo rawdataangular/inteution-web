@@ -35,28 +35,59 @@
             padding: 8rem 0 5rem;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, #0B1B3A 0%, #0D2B5E 55%, #051d3b 100%);
+            /* LIGHT MODE: Same soft gradient as About/Value page heroes */
+            background: linear-gradient(
+                135deg,
+                var(--brand-blue-lighter, #EFF4FF) 0%,
+                #FFFFFF 50%,
+                var(--brand-blue-lighter, #EFF4FF) 100%
+            );
         }
 
         [data-theme="dark"] .custom-hero {
-            background: linear-gradient(135deg, #071226 0%, #0B1B3A 55%, #031124 100%);
+            background: linear-gradient(135deg, #0b1329 0%, #0f1f4a 55%, #091530 100%);
         }
 
+        /* LIGHT MODE: Hero title — dark on light background */
         .custom-hero .custom-title {
+            color: var(--text-dark, #1A1D23);
+        }
+
+        /* DARK MODE: Hero title — white on dark background */
+        [data-theme="dark"] .custom-hero .custom-title {
             color: #ffffff;
         }
 
         .custom-hero .custom-title .highlight {
+            background: linear-gradient(135deg, var(--brand-blue, #2563EB) 0%, #0096c7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        [data-theme="dark"] .custom-hero .custom-title .highlight {
             background: linear-gradient(135deg, #90e0ef 0%, #00b4d8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
+        /* LIGHT MODE: Hero description — warm slate */
         .custom-hero .custom-desc {
-            color: rgba(255, 255, 255, 0.72);
+            color: var(--text-gray, #3D4659);
         }
 
+        /* DARK MODE: Hero description — semi-white */
+        [data-theme="dark"] .custom-hero .custom-desc {
+            color: rgba(255, 255, 255, 0.78);
+        }
+
+        /* LIGHT MODE: Hero sub-bold — dark text with blue border */
         .custom-hero .custom-sub-bold {
+            color: var(--text-dark, #1A1D23);
+            border-left-color: var(--brand-blue, #2563EB);
+        }
+
+        /* DARK MODE */
+        [data-theme="dark"] .custom-hero .custom-sub-bold {
             color: #ffffff;
             border-left-color: #00b4d8;
         }
@@ -75,9 +106,11 @@
             }
         }
 
+        /* LIGHT MODE: Custom badge — blue text on pale blue */
         .custom-badge {
-            background: rgba(0, 180, 216, 0.08);
-            color: #0096c7;
+            background: var(--brand-blue-lighter, #EFF4FF);
+            color: var(--brand-blue, #2563EB);
+            border: 1px solid rgba(37, 99, 235, 0.20);
             padding: 0.45rem 1.1rem;
             border-radius: 30px;
             font-size: 0.75rem;
@@ -93,6 +126,7 @@
         [data-theme="dark"] .custom-badge {
             background: rgba(0, 180, 216, 0.15);
             color: #90e0ef;
+            border-color: rgba(0, 180, 216, 0.25);
         }
 
         .custom-title {
@@ -105,13 +139,13 @@
         }
 
         .custom-title .highlight {
-            background: linear-gradient(135deg, var(--brand-blue) 0%, #00b4d8 100%);
+            background: linear-gradient(135deg, var(--brand-blue, #2563EB) 0%, #0096c7 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         [data-theme="dark"] .custom-title .highlight {
-            background: linear-gradient(135deg, var(--brand-blue-light) 0%, #90e0ef 100%);
+            background: linear-gradient(135deg, var(--brand-blue-light, #60a5fa) 0%, #90e0ef 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -185,11 +219,11 @@
             50% { transform: translateY(-10px); }
         }
 
-        /* Problem strip styling */
+        /* Problem strip — LIGHT MODE: clean subtle tint */
         .problem-strip {
-            background: linear-gradient(90deg, rgba(144, 224, 239, 0.08) 0%, rgba(255, 255, 255, 0.9) 100%);
-            border-top: 1px solid rgba(0, 180, 216, 0.15);
-            border-bottom: 1px solid rgba(0, 180, 216, 0.15);
+            background: linear-gradient(90deg, var(--brand-blue-lighter, #EFF4FF) 0%, #FFFFFF 100%);
+            border-top: 1px solid rgba(37, 99, 235, 0.10);
+            border-bottom: 1px solid rgba(37, 99, 235, 0.10);
             padding: 2.5rem 0;
             text-align: center;
         }
@@ -208,8 +242,9 @@
             padding: 0 20px;
         }
 
+        /* LIGHT MODE: strong emphasis in blue */
         .problem-strip strong {
-            color: #0096c7;
+            color: var(--brand-blue, #2563EB);
         }
 
         [data-theme="dark"] .problem-strip strong {
@@ -253,7 +288,8 @@
 
         .section-sub {
             font-size: 1.15rem;
-            color: var(--text-light);
+            /* Fixed: --text-light doesn’t exist as a token — use --text-gray */
+            color: var(--text-gray);
             text-align: center;
             max-width: 750px;
             margin: 0 auto 4rem auto;
@@ -503,11 +539,15 @@
             border-radius: 100px;
         }
 
-        /* Scale Section */
+        /* Scale Section — LIGHT MODE: use deep corporate indigo instead of hardcoded black */
         .scale-section {
-            background: linear-gradient(135deg, #0b1b3a 0%, #132347 100%);
+            background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #2563eb 100%);
             padding: 6rem 0;
-            color: var(--white);
+            color: #FFFFFF;
+        }
+
+        [data-theme="dark"] .scale-section {
+            background: linear-gradient(135deg, #0b1329 0%, #0f1f4a 50%, #132347 100%);
         }
 
         .scale-section .section-label {

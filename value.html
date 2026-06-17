@@ -74,28 +74,40 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="value-hero">
+    <!-- Hero Section — same structure as About page -->
+    <section class="hero value-page-hero" style="min-height: 55vh; padding-top: 100px;">
+        <div class="hero-background">
+            <div class="wave-animation"></div>
+        </div>
         <div class="container">
-            <div class="value-hero-content">
-                <div class="value-hero-badge">Why Choose inTEUtion?</div>
-                <h1 class="value-hero-title">The inTEUtion Advantage</h1>
-                <h2 class="value-hero-subtitle">13 Pillars of Profitability</h2>
-                <p class="value-hero-description">Built for NVOCC leaders who demand financial clarity, pricing control,
-                    and operational excellence. Every feature is designed to eliminate guesswork, protect your revenue,
-                    and accelerate your growth. <strong>Stop Guessing. Start Profiting.</strong></p>
-                <div class="value-hero-stats">
-                    <div class="value-stat">
-                        <div class="value-stat-number">13</div>
-                        <div class="value-stat-label">Core Advantages</div>
+            <div class="hero-content" style="animation: fadeInUp 0.8s ease-out;">
+                <!-- Badge — like About page style -->
+                <div class="value-page-badge">Why Choose inTEUtion?</div>
+                <!-- Main headline -->
+                <h1 class="hero-headline" style="font-size: clamp(2rem, 5vw, 3.25rem);">The inTEUtion Advantage</h1>
+                <!-- Subtitle -->
+                <p class="hero-subheadline-1" style="font-size: 1.4rem; margin-bottom: 0.75rem;">13 Pillars of Profitability</p>
+                <!-- Description -->
+                <p class="hero-subheadline-2" style="max-width: 700px; margin: 0 auto 2.5rem;">
+                    Built for NVOCC leaders who demand financial clarity, pricing control, and operational excellence.
+                    Every feature is designed to eliminate guesswork, protect your revenue, and accelerate your growth.
+                    <strong style="color: var(--brand-blue); font-weight: 700;">Stop Guessing. Start Profiting.</strong>
+                </p>
+                <!-- Stats row -->
+                <div class="value-stats-row">
+                    <div class="value-stat-chip">
+                        <span class="value-stat-chip-num">13</span>
+                        <span class="value-stat-chip-label">Core Advantages</span>
                     </div>
-                    <div class="value-stat">
-                        <div class="value-stat-number">3</div>
-                        <div class="value-stat-label">Key Categories</div>
+                    <div class="value-stat-divider"></div>
+                    <div class="value-stat-chip">
+                        <span class="value-stat-chip-num">3</span>
+                        <span class="value-stat-chip-label">Key Categories</span>
                     </div>
-                    <div class="value-stat">
-                        <div class="value-stat-number">100%</div>
-                        <div class="value-stat-label">Profitability Focus</div>
+                    <div class="value-stat-divider"></div>
+                    <div class="value-stat-chip">
+                        <span class="value-stat-chip-num">100%</span>
+                        <span class="value-stat-chip-label">Profitability Focus</span>
                     </div>
                 </div>
             </div>
