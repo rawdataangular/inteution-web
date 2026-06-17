@@ -5361,6 +5361,75 @@ body {
   background: radial-gradient(circle, rgba(74, 222, 128, 0.15) 0%, transparent 70%) !important;
 }
 
+/* Portal Custom Colors & Glowing */
+.erp-badge-portal {
+  background: rgba(99, 102, 241, 0.08) !important;
+  color: #4f46e5 !important;
+}
+
+[data-theme="dark"] .erp-badge-portal {
+  background: rgba(99, 102, 241, 0.15) !important;
+  color: #818cf8 !important;
+}
+
+.erp-visual-glow-portal {
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.18) 0%, transparent 70%) !important;
+}
+
+[data-theme="dark"] .erp-visual-glow-portal {
+  background: radial-gradient(circle, rgba(129, 140, 248, 0.15) 0%, transparent 70%) !important;
+}
+
+/* Singularity Custom Colors & Glowing */
+.erp-badge-singularity {
+  background: rgba(168, 85, 247, 0.08) !important;
+  color: #8b5cf6 !important;
+}
+
+[data-theme="dark"] .erp-badge-singularity {
+  background: rgba(168, 85, 247, 0.15) !important;
+  color: #c084fc !important;
+}
+
+.erp-visual-glow-singularity {
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.18) 0%, transparent 70%) !important;
+}
+
+[data-theme="dark"] .erp-visual-glow-singularity {
+  background: radial-gradient(circle, rgba(192, 132, 252, 0.15) 0%, transparent 70%) !important;
+}
+
+/* Custom IT Solutions Custom Colors & Glowing */
+.erp-badge-custom {
+  background: rgba(0, 180, 216, 0.08) !important;
+  color: #0096c7 !important;
+}
+
+[data-theme="dark"] .erp-badge-custom {
+  background: rgba(0, 180, 216, 0.15) !important;
+  color: #90e0ef !important;
+}
+
+.erp-visual-glow-custom {
+  background: radial-gradient(circle, rgba(0, 180, 216, 0.18) 0%, transparent 70%) !important;
+}
+
+[data-theme="dark"] .erp-visual-glow-custom {
+  background: radial-gradient(circle, rgba(144, 224, 239, 0.15) 0%, transparent 70%) !important;
+}
+
+.highlight-icon-custom {
+  background: rgba(0, 180, 216, 0.08) !important;
+  color: #0096c7 !important;
+}
+
+[data-theme="dark"] .highlight-icon-custom {
+  background: rgba(0, 180, 216, 0.15) !important;
+  color: #90e0ef !important;
+}
+
+
+
 /* Emojis highlights formatting */
 .highlight-icon.highlight-emoji {
   font-size: 0.95rem;
