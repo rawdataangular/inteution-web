@@ -5,162 +5,159 @@
    WCAG AA compliant · High contrast · Premium aesthetics
    ============================================ */
 :root {
-  /* ── Primary Brand – Corporate Navy / Indigo ── */
-  --brand-blue: #2563eb;           /* Corporate Navy Blue — main CTA */
-  --brand-blue-dark: #1d4ed8;      /* Darker hover state (significantly darker) */
-  --brand-blue-light: #60a5fa;     /* Accent highlights */
-  --brand-blue-lighter: #EFF4FF;   /* Soft tint for badges/tags */
-  --brand-indigo: #4f46e5;         /* Deep Indigo — secondary accent */
-  --brand-indigo-light: #818cf8;   /* Indigo highlight */
-  --brand-blue-super-dark: #1e3a8a; /* Deep navy for headings */
+  /* ── Primary Brand – Corporate Blue ── */
+  --brand-blue: #29b6f6;           /* Primary Default */
+  --brand-blue-dark: #03a9f4;      /* Primary Hover */
+  --brand-blue-active: #0288d1;    /* Primary Active/Pressed */
+  --brand-blue-light: #81d4fa;     /* Secondary Badges / Chips / Icons */
+  --brand-blue-lighter: #e1f5fe;   /* Subtle Highlights / Hover States */
+  --brand-indigo: #0288d1;         /* Deepest press state / Outline borders */
+  --brand-indigo-light: #81d4fa;   
+  --brand-blue-super-dark: #01579b; /* Headings / Important Text */
 
   /* ── Blue Scale ── */
-  --blue-50: #EFF4FF;
-  --blue-100: #dbeafe;
-  --blue-200: #bfdbfe;
-  --blue-300: #93c5fd;
-  --blue-400: #60a5fa;
-  --blue-500: #3b82f6;
-  --blue-600: #2563eb;
-  --blue-700: #1d4ed8;
-  --blue-800: #1e40af;
-  --blue-900: #1e3a8a;
+  --blue-50: #f5faff;
+  --blue-100: #e1f5fe;
+  --blue-200: #b3e5fc;
+  --blue-300: #81d4fa;
+  --blue-400: #29b6f6;
+  --blue-500: #03a9f4;
+  --blue-600: #0288d1;
+  --blue-700: #01579b;
+  --blue-800: #1e293b;
+  --blue-900: #0a1922;
 
-  /* ── Semantic Status Colors (Muted, no panic) ── */
-  --color-success: #059669;        /* Forest Green */
-  --color-error:   #DC2626;        /* Dark Terracotta */
+  /* ── Semantic Status Colors ── */
+  --color-success: #059669;        /* Success (Green) */
+  --color-error:   #dc2626;        /* Error (Red) */
   --color-warning: #D97706;        /* Amber */
-  --color-info:    #0284C7;        /* Teal Blue */
+  --color-info:    #29b6f6;        /* Teal Blue */
 
   /* ══════════════════════════════════════════
      LIGHT MODE TOKENS
-     Background: Dimmed Glass (#F8F9FC base)
-     Cards/Modals: Crisp White (#FFFFFF) — creates pop-out depth
      ══════════════════════════════════════════ */
-  --bg-primary:   #F8F9FC;         /* Main page background — reduces eye strain vs pure white */
-  --bg-secondary: #FFFFFF;         /* Cards, modals — pop-out depth over bg-primary */
-  --bg-tertiary:  #F1F4F9;         /* Section alternates, subtle dividers */
-  --bg-elevated:  #FFFFFF;         /* Elevated surfaces (dropdowns, tooltips) */
+  --bg-primary:   #f5faff;         /* Page Background (Light) */
+  --bg-secondary: #ffffff;         /* Cards / Modals / Header (Light) */
+  --bg-tertiary:  #e1f5fe;         /* Subtle Highlights */
+  --bg-elevated:  #ffffff;         /* Elevated surfaces */
 
-  --white: #FFFFFF;
-  --off-white: #F8F9FC;
+  --white: #ffffff;
+  --off-white: #f5faff;
 
-  /* ── Text — Warm Slate (tiny brown/purple hint) ── */
-  --text-dark:    #1A1D23;         /* Near-black with warm undertone — WCAG AAA headings */
-  --text-primary: #1E2330;         /* Body text — strong contrast on #F8F9FC (8.5:1 ratio) */
-  --text-gray:    #3D4659;         /* Secondary text — warm slate 600 (5.2:1 ratio) */
-  --text-light:   #6B7592;         /* Tertiary / captions — warm slate 400 */
-  --text-muted:   #94A3B8;         /* Placeholders / disabled */
+  /* ── Text ── */
+  --text-dark:    #01579b;         /* Headings / Important Text */
+  --text-primary: #1e293b;         /* Body Text (Paragraphs/Labels) */
+  --text-gray:    #1e293b;         /* Using primary text color to maintain slate-blue pairs */
+  --text-light:   #01579b;         /* Important Text */
+  --text-muted:   #81d4fa;         /* Mid-tone for supporting */
 
-  /* ── Borders — Extremely thin, barely-there ── */
-  --border-color: #E2E8F0;         /* 1px borders — just slightly darker than bg */
-  --border-strong: #CBD5E1;        /* Emphasized borders */
-  --border-focus:  #2563EB;        /* Focus rings */
+  /* ── Borders ── */
+  --border-color: #b3e5fc;         /* Borders / Dividers / Table Stripes */
+  --border-strong: #b3e5fc;        
+  --border-focus:  #29b6f6;        
 
   /* ── Header (Light Mode) ── */
-  --header-bg: rgba(255, 255, 255, 0.88); /* Pure white base with slight transparency */
-  --header-border: rgba(226, 232, 240, 0.9);
+  --header-bg: #ffffff;            
+  --header-border: #b3e5fc;
 
   /* ── Cards & Glass ── */
-  --card-bg:     #FFFFFF;                    /* Crisp white cards pop against #F8F9FC bg */
-  --card-border: rgba(226, 232, 240, 0.8);   /* Ultra-thin 1px border */
-  --card-shadow: 0 1px 3px rgba(26, 29, 35, 0.06), 0 4px 12px rgba(26, 29, 35, 0.05);
+  --card-bg:     #ffffff;          
+  --card-border: #b3e5fc;   
+  --card-shadow: none;             
 
-  /* ── Shadows — Warm (slight purple/blue tint) ── */
-  --shadow-sm:  0 1px 3px rgba(26, 29, 35, 0.06);
-  --shadow-md:  0 4px 12px rgba(26, 29, 35, 0.08);
-  --shadow-lg:  0 12px 28px rgba(26, 29, 35, 0.10);
-  --shadow-xl:  0 24px 48px rgba(26, 29, 35, 0.12);
-  --shadow-glow: rgba(37, 99, 235, 0.12);
-  --shadow-blue: 0 8px 24px rgba(37, 99, 235, 0.18);
+  /* ── Shadows ── */
+  --shadow-sm:  0 1px 3px rgba(1, 87, 155, 0.06);
+  --shadow-md:  0 4px 12px rgba(1, 87, 155, 0.08);
+  --shadow-lg:  0 12px 28px rgba(1, 87, 155, 0.10);
+  --shadow-xl:  0 24px 48px rgba(1, 87, 155, 0.12);
+  --shadow-glow: rgba(41, 182, 246, 0.12);
+  --shadow-blue: 0 8px 24px rgba(41, 182, 246, 0.18);
 
   /* ── Misc ── */
   --transition:      all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  --container-max-width: 1200px;
+  --container-max-width: 1280px;
 
-  /* ── Border Radius — Soft Neo-Morphism ── */
-  --radius-sm:   8px;   /* Buttons, inputs, small chips */
-  --radius-md:   12px;  /* Dropdowns, small cards */
-  --radius-lg:   16px;  /* Standard cards */
-  --radius-xl:   24px;  /* Large feature cards */
-  --radius-2xl:  32px;  /* Hero cards, modals */
+  /* ── Border Radius ── */
+  --radius-sm:   8px;   
+  --radius-md:   12px;  
+  --radius-lg:   16px;  
+  --radius-xl:   24px;  
+  --radius-2xl:  32px;  
 }
 
 /* ══════════════════════════════════════════
-   DARK MODE TOKENS — "Deep Space"
-   Background: #0F1117 (avoids pure black)
-   Not cold blue-grey — uses a warm near-black
+   DARK MODE TOKENS
    ══════════════════════════════════════════ */
 [data-theme="dark"] {
-  /* ── Brand — Softer for dark backgrounds ── */
-  --brand-blue: #60a5fa;           /* Lightened for contrast on dark */
-  --brand-blue-dark: #3b82f6;
-  --brand-blue-light: #93c5fd;
-  --brand-blue-lighter: #1e2a45;   /* Dark tint for badges */
-  --brand-indigo: #818cf8;
-  --brand-indigo-light: #a5b4fc;
-  --brand-blue-super-dark: #93c5fd; /* Inverted — light on dark */
+  /* ── Brand ── */
+  --brand-blue: #29b6f6;           
+  --brand-blue-dark: #03a9f4;
+  --brand-blue-light: #81d4fa;
+  --brand-blue-lighter: #1e4a63;   
+  --brand-indigo: #0288d1;
+  --brand-indigo-light: #81d4fa;
+  --brand-blue-super-dark: #e1f5fe; 
 
   /* ── Blue Scale (dark mode inverted) ── */
-  --blue-50: #0d1322;
-  --blue-100: #152040;
-  --blue-200: #1e3260;
-  --blue-300: #2563eb;
-  --blue-400: #3b82f6;
-  --blue-500: #60a5fa;
-  --blue-600: #93c5fd;
-  --blue-700: #bfdbfe;
-  --blue-800: #dbeafe;
-  --blue-900: #eff6ff;
+  --blue-50: #0b1a26;
+  --blue-100: #132d40;
+  --blue-200: #1e4a63;
+  --blue-300: #0288d1;
+  --blue-400: #03a9f4;
+  --blue-500: #29b6f6;
+  --blue-600: #81d4fa;
+  --blue-700: #b3e5fc;
+  --blue-800: #e1f5fe;
+  --blue-900: #f5faff;
 
   /* ═══════════════════════════════════════
      DARK MODE BACKGROUNDS
-     Deep Space — avoids pure black
      ═══════════════════════════════════════ */
-  --bg-primary:   #0F1117;         /* Deep Space — main background */
-  --bg-secondary: #181A20;         /* Slight lift — sections, sidebar */
-  --bg-tertiary:  #1F2230;         /* Cards / modals */
-  --bg-elevated:  #242838;         /* Dropdowns, tooltips */
+  --bg-primary:   #0b1a26;         /* Mix of black + #01579b */
+  --bg-secondary: #132d40;         /* Cards become #132d40 */
+  --bg-tertiary:  #1e4a63;         
+  --bg-elevated:  #132d40;         
 
-  --white: #1F2230;                /* Card surface in dark mode */
-  --off-white: #181A20;            /* Alternate section surface */
+  --white: #132d40;                
+  --off-white: #0b1a26;            
 
-  /* ── Text — Legible, never pure white ── */
-  --text-dark:    #E8ECF4;         /* Near-white headings (soft warm white) */
-  --text-primary: #D0D8EC;         /* Body text — high contrast on #0F1117 */
-  --text-gray:    #8B96B0;         /* Secondary text */
-  --text-light:   #5A6480;         /* Tertiary / captions */
-  --text-muted:   #3D4659;         /* Placeholders / disabled */
+  /* ── Text ── */
+  --text-dark:    #ffffff;         
+  --text-primary: #e1f5fe;         
+  --text-gray:    #b3e5fc;         
+  --text-light:   #81d4fa;         
+  --text-muted:   #1e4a63;         
 
-  /* ── Borders — Ultra-subtle ── */
-  --border-color:  rgba(255, 255, 255, 0.07); /* Almost invisible, just structural */
-  --border-strong: rgba(255, 255, 255, 0.12);
-  --border-focus:  #60a5fa;
+  /* ── Borders ── */
+  --border-color:  #1e4a63;        
+  --border-strong: #1e4a63;
+  --border-focus:  #29b6f6;
 
   /* ── Header (Dark Mode) ── */
-  --header-bg: rgba(26, 29, 36, 0.92);  /* Charcoal #1A1D24 with slight transparency */
-  --header-border: rgba(255, 255, 255, 0.06);
+  --header-bg: #132d40;  
+  --header-border: #1e4a63;
 
   /* ── Cards & Glass ── */
-  --card-bg:     #1F2230;                        /* Lifted from bg-primary */
-  --card-border: rgba(255, 255, 255, 0.06);
-  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.25);
+  --card-bg:     #132d40;                        
+  --card-border: #1e4a63;
+  --card-shadow: none;
 
-  /* ── Shadows — Stronger for dark ── */
+  /* ── Shadows ── */
   --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.25);
   --shadow-md:  0 4px 16px rgba(0, 0, 0, 0.30);
   --shadow-lg:  0 12px 32px rgba(0, 0, 0, 0.40);
   --shadow-xl:  0 24px 56px rgba(0, 0, 0, 0.50);
-  --shadow-glow: rgba(96, 165, 250, 0.15);
-  --shadow-blue: 0 8px 24px rgba(96, 165, 250, 0.20);
+  --shadow-glow: rgba(41, 182, 246, 0.15);
+  --shadow-blue: 0 8px 24px rgba(41, 182, 246, 0.20);
 
-  /* ── Status Colors (adjusted for dark) ── */
-  --color-success: #10B981;
-  --color-error:   #EF4444;
+  /* ── Status Colors ── */
+  --color-success: #059669;
+  --color-error:   #dc2626;
   --color-warning: #F59E0B;
-  --color-info:    #38BDF8;
+  --color-info:    #29b6f6;
 }
+
 
 /* ============================================
    Reset & Base Styles
@@ -1904,11 +1901,11 @@ body::before {
 .footer {
   /* Near-black footer — anchors the page structurally */
   /* Light Mode: muted slate base — distinctly darker than content */
-  background-color: #111827 !important;
-  color: #9CA3AF !important;
+background-color: #0c3757 !important;
+  
   padding: 3.5rem 0 1rem;
   /* Subtle top border to separate from CTA without harsh line */
-  border-top: 1px solid #1F2A3A !important;
+  
 }
 
 /* Light mode footer — uses a dark-anchored base always (brand decision) */
@@ -6783,3 +6780,120 @@ body {
 }
 
 
+
+/* ============================================
+   Page-by-Page Customizations & Overrides
+   ============================================ */
+
+/* --- General Button Overrides --- */
+.btn-primary {
+  background-color: var(--brand-blue) !important;
+  color: #ffffff !important;
+}
+.btn-primary:hover {
+  background-color: var(--brand-blue-dark) !important;
+}
+.btn-primary:active {
+  background-color: var(--brand-blue-active) !important;
+}
+.btn-outline, .btn-secondary {
+  border: 1px solid var(--brand-indigo) !important;
+  background-color: transparent !important;
+  color: var(--brand-indigo) !important;
+}
+
+/* --- Header Overrides --- */
+.header {
+  background-color: var(--bg-secondary) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  box-shadow: none !important;
+}
+.nav-link.active, .nav-link:hover {
+  background-color: var(--bg-tertiary) !important;
+}
+
+/* --- Footer Overrides --- */
+.footer {
+  background-color: #0c3757 !important;
+  color: #ffffff !important;
+}
+.footer .footer-title, .footer .footer-heading {
+  color: #81d4fa !important; /* Differentiate headings with secondary mid-tone */
+}
+.footer p, .footer .copyright, .footer .separator, .footer .footer-description, .footer .footer-address {
+  color: #ffffff !important; /* Regular text */
+}
+.footer a, .footer .contact-link {
+  color: #e1f5fe !important; /* Soft highlight color for links */
+}
+.footer a:hover, .footer .contact-link:hover {
+  color: #ffffff !important;
+}
+[data-theme="dark"] .footer {
+  background-color: #0a1922 !important;
+}
+
+/* --- Login/Sign-up Page --- */
+body.login-page {
+  background: linear-gradient(135deg, #e1f5fe 0%, #f5faff 100%) !important;
+}
+.login-card {
+  background-color: #ffffff !important;
+  border: 1px solid #b3e5fc !important;
+}
+.btn-login {
+  background-color: #29b6f6 !important;
+}
+
+/* --- Dashboard/Home --- */
+.kpi-tile, .metrics-card, .metric-card {
+  border-left: 4px solid #0288d1 !important;
+}
+.data-table tbody tr:nth-child(even), .table tbody tr:nth-child(even) {
+  background-color: #e1f5fe !important;
+}
+
+/* ============================================
+   Responsiveness Requirements
+   ============================================ */
+/* Desktop (>1024px) */
+@media (min-width: 1025px) {
+  .container {
+    max-width: 1280px !important;
+  }
+}
+
+/* Tablet (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .card, .product-card, .login-card, .metrics-card, .kpi-tile, .metric-card {
+    padding: calc(var(--card-padding, 2.5rem) * 0.5) !important;
+  }
+  /* Fallback if var not set */
+  .product-card { padding: 1.25rem !important; }
+  
+  .data-table-container, .table-responsive, .table-wrapper {
+    overflow-x: auto !important;
+    display: block;
+    width: 100%;
+  }
+}
+
+/* Mobile (<768px) */
+@media (max-width: 767px) {
+  .row, .grid, .products-grid, .features-grid, .footer-content, .story-content {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .btn, button, .btn-primary, .btn-secondary, .btn-know-more, .btn-cta {
+    width: 100% !important;
+  }
+  .header {
+    padding: 12px !important;
+  }
+  body {
+    font-size: max(14px, 1em) !important;
+  }
+  p, span, a, div, li {
+    font-size: max(14px, inherit) !important;
+  }
+}
