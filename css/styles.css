@@ -5399,6 +5399,36 @@ body {
   background: radial-gradient(circle, rgba(192, 132, 252, 0.15) 0%, transparent 70%) !important;
 }
 
+/* Custom IT Solutions Custom Colors & Glowing */
+.erp-badge-custom {
+  background: rgba(0, 180, 216, 0.08) !important;
+  color: #0096c7 !important;
+}
+
+[data-theme="dark"] .erp-badge-custom {
+  background: rgba(0, 180, 216, 0.15) !important;
+  color: #90e0ef !important;
+}
+
+.erp-visual-glow-custom {
+  background: radial-gradient(circle, rgba(0, 180, 216, 0.18) 0%, transparent 70%) !important;
+}
+
+[data-theme="dark"] .erp-visual-glow-custom {
+  background: radial-gradient(circle, rgba(144, 224, 239, 0.15) 0%, transparent 70%) !important;
+}
+
+.highlight-icon-custom {
+  background: rgba(0, 180, 216, 0.08) !important;
+  color: #0096c7 !important;
+}
+
+[data-theme="dark"] .highlight-icon-custom {
+  background: rgba(0, 180, 216, 0.15) !important;
+  color: #90e0ef !important;
+}
+
+
 
 /* Emojis highlights formatting */
 .highlight-icon.highlight-emoji {

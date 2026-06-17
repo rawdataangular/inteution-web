@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-228718713"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-228718713');
+</script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="inTEUtion Custom IT Solutions arm brings deep shipping domain knowledge and hands-on engineering expertise to build purpose-built solutions for NVOCC, port logistics, and cargo operations.">
+    <title>Custom IT Solutions — inTEUtion</title>
+    <link rel="icon" type="image/png" href="assets/icon.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        // Inline theme selector to prevent white screen flash
+        (function () {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+    <script src="js/main.js" defer></script>
+    <style>
+        /* Page specific overrides for Custom Solutions */
+        .custom-hero {
+            padding: 8rem 0 5rem;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0B1B3A 0%, #0D2B5E 55%, #051d3b 100%);
+        }
+
+        [data-theme="dark"] .custom-hero {
+            background: linear-gradient(135deg, #071226 0%, #0B1B3A 55%, #031124 100%);
+        }
+
+        .custom-hero .custom-title {
+            color: #ffffff;
+        }
+
+        .custom-hero .custom-title .highlight {
+            background: linear-gradient(135deg, #90e0ef 0%, #00b4d8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .custom-hero .custom-desc {
+            color: rgba(255, 255, 255, 0.72);
+        }
+
+        .custom-hero .custom-sub-bold {
+            color: #ffffff;
+            border-left-color: #00b4d8;
+        }
+
+        .custom-hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.15fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        @media (max-width: 991px) {
+            .custom-hero-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        .custom-badge {
+            background: rgba(0, 180, 216, 0.08);
+            color: #0096c7;
+            padding: 0.45rem 1.1rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        [data-theme="dark"] .custom-badge {
+            background: rgba(0, 180, 216, 0.15);
+            color: #90e0ef;
+        }
+
+        .custom-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .custom-title .highlight {
+            background: linear-gradient(135deg, var(--brand-blue) 0%, #00b4d8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        [data-theme="dark"] .custom-title .highlight {
+            background: linear-gradient(135deg, var(--brand-blue-light) 0%, #90e0ef 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .custom-desc {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+        }
+
+        .custom-sub-bold {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            border-left: 3px solid #00b4d8;
+            padding-left: 1rem;
+        }
+
+        /* Hero visual (Image) */
+        .custom-visual-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .custom-image-glow {
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 180, 216, 0.15) 0%, transparent 70%);
+            z-index: -1;
+            filter: blur(25px);
+            animation: floatGlow 5s ease-in-out infinite alternate;
+        }
+
+        @media (max-width: 991px) {
+            .custom-image-glow {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        @keyframes floatGlow {
+            0% { transform: scale(0.9) translateY(0); }
+            100% { transform: scale(1.1) translateY(-10px); }
+        }
+
+        .custom-hero-image {
+            max-width: 100%;
+            max-height: 400px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            animation: floatImage 6s ease-in-out infinite;
+        }
+
+        [data-theme="dark"] .custom-hero-image {
+            border-color: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+        }
+
+        @keyframes floatImage {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Problem strip styling */
+        .problem-strip {
+            background: linear-gradient(90deg, rgba(144, 224, 239, 0.08) 0%, rgba(255, 255, 255, 0.9) 100%);
+            border-top: 1px solid rgba(0, 180, 216, 0.15);
+            border-bottom: 1px solid rgba(0, 180, 216, 0.15);
+            padding: 2.5rem 0;
+            text-align: center;
+        }
+
+        [data-theme="dark"] .problem-strip {
+            background: linear-gradient(90deg, rgba(11, 27, 58, 0.4) 0%, rgba(15, 23, 42, 0.9) 100%);
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .problem-strip p {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: var(--text-gray);
+            padding: 0 20px;
+        }
+
+        .problem-strip strong {
+            color: #0096c7;
+        }
+
+        [data-theme="dark"] .problem-strip strong {
+            color: #90e0ef;
+        }
+
+        /* Standard Sections */
+        .custom-section {
+            padding: 6rem 0;
+            background: var(--bg-primary);
+        }
+
+        .custom-section.alt-bg {
+            background: var(--bg-secondary);
+        }
+
+        .section-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: #0096c7;
+            margin-bottom: 1.25rem;
+            text-align: center;
+            display: block;
+        }
+
+        [data-theme="dark"] .section-label {
+            color: #90e0ef;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.25;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            letter-spacing: -0.01em;
+        }
+
+        .section-sub {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto 4rem auto;
+            line-height: 1.6;
+        }
+
+        /* Blueprint Section and Terminal Layout */
+        .blueprint-section {
+            padding: 6rem 0;
+            background: var(--bg-secondary);
+        }
+
+        .blueprint-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @media (max-width: 991px) {
+            .blueprint-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        .blueprint-text {
+            text-align: left;
+        }
+
+        .blueprint-text .section-label {
+            text-align: left;
+        }
+
+        .blueprint-text .section-title {
+            text-align: left;
+        }
+
+        .blueprint-card-wrapper {
+            width: 100%;
+        }
+
+        .blueprint {
+            background: #0b1329;
+            border: 1px solid rgba(0, 180, 216, 0.25);
+            border-radius: 16px;
+            overflow: hidden;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.80rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            text-align: left;
+        }
+
+        .bp-bar {
+            background: rgba(0, 180, 216, 0.08);
+            border-bottom: 1px solid rgba(0, 180, 216, 0.15);
+            padding: 0.75rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .bp-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .bp-title {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.75rem;
+            margin-left: auto;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 500;
+        }
+
+        .bp-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .bp-line {
+            display: flex;
+            gap: 1rem;
+            line-height: 1.6;
+        }
+
+        .ln {
+            color: rgba(255, 255, 255, 0.2);
+            min-width: 20px;
+            text-align: right;
+            user-select: none;
+        }
+
+        .kw { color: #8ecafc; } /* keyword */
+        .fn { color: #c084fc; } /* function */
+        .str { color: #a6e3a1; } /* string */
+        .cm { color: rgba(255, 255, 255, 0.35); font-style: italic; } /* comment */
+        .num { color: #f9e2af; } /* number */
+        .pl { color: #f5c2e7; } /* plain/boolean */
+        .op { color: rgba(255, 255, 255, 0.6); }
+
+        .bp-section {
+            margin-top: 1.25rem;
+            padding: 1rem 1.25rem;
+            background: rgba(0, 180, 216, 0.05);
+            border-left: 3px solid #00b4d8;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .bp-section-label {
+            font-size: 0.7rem;
+            color: #00b4d8;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: rgba(0, 180, 216, 0.12);
+            border: 1px solid rgba(0, 180, 216, 0.25);
+            color: #90e0ef;
+            font-size: 0.80rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+            transition: all 0.2s ease;
+        }
+
+        .tag:hover {
+            background: rgba(0, 180, 216, 0.25);
+            border-color: #00b4d8;
+            transform: translateY(-1px);
+        }
+
+        .bp-footer-status {
+            margin-top: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 1rem;
+        }
+
+        .bp-status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #a6e3a1;
+            box-shadow: 0 0 8px #a6e3a1;
+            animation: bpBlink 2s infinite;
+        }
+
+        @keyframes bpBlink {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .bp-status-text {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.75rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Two Axis Grid (Domain vs Tech) */
+        .axis-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .axis-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .axis-card {
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .axis-card:hover {
+            box-shadow: var(--shadow-xl);
+            border-color: #00b4d8;
+            transform: translateY(-4px);
+        }
+
+        .axis-card .ax-eyebrow {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #0096c7;
+            margin-bottom: 1rem;
+        }
+
+        [data-theme="dark"] .axis-card .ax-eyebrow {
+            color: #90e0ef;
+        }
+
+        .axis-card h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .axis-card p {
+            font-size: 1rem;
+            color: var(--text-gray);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .ax-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+
+        .ax-tag {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-gray);
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border-radius: 100px;
+        }
+
+        /* Scale Section */
+        .scale-section {
+            background: linear-gradient(135deg, #0b1b3a 0%, #132347 100%);
+            padding: 6rem 0;
+            color: var(--white);
+        }
+
+        .scale-section .section-label {
+            color: #90e0ef;
+        }
+
+        .scale-section .section-title {
+            color: var(--white);
+        }
+
+        .scale-section .section-sub {
+            color: rgba(255, 255, 255, 0.55);
+        }
+
+        .scale-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .scale-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .scale-card {
+            border-radius: 24px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.03);
+            transition: all 0.3s ease;
+        }
+
+        .scale-card:hover {
+            background: rgba(0, 180, 216, 0.08);
+            border-color: rgba(0, 180, 216, 0.35);
+            transform: translateY(-3px);
+        }
+
+        .scale-card .sc-icon {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .scale-card h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .scale-card p {
+            font-size: 0.98rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .scale-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 1.5rem;
+        }
+
+        .scale-list li {
+            font-size: 0.92rem;
+            color: rgba(255, 255, 255, 0.75);
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+        }
+
+        .scale-list li::before {
+            content: '→';
+            color: #00b4d8;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* Why Us Section */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 991px) {
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .why-card {
+            padding: 2.5rem;
+            border-radius: 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .why-card:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: #00b4d8;
+            transform: translateY(-3px);
+            background: var(--bg-primary);
+        }
+
+        .why-card .w-icon {
+            font-size: 1.8rem;
+            margin-bottom: 1.25rem;
+            display: block;
+        }
+
+        .why-card h3 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .why-card p {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            line-height: 1.65;
+        }
+
+        /* Process Section and Timeline */
+        .process-section {
+            padding: 6rem 0;
+            background: var(--bg-secondary);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+            position: relative;
+            margin-top: 4rem;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 27px;
+            left: calc(10% + 15px);
+            right: calc(10% + 15px);
+            height: 2px;
+            background: linear-gradient(to right, #00b4d8, rgba(0, 180, 216, 0.15));
+            z-index: 1;
+        }
+
+        @media (max-width: 900px) {
+            .process-steps {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .process-steps::before {
+                display: none;
+            }
+        }
+
+        .ps {
+            text-align: center;
+            padding: 0 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 900px) {
+            .ps {
+                text-align: left;
+                display: grid;
+                grid-template-columns: auto 1fr;
+                gap: 1.5rem;
+                align-items: start;
+            }
+        }
+
+        .ps-num {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            border: 2px solid #00b4d8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #0096c7;
+            margin: 0 auto 1.5rem;
+            background: var(--bg-secondary);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .ps-num {
+            color: #90e0ef;
+            border-color: #00b4d8;
+            background: var(--bg-secondary);
+        }
+
+        @media (max-width: 900px) {
+            .ps-num {
+                margin: 0;
+            }
+        }
+
+        .ps:hover .ps-num {
+            background: #00b4d8;
+            color: var(--white);
+            box-shadow: 0 0 15px rgba(0, 180, 216, 0.4);
+            transform: scale(1.05);
+        }
+
+        .ps-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .ps h4 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+
+        .ps p {
+            font-size: 0.88rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Integration Banner */
+        .int-banner {
+            background: linear-gradient(135deg, rgba(0, 180, 216, 0.05) 0%, rgba(37, 99, 235, 0.02) 100%);
+            border: 1px solid rgba(0, 180, 216, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem 3rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        [data-theme="dark"] .int-banner {
+            background: linear-gradient(135deg, rgba(0, 180, 216, 0.1) 0%, rgba(15, 23, 42, 0.3) 100%);
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 600px) {
+            .int-banner {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 2rem;
+            }
+        }
+
+        .int-banner .ib-icon {
+            font-size: 2.2rem;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .int-banner h4 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .int-banner p {
+            font-size: 1rem;
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+
+        /* Hero Checklist */
+        .hero-checklist {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            text-align: left;
+        }
+
+        .hero-checklist li {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .checklist-bullet {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: rgba(0, 180, 216, 0.1);
+            color: #00b4d8;
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        [data-theme="dark"] .checklist-bullet {
+            background: rgba(0, 180, 216, 0.2);
+            color: #90e0ef;
+        }
+
+        .hero-checklist li div {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+
+        .hero-checklist li div strong {
+            font-size: 0.98rem;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .hero-checklist li div span {
+            font-size: 0.88rem;
+            color: var(--text-gray);
+            line-height: 1.5;
+        }
+
+        /* Blueprint Terminal Tabbed Interface */
+        .bp-tabs {
+            display: flex;
+            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .bp-tab {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.80rem;
+            color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.02);
+            transition: all 0.2s ease;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+            user-select: none;
+        }
+
+        .bp-tab:hover {
+            color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .bp-tab.active {
+            color: #00b4d8;
+            background: #0b1329;
+            box-shadow: inset 0 2px 0 #00b4d8;
+        }
+
+        .bp-code-body {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="index.html" class="logo">
+                        <img src="assets/logo-big.png" alt="inTEUtion" class="logo-img">
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle active" aria-haspopup="true" aria-expanded="false">Products<span class="chevron">▼</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="erp.html" class="dropdown-item">inTEUtion</a></li>
+                            <li><a href="assistify-light.html" class="dropdown-item">Assistify</a></li>
+                            <li><a href="customer-self-servicing-portal.html" class="dropdown-item">Customer Portal</a> </li>
+                             <li><a href="singularity.html" class="dropdown-item">Singularity</a></li>
+                             <li> <a href="custom-solution.html" class="dropdown-item">Custom Solutions</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="value.html" class="nav-link">What You Get</a></li>
+                    <li><a href="about.html" class="nav-link">About Us</a></li>
+                    
+                    <!-- <li><a href="careers.html" class="nav-link">Careers</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li> -->
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <span class="sun-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="4" />
+                            <path
+                                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                        </svg>
+                    </span>
+                    <span class="moon-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+                        </svg>
+                    </span>
+                </button>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="custom-hero">
+        <div class="container">
+            <div class="custom-hero-grid">
+                <div class="hero-content-left">
+                    <span class="custom-badge">
+                        Custom IT Solutions
+                    </span>
+                    <h1 class="custom-title">Maritime Problems.<br><span class="highlight">Purpose-Built Solutions.</span></h1>
+                    <p class="custom-desc">
+                        inTEUtion's Custom IT Solutions arm brings together deep shipping domain knowledge and hands-on engineering expertise to build exactly what your operation needs — nothing more, nothing less. Whether you're locked into a legacy stack or scaling a greenfield platform, we meet you where you are.
+                    </p>
+                    
+             
+
+                    <p class="custom-sub-bold">
+                        Small project or enterprise platform — we scope to fit your world.
+                    </p>
+                    <div class="hero-cta-btn">
+                        <a href="javascript:void(0)" class="btn btn-primary">Talk to Our Team →</a>
+                    </div>
+                </div>
+                            <div class="blueprint-card-wrapper">
+                    <div class="blueprint">
+                        <!-- Terminal Top Header Bar -->
+                        <div class="bp-bar">
+                            <div class="bp-dot" style="background:#ff5f57;"></div>
+                            <div class="bp-dot" style="background:#febc2e;"></div>
+                            <div class="bp-dot" style="background:#28c840;"></div>
+                            <span class="bp-title">custom-it-blueprint</span>
+                        </div>
+                        
+                        <!-- IDE Tabs (Interactive!) -->
+                        <div class="bp-tabs">
+                            <div class="bp-tab active" data-target="tabScope">scope.json</div>
+                            <div class="bp-tab" data-target="tabAdapters">adapters.yaml</div>
+                            <div class="bp-tab" data-target="tabApiBridge">api-bridge.ts</div>
+                        </div>
+
+                        <div class="bp-body">
+                            <!-- Tab 1 Code Body (Scope) -->
+                            <div class="bp-code-body" id="tabScope">
+                                <div class="bp-line"><span class="ln">1</span><span class="op">{</span></div>
+                                <div class="bp-line"><span class="ln">2</span><span class="kw">&nbsp;&nbsp;"client"</span><span class="op">:</span> <span class="str">"Maritime Co. Ltd"</span><span class="op">,</span></div>
+                                <div class="bp-line"><span class="ln">3</span><span class="kw">&nbsp;&nbsp;"industry"</span><span class="op">:</span> <span class="str">"NVOCC / Forwarding"</span><span class="op">,</span></div>
+                                <div class="bp-line"><span class="ln">4</span><span class="kw">&nbsp;&nbsp;"existingStack"</span><span class="op">:</span> <span class="str">"Legacy TOS + Custom ERP"</span><span class="op">,</span></div>
+                                <div class="bp-line"><span class="ln">5</span><span class="kw">&nbsp;&nbsp;"solution"</span><span class="op">:</span> <span class="str">"Custom Integration Layer"</span><span class="op">,</span></div>
+                                <div class="bp-line"><span class="ln">6</span><span class="kw">&nbsp;&nbsp;"deliveryWeeks"</span><span class="op">:</span> <span class="num">12</span><span class="op">,</span></div>
+                                <div class="bp-line"><span class="ln">7</span><span class="kw">&nbsp;&nbsp;"domainExpertise"</span><span class="op">:</span> <span class="pl">true</span></div>
+                                <div class="bp-line"><span class="ln">8</span><span class="op">}</span></div>
+                            </div>
+
+                            <!-- Tab 2 Code Body (Adapters) -->
+                            <div class="bp-code-body" id="tabAdapters" style="display: none;">
+                                <div class="bp-line"><span class="ln">1</span><span class="cm"># Legacy TOS & Carrier API Adapters</span></div>
+                                <div class="bp-line"><span class="ln">2</span><span class="kw">adapters</span><span class="op">:</span></div>
+                                <div class="bp-line"><span class="ln">3</span><span class="kw">&nbsp;&nbsp;-</span> <span class="str">"CargoWise & Navis SPARCS (EDI/XML)"</span></div>
+                                <div class="bp-line"><span class="ln">4</span><span class="kw">&nbsp;&nbsp;-</span> <span class="str">"Port Authority Systems (EDIFACT)"</span></div>
+                                <div class="bp-line"><span class="ln">5</span><span class="kw">&nbsp;&nbsp;-</span> <span class="str">"Carrier API (Booking/Vessel Track)"</span></div>
+                            </div>
+
+                            <!-- Tab 3 Code Body (API Bridge) -->
+                            <div class="bp-code-body" id="tabApiBridge" style="display: none;">
+                                <div class="bp-line"><span class="ln">1</span><span class="cm">// Vessel Tracking & ERP Accruals Bridge</span></div>
+                                <div class="bp-line"><span class="ln">2</span><span class="kw">async function</span> <span class="fn">syncContainer</span><span class="op">(</span><span class="pl">containerId</span><span class="op">:</span> <span class="kw">string</span><span class="op">)</span> <span class="op">{</span></div>
+                                <div class="bp-line"><span class="ln">3</span><span class="kw">&nbsp;&nbsp;const</span> <span class="pl">status</span> <span class="op">=</span> <span class="kw">await</span> <span class="pl">TOS</span><span class="op">.</span><span class="fn">getGateStatus</span><span class="op">(</span><span class="pl">containerId</span><span class="op">);</span></div>
+                                <div class="bp-line"><span class="ln">4</span><span class="kw">&nbsp;&nbsp;await</span> <span class="pl">ERP</span><span class="op">.</span><span class="fn">accrual</span><span class="op">({</span> <span class="pl">containerId</span><span class="op">,</span> <span class="pl">status</span><span class="op">,</span> <span class="kw">event</span><span class="op">:</span> <span class="str">"GATE_IN"</span> <span class="op">});</span></div>
+                                <div class="bp-line"><span class="ln">5</span><span class="op">}</span></div>
+                            </div>
+
+                            <div class="bp-section">
+                                <div class="bp-section-label">Capabilities & Connectors</div>
+                                <div class="tag-row">
+                                    <span class="tag">ERP Integration</span>
+                                    <span class="tag">TOS Connectors</span>
+                                    <span class="tag">Vessel Tracking</span>
+                                    <span class="tag">Rate Engines</span>
+                                    <span class="tag">EDI / API Bridges</span>
+                                    <span class="tag">Reporting Dashboards</span>
+                                    <span class="tag">Port Operations</span>
+                                    <span class="tag">Legacy Migration</span>
+                                </div>
+                            </div>
+
+                            <div class="bp-footer-status">
+                                <div class="bp-status-dot"></div>
+                                <span class="bp-status-text">Ready to scope your project</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Strip -->
+    <div class="problem-strip">
+        <p>The maritime industry runs on <strong>specialised, often decades-old workflows.</strong> Generic software ignores that reality. We don't — because we've worked inside it.</p>
+    </div>
+
+    <!-- Domain vs Tech Section -->
+    <section class="custom-section">
+        <div class="container">
+            <span class="section-label">⚓ Our Edge</span>
+            <h2 class="section-title">Two disciplines. One team.</h2>
+            <p class="section-sub">Most IT vendors know software. We know software <em>and</em> shipping — and that difference shows up in every line of code we write.</p>
+
+            <div class="axis-grid">
+                <div class="axis-card">
+                    <div class="ax-eyebrow">🚢 Shipping Domain Knowledge</div>
+                    <h3>We speak your language fluently.</h3>
+                    <p>From EXIM operations and vessel scheduling to BL management, container lifecycle, freight rating, and port operations — we understand the workflows before we design the system.</p>
+                    <div class="ax-tags">
+                        <span class="ax-tag">NVOCC Operations</span>
+                        <span class="ax-tag">Freight Forwarding</span>
+                        <span class="ax-tag">Port Logistics</span>
+                        <span class="ax-tag">Container Management</span>
+                        <span class="ax-tag">Vessel Scheduling</span>
+                        <span class="ax-tag">BL Issuance</span>
+                        <span class="ax-tag">Customs & EXIM</span>
+                    </div>
+                </div>
+                <div class="axis-card">
+                    <div class="ax-eyebrow">💻 Engineering Expertise</div>
+                    <h3>We build to last, not to impress.</h3>
+                    <p>Modern APIs, robust integrations, clean data pipelines, and scalable architectures — built to fit into your existing infrastructure, not fight against it.</p>
+                    <div class="ax-tags">
+                        <span class="ax-tag">REST & EDI APIs</span>
+                        <span class="ax-tag">ERP Connectors</span>
+                        <span class="ax-tag">Cloud & On-Prem</span>
+                        <span class="ax-tag">Data Pipelines</span>
+                        <span class="ax-tag">Web & Mobile</span>
+                        <span class="ax-tag">Automation</span>
+                        <span class="ax-tag">Reporting & BI</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scale Section -->
+    <section class="scale-section">
+        <div class="container">
+            <span class="section-label">📐 Project Scale</span>
+            <h2 class="section-title">No project is too small.<br>No problem is too complex.</h2>
+            <p class="section-sub">We scope every engagement to match the problem — not the other way around.</p>
+
+            <div class="scale-cards">
+                <div class="scale-card">
+                    <span class="sc-icon">🔧</span>
+                    <h3>Focused Builds</h3>
+                    <p>Targeted tools and integrations that solve a specific pain point — fast to scope, fast to ship.</p>
+                    <ul class="scale-list">
+                        <li>Custom reporting dashboards</li>
+                        <li>Legacy system data bridges</li>
+                        <li>Rate calculation engines</li>
+                        <li>Document generation tools</li>
+                        <li>Workflow automation scripts</li>
+                    </ul>
+                </div>
+                <div class="scale-card">
+                    <span class="sc-icon">🏗️</span>
+                    <h3>Full Platform Builds</h3>
+                    <p>End-to-end systems designed around your operation's complete lifecycle — from architecture to deployment.</p>
+                    <ul class="scale-list">
+                        <li>Customer-facing portals</li>
+                        <li>Operational management systems</li>
+                        <li>ERP & TOS integrations</li>
+                        <li>Multi-module enterprise platforms</li>
+                        <li>Legacy modernisation projects</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section class="custom-section">
+        <div class="container">
+            <span class="section-label">✦ Why inTEUtion</span>
+            <h2 class="section-title">Built by people who've<br>worked the problem.</h2>
+            <p class="section-sub">We're not a generic dev shop handed a spec sheet. We bring context to every project.</p>
+
+            <div class="why-grid">
+                <div class="why-card">
+                    <span class="w-icon">🎯</span>
+                    <h3>Domain-First Thinking</h3>
+                    <p>We start with the shipping workflow, not the tech stack. This means fewer re-scopes, fewer surprises, and solutions that actually fit how your team works.</p>
+                </div>
+                <div class="why-card">
+                    <span class="w-icon">🔌</span>
+                    <h3>Stack-Agnostic Integration</h3>
+                    <p>Tied to a legacy TOS or ERP you can't replace? We build around it. Our integrations work with what you have — not against it.</p>
+                </div>
+                <div class="why-card">
+                    <span class="w-icon">⚡</span>
+                    <h3>Speed Without Compromise</h3>
+                    <p>Maritime problems don't wait. We move quickly from scoping to delivery without cutting corners on reliability or data integrity.</p>
+                </div>
+                <div class="why-card">
+                    <span class="w-icon">📦</span>
+                    <h3>Right-Sized Delivery</h3>
+                    <p>We don't upsell complexity. If your problem needs a focused tool, that's what we build. If it needs a platform, we'll scope it honestly.</p>
+                </div>
+                <div class="why-card">
+                    <span class="w-icon">🌐</span>
+                    <h3>Maritime Network</h3>
+                    <p>Our background in the industry means we understand regulatory requirements, carrier data formats, port authority systems, and the nuances that trip up outsiders.</p>
+                </div>
+                <div class="why-card">
+                    <span class="w-icon">🛠️</span>
+                    <h3>Built to Hand Over</h3>
+                    <p>Every solution we deliver is documented, maintainable, and yours. No vendor lock-in, no black boxes — just clean, operable software.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process-section">
+        <div class="container">
+            <span class="section-label">🔄 How We Work</span>
+            <h2 class="section-title">From first conversation<br>to live system.</h2>
+            <p class="section-sub">A transparent, collaborative process — so you always know where things stand.</p>
+
+            <div class="process-steps">
+                <div class="ps">
+                    <div class="ps-num">1</div>
+                    <div class="ps-content">
+                        <h4>Discovery</h4>
+                        <p>We learn your workflows, constraints, and existing systems before writing a single line of code.</p>
+                    </div>
+                </div>
+                <div class="ps">
+                    <div class="ps-num">2</div>
+                    <div class="ps-content">
+                        <h4>Scoping</h4>
+                        <p>A clear, honest project scope — timelines, deliverables, and integration touchpoints agreed upfront.</p>
+                    </div>
+                </div>
+                <div class="ps">
+                    <div class="ps-num">3</div>
+                    <div class="ps-content">
+                        <h4>Build</h4>
+                        <p>Iterative development with regular check-ins. You see progress throughout, not just at the end.</p>
+                    </div>
+                </div>
+                <div class="ps">
+                    <div class="ps-num">4</div>
+                    <div class="ps-content">
+                        <h4>Integration</h4>
+                        <p>We connect into your existing stack carefully — tested against real data, not just synthetic scenarios.</p>
+                    </div>
+                </div>
+                <div class="ps">
+                    <div class="ps-num">5</div>
+                    <div class="ps-content">
+                        <h4>Handover</h4>
+                        <p>Full documentation, training where needed, and ongoing support options. The system is yours to own.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integration Note Banner -->
+    <section class="custom-section">
+        <div class="container">
+            <div class="int-banner">
+                <div class="ib-icon">🔗</div>
+                <div>
+                    <h4>Open to Third-Party ERP & Platform Integration</h4>
+                    <p>Many companies are locked into existing IT infrastructure — and that's perfectly fine. Our Custom IT Solutions are designed to integrate with third-party ERPs, TOS platforms, carrier APIs, and any system your business currently relies on. We work within your world, not outside of it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Have a Problem Worth Solving?<br>Let's Talk.</h2>
+                <p class="cta-description">Tell us what you're dealing with. No obligation — just a conversation between people who understand maritime operations.</p>
+                <a href="javascript:void(0)" class="btn btn-cta">🚀&nbsp; Schedule A Demo</a>
+            </div>
+        </div>
+    </section>    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">inTEUtion</h3>
+                    <p class="footer-description">The Executive Software Platform for Streamlined Container Operations
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="value.html">What You Get</a></li>
+                        <!-- <li><a href="careers.html">Careers</a></li>
+                        <li><a href="blog.html">Blog</a></li> -->
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <a #href="https://wa.me/918592859274" target="_blank" class="contact-link">
+                                <span class="contact-icon">💬</span>
+                                WhatsApp: +91 87 14 335 326
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:info@inteution.com" class="contact-link">
+                                <span class="contact-icon">✉️</span>
+                                info@inteution.com
+                            </a>
+                        </li>
+                        <li>
+                            <div class="footer-social-links">
+                                <a href="https://www.linkedin.com/company/inteution/" target="_blank" rel="noopener noreferrer" class="social-link">
+                                    <img src="assets/linkedin.png" alt="LinkedIn" class="social-icon-img">
+                                </a>
+                                <a href="https://www.instagram.com/we_are_inteution/" target="_blank" rel="noopener noreferrer" class="social-link">
+                                    <img src="assets/instagram.png" alt="Instagram" class="social-icon-img">
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Address</h4>
+                    <p class="footer-address">
+                        2nd Floor, Transasia Corporate Park<br>
+                        XIV/396-C, Seaport - Airport Rd<br>
+                        Chittethukara, Kakkanad<br>
+                        Kerala 682037, India
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2026 inTEUtion. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#privacy">Privacy Policy</a>
+                    <span class="separator">|</span>
+                    <a href="#terms">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.bp-tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active from other tabs
+                    tab.parentElement.querySelectorAll('.bp-tab').forEach(t => t.classList.remove('active'));
+                    // Add active to clicked tab
+                    tab.classList.add('active');
+                    
+                    // Hide other code blocks
+                    const targetId = tab.getAttribute('data-target');
+                    const blueprint = tab.closest('.blueprint');
+                    blueprint.querySelectorAll('.bp-code-body').forEach(body => {
+                        body.style.display = 'none';
+                    });
+                    
+                    // Show clicked code block
+                    const targetBody = blueprint.querySelector(`#${targetId}`);
+                    if (targetBody) {
+                        targetBody.style.display = 'flex';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
