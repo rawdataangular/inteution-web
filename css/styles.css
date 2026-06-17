@@ -6259,13 +6259,13 @@ body {
 
 /* ── Customer logo dark mode ── */
 [data-theme="dark"] .customer-logo {
-  background: var(--card-bg) !important;
-  border-color: var(--card-border) !important;
+  background: #ffffff !important;
+  border-color: transparent !important;
 }
 
 [data-theme="dark"] .customer-logo:hover {
-  border-color: rgba(96, 165, 250, 0.3) !important;
-  box-shadow: 0 12px 28px rgba(96, 165, 250, 0.10) !important;
+  border-color: var(--brand-blue-light) !important;
+  box-shadow: 0 12px 28px rgba(255, 255, 255, 0.15) !important;
 }
 
 /* ── Know More button refinement ── */
