@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-228718713"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-228718713');
+</script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Singularity — AI-Powered Tariff Extraction Platform. Automatically extract, edit, and bulk-change tariff data from PDFs, images, and Excel sheets using AI agents.">
+    <title>Singularity — AI-Powered Tariff Extraction Platform</title>
+    <link rel="icon" type="image/png" href="assets/icon.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        // Inline theme selector to prevent white screen flash
+        (function () {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+    <script src="js/main.js" defer></script>
+    <style>
+        /* Page specific overrides */
+        .singularity-hero {
+            padding: 8rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, rgba(168, 85, 247, 0.04) 0%, var(--white) 100%);
+        }
+
+        [data-theme="dark"] .singularity-hero {
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+        }
+
+        .singularity-hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .singularity-badge {
+            background: rgba(168, 85, 247, 0.08);
+            color: #8b5cf6;
+            padding: 0.45rem 1.1rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        [data-theme="dark"] .singularity-badge {
+            background: rgba(168, 85, 247, 0.15);
+            color: #c084fc;
+        }
+
+        .singularity-badge-icon {
+            width: 16px;
+            height: 16px;
+            object-fit: contain;
+        }
+
+        .singularity-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .singularity-title .highlight {
+            background: linear-gradient(135deg, var(--brand-blue) 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        [data-theme="dark"] .singularity-title .highlight {
+            background: linear-gradient(135deg, var(--brand-blue-light) 0%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .singularity-desc {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+        }
+
+        .singularity-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .singularity-image {
+            max-width: 100%;
+            max-height: 400px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 24px;
+            filter: drop-shadow(0 20px 40px rgba(168, 85, 247, 0.15));
+            animation: floatArt 6s ease-in-out infinite;
+        }
+
+        @keyframes floatArt {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* Problem strip styling */
+        .problem-strip {
+            background: linear-gradient(90deg, rgba(243, 232, 255, 0.6) 0%, rgba(255, 255, 255, 0.9) 100%);
+            border-top: 1px solid rgba(168, 85, 247, 0.15);
+            border-bottom: 1px solid rgba(168, 85, 247, 0.15);
+            padding: 2.5rem 0;
+            text-align: center;
+        }
+
+        [data-theme="dark"] .problem-strip {
+            background: linear-gradient(90deg, rgba(24, 15, 41, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .problem-strip p {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 1.25rem;
+            line-height: 1.7;
+            color: var(--text-gray);
+            padding: 0 20px;
+        }
+
+        .problem-strip strong {
+            color: #8b5cf6;
+        }
+
+        [data-theme="dark"] .problem-strip strong {
+            color: #c084fc;
+        }
+
+        /* Sections and Titles */
+        .sing-section {
+            padding: 6rem 0;
+            background: var(--bg-primary);
+        }
+
+        .sing-section.alt-bg {
+            background: var(--bg-secondary);
+        }
+
+        .section-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: #8b5cf6;
+            margin-bottom: 1.25rem;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.25;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            letter-spacing: -0.01em;
+        }
+
+        .section-sub {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto 4rem auto;
+            line-height: 1.6;
+        }
+
+        /* Comparison Table Matrix styling */
+        .comparison-container {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+            background: var(--bg-primary);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table th, 
+        .comparison-table td {
+            padding: 1.25rem 1.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table th {
+            background: var(--bg-secondary);
+            color: var(--text-dark);
+            font-weight: 800;
+            font-size: 1.05rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table td.feature-name {
+            font-weight: 700;
+            color: var(--text-dark);
+            background: var(--bg-secondary);
+            width: 20%;
+        }
+
+        .comparison-table td.nightmare {
+            color: var(--text-light);
+            background: rgba(239, 68, 68, 0.02);
+            width: 40%;
+        }
+
+        .comparison-table td.advantage {
+            color: var(--text-dark);
+            background: rgba(139, 92, 246, 0.03);
+            font-weight: 600;
+            width: 40%;
+            border-left: 2px solid rgba(139, 92, 246, 0.15);
+        }
+
+        [data-theme="dark"] .comparison-table td.advantage {
+            background: rgba(168, 85, 247, 0.05);
+            border-left-color: rgba(168, 85, 247, 0.25);
+        }
+
+        .comparison-table td.advantage strong {
+            color: #8b5cf6;
+        }
+
+        [data-theme="dark"] .comparison-table td.advantage strong {
+            color: #c084fc;
+        }
+
+        /* Feature Cards Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.4) 100%);
+            backdrop-filter: blur(20px) saturate(140%);
+            -webkit-backdrop-filter: blur(20px) saturate(140%);
+            border: 1px solid rgba(168, 85, 247, 0.15);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] .feature-card {
+            background: linear-gradient(135deg, rgba(15, 21, 36, 0.6) 0%, rgba(30, 41, 59, 0.4) 100%);
+            border-color: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            border-color: #c084fc;
+            box-shadow: 0 20px 40px rgba(168, 85, 247, 0.1);
+        }
+
+        .feature-card h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 0;
+        }
+
+        .feature-card h3 span.num {
+            background: rgba(168, 85, 247, 0.08);
+            color: #8b5cf6;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        [data-theme="dark"] .feature-card h3 span.num {
+            background: rgba(168, 85, 247, 0.15);
+            color: #c084fc;
+        }
+
+        .feature-card p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-sublist {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            padding-left: 0.5rem;
+        }
+
+        .feature-sublist li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            font-weight: 600;
+        }
+
+        .feature-sublist li::before {
+            content: "✦";
+            color: #8b5cf6;
+            font-size: 0.8rem;
+        }
+
+        [data-theme="dark"] .feature-sublist li::before {
+            color: #c084fc;
+        }
+
+        /* Real World Formats block */
+        .formats-container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.03) 0%, rgba(37, 99, 235, 0.03) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 28px;
+            padding: 3.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .formats-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            margin-top: 0;
+        }
+
+        .formats-row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .format-badge {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .format-badge:hover {
+            border-color: #8b5cf6;
+            transform: translateY(-2px);
+        }
+
+        .format-badge.coming-soon {
+            opacity: 0.5;
+            background: var(--bg-secondary);
+            border-style: dashed;
+        }
+
+        .format-badge.coming-soon:hover {
+            transform: none;
+            border-color: var(--border-color);
+        }
+
+        .format-icon {
+            font-size: 1.1rem;
+        }
+
+        .formats-desc {
+            font-size: 1.05rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* Highlight block */
+        .accent-block {
+            background: linear-gradient(135deg, #090514 0%, #1e1b4b 100%) !important;
+            color: #ffffff;
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .accent-block::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.01) 0 1px, transparent 1px 40px);
+            pointer-events: none;
+        }
+
+        .accent-block p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.35rem;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .accent-block strong {
+            color: #c084fc;
+        }
+
+        /* Responsive styling */
+        @media (max-width: 992px) {
+            .singularity-hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+            }
+            .singularity-badge {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .singularity-visual {
+                order: -1;
+            }
+            .singularity-image {
+                max-height: 300px;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .formats-container {
+                padding: 2rem 1.5rem;
+            }
+            .comparison-table th, 
+            .comparison-table td {
+                padding: 1rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="index.html" class="logo">
+                        <img src="assets/logo-big.png" alt="inTEUtion" class="logo-img">
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Products<span class="chevron">▼</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="erp.html" class="dropdown-item">inTEUtion</a></li>
+                            <li><a href="assistify-light.html" class="dropdown-item">Assistify</a></li>
+                            <li><a href="customer-self-servicing-portal.html" class="dropdown-item">Customer Portal</a> </li>
+                            <li><a href="singularity.html" class="dropdown-item">Singularity</a></li>
+                              <li> <a href="custom-solution.html" class="dropdown-item">Custom Solutions</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="value.html" class="nav-link">What You Get</a></li>
+                    <li><a href="about.html" class="nav-link active">About Us</a></li>
+                    
+                    <!-- <li><a href="careers.html" class="nav-link">Careers</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li> -->
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <span class="sun-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="4" />
+                            <path
+                                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                        </svg>
+                    </span>
+                    <span class="moon-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+                        </svg>
+                    </span>
+                </button>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="singularity-hero">
+        <div class="container">
+            <div class="singularity-hero-grid">
+                <div class="hero-content-left">
+                    <span class="singularity-badge">
+                        <img src="assets/icon_singularity.png" alt="Singularity Icon" class="singularity-badge-icon">
+                        Tariff Extraction Suite
+                    </span>
+                    <h1 class="singularity-title">Turn Chaos into Clarity.<br>Extract. Edit.<br><span class="highlight">Rule. Repeat.</span></h1>
+                    <p class="singularity-desc">
+                        Tariff extraction is the silent killer of productivity in global trade. Teams spend hours—sometimes days—manually sifting through PDFs, Excel sheets, and image files, hunting for the right rates, codes, and conditions. One missed digit, one misread row, and you're looking at fines, delays, or seized goods.
+                        <br><br>
+                        <strong>Singularity changes everything.</strong>
+                    </p>
+                    <div class="hero-cta-btn">
+                        <a href="javascript:void(0)" class="btn btn-primary">
+                            Schedule A Demo <span class="arrow-icon">→</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="singularity-visual">
+                    <div class="erp-visual-glow erp-visual-glow-singularity"></div>
+                    <img src="assets/singularity_theam.jpeg" alt="Singularity AI Tariff Extraction visual" class="singularity-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROBLEM STRIP -->
+    <div class="problem-strip">
+        <p>Built with advanced AI agents, <strong>Singularity</strong> doesn't just extract tariff data—it transforms how you work with it. Upload any file. Extract instantly. Edit, add, bulk-change, and apply custom rules. All in one place. All in minutes.</p>
+    </div>
+
+    <!-- COMPARISON SECTION -->
+    <section class="sing-section alt-bg">
+        <div class="container">
+            <div class="section-label">⚖️ Comparison Matrix</div>
+            <h2 class="section-title">The Manual Nightmare vs.<br>The Singularity Advantage</h2>
+            <p class="section-sub">See how traditional manual tariff extraction stacks up against Singularity's advanced AI agents.</p>
+
+            <div class="comparison-container">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Manual Tariff Extraction</th>
+                            <th>Singularity AI Agents</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-name">Speed</td>
+                            <td class="nightmare">Weeks of manual review per document batch</td>
+                            <td class="advantage"><strong>Seconds per file.</strong> Thousands of items classified in moments</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Accuracy</td>
+                            <td class="nightmare">Inconsistent. Human error rates vary by classifier</td>
+                            <td class="advantage"><strong>Up to 99%+ accuracy.</strong> Consistent, repeatable results</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Scalability</td>
+                            <td class="nightmare">More volume = more headcount</td>
+                            <td class="advantage"><strong>Infinite scale.</strong> Handles thousands of SKUs without adding resources</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Cost</td>
+                            <td class="nightmare">Expensive specialists, consultants, and overtime</td>
+                            <td class="advantage"><strong>0.14%</strong> of estimated manual labor cost</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Auditability</td>
+                            <td class="nightmare">Scattered notes, tribal knowledge</td>
+                            <td class="advantage">Complete traceability, version history, audit-ready trails</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Format Handling</td>
+                            <td class="nightmare">One format at a time. Painful conversions</td>
+                            <td class="advantage">Image, PDF, Excel, Word. <strong>All supported. One upload.</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Flexibility</td>
+                            <td class="nightmare">Rigid workflows. Start over when rules change</td>
+                            <td class="advantage">Edit rows, add rows, bulk change, custom rules on the fly.</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Compliance Risk</td>
+                            <td class="nightmare">High—missed updates, missed rates</td>
+                            <td class="advantage"><strong>Real-time intelligence.</strong> Rules that evolve with regulations</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- KEY FEATURES -->
+    <section class="sing-section">
+        <div class="container">
+            <div class="section-label">⚓ What Singularity Does</div>
+            <h2 class="section-title">Designed to master the chaos<br>of global trade.</h2>
+            <p class="section-sub">Extraction is just the beginning. Singularity gives you full operational control over your extracted data.</p>
+
+            <div class="features-grid">
+                <!-- Card 1 -->
+                <div class="feature-card">
+                    <h3><span class="num">1</span> Extract from Anything</h3>
+                    <p>Upload images, PDFs, Excel files, or documents. Singularity's AI agents read everything—tables, text, complex layouts, even scanned documents. No manual data entry. No reformatting. Just clean, structured tariff data ready to use.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="feature-card">
+                    <h3><span class="num">2</span> Edit Everything</h3>
+                    <p>Unlike basic OCR tools that give you static output, Singularity puts you in complete control. Re-arrange and edit files directly in your browser:</p>
+                    <ul class="feature-sublist">
+                        <li><strong>Edit rows</strong> — Fix, update, or refine any extracted field</li>
+                        <li><strong>Add rows</strong> — Insert new tariff entries seamlessly</li>
+                        <li><strong>Bulk change</strong> — Update hundreds of rows with one action</li>
+                        <li><strong>Custom fields</strong> — Add the data points your business needs</li>
+                    </ul>
+                </div>
+                <!-- Card 3 -->
+                <div class="feature-card">
+                    <h3><span class="num">3</span> Rule Your Extraction</h3>
+                    <p>Every carrier, every country, every tariff file is different. Singularity lets you define custom extraction rules so the AI knows exactly what to look for—every time. Train it once. Use it forever. Perfect extraction, every upload.</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="feature-card">
+                    <h3><span class="num">4</span> Work at Scale</h3>
+                    <p>Bulk classify thousands of products in seconds. Run bulk AI operations with natural language commands—just describe what you want, and Singularity does the rest.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REAL WORLD SUPPORTED FORMATS -->
+    <section class="sing-section alt-bg">
+        <div class="container">
+            <div class="formats-container">
+                <h3 class="formats-title">Built for the Real World</h3>
+                <div class="formats-row">
+                    <div class="format-badge">
+                        <span class="format-icon">🖼️</span>
+                        <span>Images</span>
+                    </div>
+                    <div class="format-badge">
+                        <span class="format-icon">📄</span>
+                        <span>PDF Files</span>
+                    </div>
+                    <div class="format-badge">
+                        <span class="format-icon">📊</span>
+                        <span>Excel Sheets</span>
+                    </div>
+                    <div class="format-badge coming-soon">
+                        <span class="format-icon">📝</span>
+                        <span>DOC / DOCX</span>
+                        <span style="font-size: 0.75rem; background: rgba(139, 92, 246, 0.1); color: #8b5cf6; padding: 2px 6px; border-radius: 10px; margin-left: 5px;">Soon</span>
+                    </div>
+                </div>
+                <p class="formats-desc">
+                    Tariff extraction is time-consuming because tariff files are messy. Different carriers. Different formats. Different rules. Singularity was built for this chaos.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACCENT BREAK -->
+    <section class="accent-block">
+        <div class="container">
+            <p>The global trade landscape is shifting faster than ever. Teams that rely on manual processes are falling behind—spending weeks on what should take minutes, risking errors that cost millions.<br><br><strong>Singularity puts AI agents to work for you.</strong> Not as a replacement for your expertise—as a force multiplier that handles the grunt work so you can focus on what matters.</p>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to see what Singularity can do<br>for your tariff workflow?</h2>
+                <p class="cta-description">Get a personalized demo and see how Singularity can transform your logistics operations.</p>
+                <a href="javascript:void(0)" class="btn btn-cta">
+                    <span class="demo-icon">🚀</span>
+                    Schedule A Demo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">inTEUtion</h3>
+                    <p class="footer-description">The Executive Software Platform for Streamlined Container Operations
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="value.html">What You Get</a></li>
+                        <!-- <li><a href="careers.html">Careers</a></li>
+                        <li><a href="blog.html">Blog</a></li> -->
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <a #href="https://wa.me/918592859274" target="_blank" class="contact-link">
+                                <span class="contact-icon">💬</span>
+                                WhatsApp: +91 87 14 335 326
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:info@inteution.com" class="contact-link">
+                                <span class="contact-icon">✉️</span>
+                                info@inteution.com
+                            </a>
+                        </li>
+                        <li>
+                            <div class="footer-social-links">
+                                <a href="https://www.linkedin.com/company/inteution/" target="_blank" rel="noopener noreferrer" class="social-link">
+                                    <img src="assets/linkedin.png" alt="LinkedIn" class="social-icon-img">
+                                </a>
+                                <a href="https://www.instagram.com/we_are_inteution/" target="_blank" rel="noopener noreferrer" class="social-link">
+                                    <img src="assets/instagram.png" alt="Instagram" class="social-icon-img">
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Address</h4>
+                    <p class="footer-address">
+                        2nd Floor, Transasia Corporate Park<br>
+                        XIV/396-C, Seaport - Airport Rd<br>
+                        Chittethukara, Kakkanad<br>
+                        Kerala 682037, India
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2026 inTEUtion. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#privacy">Privacy Policy</a>
+                    <span class="separator">|</span>
+                    <a href="#terms">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -5380,6 +5380,25 @@ body {
   background: radial-gradient(circle, rgba(129, 140, 248, 0.15) 0%, transparent 70%) !important;
 }
 
+/* Singularity Custom Colors & Glowing */
+.erp-badge-singularity {
+  background: rgba(168, 85, 247, 0.08) !important;
+  color: #8b5cf6 !important;
+}
+
+[data-theme="dark"] .erp-badge-singularity {
+  background: rgba(168, 85, 247, 0.15) !important;
+  color: #c084fc !important;
+}
+
+.erp-visual-glow-singularity {
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.18) 0%, transparent 70%) !important;
+}
+
+[data-theme="dark"] .erp-visual-glow-singularity {
+  background: radial-gradient(circle, rgba(192, 132, 252, 0.15) 0%, transparent 70%) !important;
+}
+
 
 /* Emojis highlights formatting */
 .highlight-icon.highlight-emoji {
