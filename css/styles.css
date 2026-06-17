@@ -5317,9 +5317,13 @@ body {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+  width: 50px !important;
+  height: 50px !important;
+  min-width: 50px !important;
+  min-height: 50px !important;
+  padding: 0 !important;
+  flex-shrink: 0 !important;
+  border-radius: 50% !important;
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -5393,14 +5397,17 @@ body {
 }
 
 .erp-carousel-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
+  width: 12px !important;
+  height: 12px !important;
+  min-width: 12px !important;
+  min-height: 12px !important;
+  padding: 0 !important;
+  flex-shrink: 0 !important;
+  border-radius: 50% !important;
   border: 2px solid var(--brand-blue);
   background: transparent;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 0;
   position: relative;
 }
 
@@ -5558,8 +5565,12 @@ body {
 
 @media (max-width: 768px) {
   .erp-carousel-control {
-    width: 40px;
-    height: 40px;
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    padding: 0 !important;
+    flex-shrink: 0 !important;
     font-size: 1rem;
   }
   .erp-carousel-prev {
