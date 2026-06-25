@@ -1006,74 +1006,8 @@
                         <a href="javascript:void(0)" class="btn btn-primary">Talk to Our Team →</a>
                     </div>
                 </div>
-                            <div class="blueprint-card-wrapper">
-                    <div class="blueprint">
-                        <!-- Terminal Top Header Bar -->
-                        <div class="bp-bar">
-                            <div class="bp-dot" style="background:#ff5f57;"></div>
-                            <div class="bp-dot" style="background:#febc2e;"></div>
-                            <div class="bp-dot" style="background:#28c840;"></div>
-                            <span class="bp-title">custom-it-blueprint</span>
-                        </div>
-                        
-                        <!-- IDE Tabs (Interactive!) -->
-                        <div class="bp-tabs">
-                            <div class="bp-tab active" data-target="tabScope">scope.json</div>
-                            <div class="bp-tab" data-target="tabAdapters">adapters.yaml</div>
-                            <div class="bp-tab" data-target="tabApiBridge">api-bridge.ts</div>
-                        </div>
-
-                        <div class="bp-body">
-                            <!-- Tab 1 Code Body (Scope) -->
-                            <div class="bp-code-body" id="tabScope">
-                                <div class="bp-line"><span class="ln">1</span><span class="op">{</span></div>
-                                <div class="bp-line"><span class="ln">2</span><span class="kw">&nbsp;&nbsp;"client"</span><span class="op">:</span> <span class="str">"Maritime Co. Ltd"</span><span class="op">,</span></div>
-                                <div class="bp-line"><span class="ln">3</span><span class="kw">&nbsp;&nbsp;"industry"</span><span class="op">:</span> <span class="str">"NVOCC / Forwarding"</span><span class="op">,</span></div>
-                                <div class="bp-line"><span class="ln">4</span><span class="kw">&nbsp;&nbsp;"existingStack"</span><span class="op">:</span> <span class="str">"Legacy TOS + Custom ERP"</span><span class="op">,</span></div>
-                                <div class="bp-line"><span class="ln">5</span><span class="kw">&nbsp;&nbsp;"solution"</span><span class="op">:</span> <span class="str">"Custom Integration Layer"</span><span class="op">,</span></div>
-                                <div class="bp-line"><span class="ln">6</span><span class="kw">&nbsp;&nbsp;"deliveryWeeks"</span><span class="op">:</span> <span class="num">12</span><span class="op">,</span></div>
-                                <div class="bp-line"><span class="ln">7</span><span class="kw">&nbsp;&nbsp;"domainExpertise"</span><span class="op">:</span> <span class="pl">true</span></div>
-                                <div class="bp-line"><span class="ln">8</span><span class="op">}</span></div>
-                            </div>
-
-                            <!-- Tab 2 Code Body (Adapters) -->
-                            <div class="bp-code-body" id="tabAdapters" style="display: none;">
-                                <div class="bp-line"><span class="ln">1</span><span class="cm"># Legacy TOS & Carrier API Adapters</span></div>
-                                <div class="bp-line"><span class="ln">2</span><span class="kw">adapters</span><span class="op">:</span></div>
-                                <div class="bp-line"><span class="ln">3</span><span class="kw">&nbsp;&nbsp;-</span> <span class="str">"CargoWise & Navis SPARCS (EDI/XML)"</span></div>
-                                <div class="bp-line"><span class="ln">4</span><span class="kw">&nbsp;&nbsp;-</span> <span class="str">"Port Authority Systems (EDIFACT)"</span></div>
-                                <div class="bp-line"><span class="ln">5</span><span class="kw">&nbsp;&nbsp;-</span> <span class="str">"Carrier API (Booking/Vessel Track)"</span></div>
-                            </div>
-
-                            <!-- Tab 3 Code Body (API Bridge) -->
-                            <div class="bp-code-body" id="tabApiBridge" style="display: none;">
-                                <div class="bp-line"><span class="ln">1</span><span class="cm">// Vessel Tracking & ERP Accruals Bridge</span></div>
-                                <div class="bp-line"><span class="ln">2</span><span class="kw">async function</span> <span class="fn">syncContainer</span><span class="op">(</span><span class="pl">containerId</span><span class="op">:</span> <span class="kw">string</span><span class="op">)</span> <span class="op">{</span></div>
-                                <div class="bp-line"><span class="ln">3</span><span class="kw">&nbsp;&nbsp;const</span> <span class="pl">status</span> <span class="op">=</span> <span class="kw">await</span> <span class="pl">TOS</span><span class="op">.</span><span class="fn">getGateStatus</span><span class="op">(</span><span class="pl">containerId</span><span class="op">);</span></div>
-                                <div class="bp-line"><span class="ln">4</span><span class="kw">&nbsp;&nbsp;await</span> <span class="pl">ERP</span><span class="op">.</span><span class="fn">accrual</span><span class="op">({</span> <span class="pl">containerId</span><span class="op">,</span> <span class="pl">status</span><span class="op">,</span> <span class="kw">event</span><span class="op">:</span> <span class="str">"GATE_IN"</span> <span class="op">});</span></div>
-                                <div class="bp-line"><span class="ln">5</span><span class="op">}</span></div>
-                            </div>
-
-                            <div class="bp-section">
-                                <div class="bp-section-label">Capabilities & Connectors</div>
-                                <div class="tag-row">
-                                    <span class="tag">ERP Integration</span>
-                                    <span class="tag">TOS Connectors</span>
-                                    <span class="tag">Vessel Tracking</span>
-                                    <span class="tag">Rate Engines</span>
-                                    <span class="tag">EDI / API Bridges</span>
-                                    <span class="tag">Reporting Dashboards</span>
-                                    <span class="tag">Port Operations</span>
-                                    <span class="tag">Legacy Migration</span>
-                                </div>
-                            </div>
-
-                            <div class="bp-footer-status">
-                                <div class="bp-status-dot"></div>
-                                <span class="bp-status-text">Ready to scope your project</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="custom-hero-image">
+                    <img src="assets/Coustomsolution.jpg" alt="Custom Solution Blueprint" style="width: 100%; height: auto; border-radius: 20px; box-shadow: var(--shadow-lg);">
                 </div>
             </div>
         </div>
@@ -1124,41 +1058,7 @@
         </div>
     </section>
 
-    <!-- Scale Section -->
-    <section class="scale-section">
-        <div class="container">
-            <span class="section-label">📐 Project Scale</span>
-            <h2 class="section-title">No project is too small.<br>No problem is too complex.</h2>
-            <p class="section-sub">We scope every engagement to match the problem — not the other way around.</p>
-
-            <div class="scale-cards">
-                <div class="scale-card">
-                    <span class="sc-icon">🔧</span>
-                    <h3>Focused Builds</h3>
-                    <p>Targeted tools and integrations that solve a specific pain point — fast to scope, fast to ship.</p>
-                    <ul class="scale-list">
-                        <li>Custom reporting dashboards</li>
-                        <li>Legacy system data bridges</li>
-                        <li>Rate calculation engines</li>
-                        <li>Document generation tools</li>
-                        <li>Workflow automation scripts</li>
-                    </ul>
-                </div>
-                <div class="scale-card">
-                    <span class="sc-icon">🏗️</span>
-                    <h3>Full Platform Builds</h3>
-                    <p>End-to-end systems designed around your operation's complete lifecycle — from architecture to deployment.</p>
-                    <ul class="scale-list">
-                        <li>Customer-facing portals</li>
-                        <li>Operational management systems</li>
-                        <li>ERP & TOS integrations</li>
-                        <li>Multi-module enterprise platforms</li>
-                        <li>Legacy modernisation projects</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+   
 
     <!-- Why Us Section -->
     <section class="custom-section">
