@@ -2180,7 +2180,7 @@
     function renderModulesGrid() {
       var grid = document.getElementById('modulesGrid');
       grid.innerHTML = MODULES_DATA.map(m => `
-        <div class="module-card ${m.code === selectedModuleCode ? 'active-card' : ''}" onclick="selectModule('${m.code}', this)">
+        <div class="module-card ${m.code === selectedModuleCode ? 'active-card' : ''}" data-action="selectModule" data-code="${m.code}">
           <div>
             <div class="module-code">${m.code}</div>
             <div class="module-title">${m.name}</div>
@@ -2209,10 +2209,10 @@
           <div class="cmnr-calc-box">
             <span style="font-size:11px; font-weight:800; color:var(--navy);">LIVE STENCIL ESTIMATOR</span>
             <div class="cmnr-selects">
-              <select id="cmnrFace" onchange="updateCmnr()"><option>Roof</option><option>Door</option><option>Floor</option><option>Left Wall</option></select>
-              <select id="cmnrComp" onchange="updateCmnr()"><option>Panel</option><option>Post</option><option>Corner Casting</option></select>
-              <select id="cmnrDamage" onchange="updateCmnr()"><option>Dent</option><option>Hole</option><option>Rust</option></select>
-              <select id="cmnrRepair" onchange="updateCmnr()"><option>Straighten</option><option>Patch</option><option>Welding</option></select>
+              <select id="cmnrFace" data-action="updateCmnr"><option>Roof</option><option>Door</option><option>Floor</option><option>Left Wall</option></select>
+              <select id="cmnrComp" data-action="updateCmnr"><option>Panel</option><option>Post</option><option>Corner Casting</option></select>
+              <select id="cmnrDamage" data-action="updateCmnr"><option>Dent</option><option>Hole</option><option>Rust</option></select>
+              <select id="cmnrRepair" data-action="updateCmnr"><option>Straighten</option><option>Patch</option><option>Welding</option></select>
             </div>
             <div class="cmnr-result">
               <div>
@@ -2232,12 +2232,12 @@
               <div style="font-size:12.5px; font-weight:800; color:var(--navy-deep);"><span id="windowLabel">${agySettleDays} Days</span></div>
             </div>
             
-            <input type="range" class="settlement-slider" min="15" max="90" value="${agySettleDays}" id="settleSlider" style="width:100%; margin-bottom:14px;" oninput="updateSettleWindow(this.value)">
+            <input type="range" class="settlement-slider" min="15" max="90" value="${agySettleDays}" id="settleSlider" style="width:100%; margin-bottom:14px;" data-action="updateSettleWindow">
 
             <!-- Commission Calculation Toggle Buttons -->
             <div style="display:flex; gap:6px; margin-bottom:14px; background:var(--ice-2); padding:4px; border-radius:8px;">
-              <button id="btnAgyModeElem" class="flow-tab-btn active" style="padding:6px 12px; font-size:11px; flex:1; border-radius:6px; font-weight:800;" onclick="setAgyCalculationMode('element')">Element-wise</button>
-              <button id="btnAgyModeCont" class="flow-tab-btn" style="padding:6px 12px; font-size:11px; flex:1; border-radius:6px; font-weight:800;" onclick="setAgyCalculationMode('container')">Per-Container</button>
+              <button id="btnAgyModeElem" class="flow-tab-btn active" style="padding:6px 12px; font-size:11px; flex:1; border-radius:6px; font-weight:800;" data-action="setAgyCalculationMode" data-mode="element">Element-wise</button>
+              <button id="btnAgyModeCont" class="flow-tab-btn" style="padding:6px 12px; font-size:11px; flex:1; border-radius:6px; font-weight:800;" data-action="setAgyCalculationMode" data-mode="container">Per-Container</button>
             </div>
 
             <!-- Verified Financial Accruals -->
@@ -2270,7 +2270,7 @@
               <!-- Generated Dynamically -->
             </div>
 
-            <button class="action-btn" style="padding:10px 16px; font-size:12.5px; width:100%; justify-content:center; margin-top:14px; font-weight:800;" onclick="executeAgencySettle()">
+            <button class="action-btn" style="padding:10px 16px; font-size:12.5px; width:100%; justify-content:center; margin-top:14px; font-weight:800;" data-action="executeAgencySettle">
               1-Click Settle & Actuate Accounts
             </button>
           </div>
@@ -2303,7 +2303,7 @@
           <div style="background:var(--ice-2); padding:16px; border:1px solid var(--line); border-radius:12px; margin-top:10px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
               <span style="font-size:11px; font-weight:800; color:var(--navy); text-transform:uppercase;">EMS Container Inspector</span>
-              <select id="emsYardSelect" onchange="updateEmsSandbox(this.value)" style="padding:4px 8px; border-radius:6px; border:1px solid var(--line); font-size:11px; font-weight:600;">
+              <select id="emsYardSelect" data-action="updateEmsSandbox" style="padding:4px 8px; border-radius:6px; border:1px solid var(--line); font-size:11px; font-weight:600;">
                 <option value="COCHIN">Cochin Yard (INCOK)</option>
                 <option value="JEBEL">Jebel Ali (AEJEA)</option>
                 <option value="ROTTER">Rotterdam (NLROT)</option>
@@ -2358,7 +2358,7 @@
             <div style="display:grid; grid-template-columns:1fr 1.2fr; gap:10px; margin-bottom:12px;">
               <div class="param-group">
                 <label style="font-size:10px;">Vendor</label>
-                <select id="slotVendorSel" onchange="updateSlotSandbox()" style="padding:6px; font-size:11.5px; border-radius:6px; border:1px solid var(--line); background:#fff;">
+                <select id="slotVendorSel" data-action="updateSlotSandbox" style="padding:6px; font-size:11.5px; border-radius:6px; border:1px solid var(--line); background:#fff;">
                   <option value="MAERSK">Maersk Line</option>
                   <option value="CMA">CMA CGM Slots</option>
                   <option value="MSC">MSC Charter</option>
@@ -2366,7 +2366,7 @@
               </div>
               <div class="param-group">
                 <label style="font-size:10px;">Contract Type</label>
-                <select id="slotContractSel" onchange="updateSlotSandbox()" style="padding:6px; font-size:11.5px; border-radius:6px; border:1px solid var(--line); background:#fff;">
+                <select id="slotContractSel" data-action="updateSlotSandbox" style="padding:6px; font-size:11.5px; border-radius:6px; border:1px solid var(--line); background:#fff;">
                   <option value="Segment">Segment Allocation</option>
                   <option value="DeadFreight">Dead Freight Guarantee</option>
                   <option value="ThroughSlot">Through Slot Agreement</option>
@@ -2381,7 +2381,7 @@
                 <span style="font-size:12px; font-weight:800;" id="slotStatusTitle">Maersk Line (Segment)</span>
                 <span id="slotPercentLabel" style="font-size:12px; font-weight:800; color:var(--navy-soft);">75% Utilised</span>
               </div>
-              <input type="range" id="slotSlider" min="50" max="110" value="75" oninput="adjustSlotSlider(this.value)" style="width:100%; margin-bottom:8px;">
+              <input type="range" id="slotSlider" min="50" max="110" value="75" data-action="adjustSlotSlider" style="width:100%; margin-bottom:8px;">
               
               <div id="slotAlertContainer" style="font-size:11px; padding:6px 10px; border-radius:6px; background:#d1fae5; color:#065f46; font-weight:600; display:flex; align-items:center; gap:4px;">
                 <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#10b981;"></span>
@@ -2404,8 +2404,8 @@
 
             <!-- EXIM Built-in Reports -->
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
-              <button class="flow-tab-btn active" id="btnEximSummary" style="font-size:11px; padding:8px; text-align:center;" onclick="toggleEximReport('summary')">Export Summary</button>
-              <button class="flow-tab-btn" id="btnEximDaily" style="font-size:11px; padding:8px; text-align:center;" onclick="toggleEximReport('daily')">Daily Activity</button>
+              <button class="flow-tab-btn active" id="btnEximSummary" style="font-size:11px; padding:8px; text-align:center;" data-action="toggleEximReport" data-type="summary">Export Summary</button>
+              <button class="flow-tab-btn" id="btnEximDaily" style="font-size:11px; padding:8px; text-align:center;" data-action="toggleEximReport" data-type="daily">Daily Activity</button>
             </div>
 
             <div id="eximReportBox" style="background:var(--white); border-radius:8px; border:1px solid var(--line); padding:12px; font-size:11.5px; min-height:110px;">
@@ -2449,10 +2449,10 @@
             <p style="font-size:11.5px; color:var(--slate); margin-bottom:10px;">Export system manifests for direct integration with third-party networks.</p>
 
             <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:8px; margin-bottom:12px;">
-              <button class="action-btn" style="padding:8px 10px; font-size:11.5px; justify-content:center; background:var(--white); color:var(--navy-deep); border:1px solid var(--line);" onclick="triggerExport('JSON')">JSON Manifest</button>
-              <button class="action-btn" style="padding:8px 10px; font-size:11.5px; justify-content:center; background:var(--white); color:var(--navy-deep); border:1px solid var(--line);" onclick="triggerExport('EDI')">EDI Exchange</button>
-              <button class="action-btn" style="padding:8px 10px; font-size:11.5px; justify-content:center; background:var(--white); color:var(--navy-deep); border:1px solid var(--line);" onclick="triggerExport('PDF')">PDF Document</button>
-              <button class="action-btn" style="padding:8px 10px; font-size:11.5px; justify-content:center; background:var(--white); color:var(--navy-deep); border:1px solid var(--line);" onclick="triggerExport('Excel')">Excel Sheet</button>
+              <button class="action-btn" style="padding:8px 10px; font-size:11.5px; justify-content:center; background:var(--white); color:var(--navy-deep); border:1px solid var(--line);" data-action="triggerExport" data-type="JSON">JSON Manifest</button>
+              <button class="action-btn" style="padding:8px 10px; font-size:11.5px; justify-content:center; background:var(--white); color:var(--navy-deep); border:1px solid var(--line);" data-action="triggerExport" data-type="EDI">EDI Exchange</button>
+              <button class="action-btn" style="padding:8px 10px; font-size:11.5px; justify-content:center; background:var(--white); color:var(--navy-deep); border:1px solid var(--line);" data-action="triggerExport" data-type="PDF">PDF Document</button>
+              <button class="action-btn" style="padding:8px 10px; font-size:11.5px; justify-content:center; background:var(--white); color:var(--navy-deep); border:1px solid var(--line);" data-action="triggerExport" data-type="Excel">Excel Sheet</button>
             </div>
 
             <div style="background:var(--white); border-radius:8px; border:1px dashed var(--line); padding:10px; font-size:11px;">
@@ -2674,7 +2674,7 @@
     function renderTimeline() {
       var track = document.getElementById('timelineTrack');
       track.innerHTML = MOVES_DATA.map((move, idx) => `
-        <div class="timeline-node ${idx === activeTimelineNodeIdx ? 'active' : ''}" onclick="selectTimelineNode(${idx})">
+        <div class="timeline-node ${idx === activeTimelineNodeIdx ? 'active' : ''}" data-action="selectTimelineNode" data-idx="${idx}">
           <div class="node-icon-wrapper">
             ${move.icon}
           </div>
@@ -2853,7 +2853,7 @@
         var isMove = ['DSO', 'OFO', 'BFF'].includes(step.event);
         var subText = isMove ? `Move Code: <strong>${step.event}</strong>` : `Operational Step`;
         return `
-          <div class="workflow-card-step" id="expStepCard-${idx}" onclick="setExportStep(${idx})">
+          <div class="workflow-card-step" id="expStepCard-${idx}" data-action="setExportStep" data-idx="${idx}">
             <div class="step-circle">${step.num}</div>
             <div class="step-text">
               <h4>${step.stage}</h4>
@@ -2956,8 +2956,8 @@
         ${moveBoxHTML}
 
         <div style="display:flex; gap:12px; margin-top:20px;">
-          <button class="action-btn" style="flex:1; background:var(--ice-2); color:var(--navy); padding:12px;" onclick="setExportStep(${Math.max(0, idx - 1)})">Previous Milestone</button>
-          <button class="action-btn" style="flex:1; padding:12px;" onclick="setExportStep(${Math.min(15, idx + 1)})">Next Step ✓</button>
+          <button class="action-btn" style="flex:1; background:var(--ice-2); color:var(--navy); padding:12px;" data-action="setExportStep" data-idx="${Math.max(0, idx - 1)}">Previous Milestone</button>
+          <button class="action-btn" style="flex:1; padding:12px;" data-action="setExportStep" data-idx="${Math.min(15, idx + 1)}">Next Step ✓</button>
         </div>
       `;
     }
@@ -2990,6 +2990,38 @@
       `;
     }
   </script>
+
+  <script>
+    document.addEventListener('change', function(e) {
+      if (!e.target || !e.target.getAttribute) return;
+      var action = e.target.getAttribute('data-action');
+      if (action === 'updateCmnr') updateCmnr();
+      else if (action === 'updateEmsSandbox') updateEmsSandbox(e.target.value);
+      else if (action === 'updateSlotSandbox') updateSlotSandbox();
+    });
+
+    document.addEventListener('input', function(e) {
+      if (!e.target || !e.target.getAttribute) return;
+      var action = e.target.getAttribute('data-action');
+      if (action === 'updateSettleWindow') updateSettleWindow(e.target.value);
+      else if (action === 'adjustSlotSlider') adjustSlotSlider(e.target.value);
+    });
+
+    document.addEventListener('click', function(e) {
+      var el = e.target.closest('[data-action]');
+      if (!el) return;
+      var action = el.getAttribute('data-action');
+      
+      if (action === 'selectModule') selectModule(el.getAttribute('data-code'), el);
+      else if (action === 'setAgyCalculationMode') setAgyCalculationMode(el.getAttribute('data-mode'));
+      else if (action === 'executeAgencySettle') executeAgencySettle();
+      else if (action === 'toggleEximReport') toggleEximReport(el.getAttribute('data-type'));
+      else if (action === 'triggerExport') triggerExport(el.getAttribute('data-type'));
+      else if (action === 'selectTimelineNode') selectTimelineNode(parseInt(el.getAttribute('data-idx')));
+      else if (action === 'setExportStep') setExportStep(parseInt(el.getAttribute('data-idx')));
+    });
+  </script>
+
 </body>
 
 </html>
