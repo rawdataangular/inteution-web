@@ -2487,6 +2487,35 @@
       }
     }
 
+    // Interactive CMNR Estimator
+    function updateCmnr() {
+      var face = document.getElementById('cmnrFace');
+      var comp = document.getElementById('cmnrComp');
+      var repair = document.getElementById('cmnrRepair');
+      var formulaDisplay = document.getElementById('cmnrFormula');
+      var priceDisplay = document.getElementById('cmnrPriceDisplay');
+
+      if (!face || !comp || !repair || !formulaDisplay || !priceDisplay) return;
+
+      var formula = face.value + ' ' + comp.value + ' ' + repair.value;
+      formulaDisplay.textContent = formula;
+
+      var price = 0;
+      // Sandbox pricing logic
+      if (face.value === 'Roof') price += 40;
+      else if (face.value === 'Door') price += 60;
+      else price += 20;
+
+      if (comp.value === 'Panel') price += 30;
+      else if (comp.value === 'Post') price += 80;
+      else price += 110;
+
+      if (repair.value === 'Straighten') price += 50;
+      else if (repair.value === 'Patch') price += 70;
+      else price += 100;
+
+      priceDisplay.textContent = '$' + price.toFixed(2);
+    }
     // Interactive EMS Reports sandbox
     function updateEmsSandbox(yard) {
       emsActiveYard = yard;
@@ -2675,6 +2704,7 @@
     // Tab 3: Move Engine Dynamic Logic
     function renderTimeline() {
       var track = document.getElementById('timelineTrack');
+      if (!track) return;
       track.innerHTML = MOVES_DATA.map((move, idx) => `
         <div class="timeline-node ${idx === activeTimelineNodeIdx ? 'active' : ''}" data-action="selectTimelineNode" data-idx="${idx}">
           <div class="node-icon-wrapper">
@@ -2693,7 +2723,9 @@
     }
 
     function recalculateCurrentMove() {
-      var containerSize = document.getElementById('paramContainer').value;
+      var paramContainer = document.getElementById('paramContainer');
+      if (!paramContainer) return;
+      var containerSize = paramContainer.value;
       var isLaden = document.getElementById('paramLaden').value;
       var route = document.getElementById('paramRoute').value;
 
@@ -2851,6 +2883,7 @@
     // Generate Export Timeline Checklist with contextual move-code display
     function generateExportWorkflowSteps() {
       var stepList = document.getElementById('exportStepList');
+      if (!stepList) return;
       stepList.innerHTML = EXPORT_STEPS.map((step, idx) => {
         var isMove = ['DSO', 'OFO', 'BFF'].includes(step.event);
         var subText = isMove ? `Move Code: <strong>${step.event}</strong>` : `Operational Step`;
@@ -2965,11 +2998,13 @@
     }
 
     function clickImportNode(key, el) {
+      if (!el) return;
       document.querySelectorAll('#importWorkflowWrapper .lane-node').forEach(node => node.classList.remove('active'));
       el.classList.add('active');
 
       var mockData = IMPORT_FLOW_MOCKS[key];
       var panel = document.getElementById('importDocPanel');
+      if (!panel) return;
 
       var importSimHTML = mockData.sim;
       // Inject dynamic IGM reference for discharges
